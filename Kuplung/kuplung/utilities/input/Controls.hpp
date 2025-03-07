@@ -9,7 +9,7 @@
 #ifndef Controls_hpp
 #define Controls_hpp
 
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
 #ifdef _WIN32
 #  undef main
 #endif

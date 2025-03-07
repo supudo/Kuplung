@@ -8,7 +8,7 @@
 
 #include "Settings.h"
 #include "kuplung/utilities/helpers/Strings.h"
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
 #include <iostream>
 #include <filesystem>
 #include <assimp/Exporter.hpp>
@@ -16,6 +16,9 @@
 #include <assimp/importerdesc.h>
 #include <memory>
 #include <stdarg.h>
+#ifdef _WIN32
+#include <fileapi.h>
+#endif
 
 Settings* Settings::m_pInstance = NULL;
 
@@ -94,7 +97,7 @@ void Settings::initSettings(const std::string& iniFolder) {
   m_pInstance->Consumption_Interval_Memory = m_pInstance->cfgUtils->readInt("Consumption_Interval_Memory");
 
   m_pInstance->guiClearColor = {70.0f / 255.0f, 70.0f / 255.0f, 70.0f / 255.0f, 255.0f / 255.0f};
-  m_pInstance->SDL_Window_Flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
+  m_pInstance->SDL_Window_Flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
 
   m_pInstance->UIFontFileIndex = 0;
 

@@ -52,7 +52,7 @@ Kuplung::~Kuplung() {
   ImGui_ImplSDL2_Shutdown();
   ImGui::DestroyContext();
 
-  SDL_GL_DeleteContext(this->glContext);
+  SDL_GL_DestroyContext(this->glContext);
 
   SDL_DestroyWindow(this->sdlWindow);
   this->sdlWindow = NULL;
@@ -112,8 +112,8 @@ int Kuplung::run() {
 bool Kuplung::init() {
   bool success = true;
 
-  if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-    printf("Error: SDL could not initialize! SDL Error: %s\n", SDL_GetError());
+  if (!SDL_Init(SDL_INIT_VIDEO)) {
+    printf("Error: SDL Video could not initialize! SDL Error: %s\n", SDL_GetError());
     success = false;
   }
   else {
@@ -134,17 +134,15 @@ bool Kuplung::init() {
 #endif
 
     SDL_SetHint(SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK, "1");
-    SDL_SetHint(SDL_HINT_VIDEO_HIGHDPI_DISABLED, "0");
 
-    SDL_DisplayMode current;
-    SDL_GetCurrentDisplayMode(0, &current);
+    const SDL_DisplayMode* current = SDL_GetCurrentDisplayMode(SDL_GetPrimaryDisplay());
 
     if (Settings::Instance()->SDL_Window_Height == 0)
-      Settings::Instance()->SDL_Window_Height = current.h - 100;
+      Settings::Instance()->SDL_Window_Height = current->h - 100;
     if (Settings::Instance()->SDL_Window_Width == 0)
-      Settings::Instance()->SDL_Window_Width = current.w - 100;
+      Settings::Instance()->SDL_Window_Width = current->w - 100;
 
-    this->sdlWindow = SDL_CreateWindow(WINDOW_TITLE, WINDOW_POSITION_X, WINDOW_POSITION_Y, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, Settings::Instance()->SDL_Window_Flags | SDL_WINDOW_ALLOW_HIGHDPI);
+    this->sdlWindow = SDL_CreateWindow(WINDOW_TITLE, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, Settings::Instance()->SDL_Window_Flags);
     if (this->sdlWindow == nullptr) {
       printf("Error: Window could not be created! SDL Error: %s\n", SDL_GetError());
       success = false;
@@ -156,12 +154,12 @@ bool Kuplung::init() {
         success = false;
       }
       else {
-        if (SDL_GL_MakeCurrent(this->sdlWindow, this->glContext) < 0) {
+        if (!SDL_GL_MakeCurrent(this->sdlWindow, this->glContext)) {
           printf("Warning: Unable to set current context! SDL Error: %s\n", SDL_GetError());
           success = false;
         }
         else {
-          if (SDL_GL_SetSwapInterval(1) < 0) {
+          if (!SDL_GL_SetSwapInterval(1)) {
             printf("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
             success = false;
           }
@@ -174,7 +172,7 @@ bool Kuplung::init() {
 #endif
           Settings::Instance()->setLogFunc(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
 
-          SDL_GL_GetDrawableSize(this->sdlWindow, &Settings::Instance()->SDL_DrawableSize_Width, &Settings::Instance()->SDL_DrawableSize_Height);
+          SDL_GetWindowSizeInPixels(this->sdlWindow, &Settings::Instance()->SDL_DrawableSize_Width, &Settings::Instance()->SDL_DrawableSize_Height);
 
           this->parser = std::make_unique<FileModelManager>();
           this->parser->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
@@ -250,13 +248,8 @@ void Kuplung::initFolders() {
   if (!std::filesystem::exists(supudoFolderKuplung))
     std::filesystem::create_directory(supudoFolderKuplung);
 
-  char* data_path = NULL;
-  char* base_path = SDL_GetBasePath();
-  if (base_path)
-    data_path = base_path;
-  else
-    data_path = SDL_strdup("./");
-  Settings::Instance()->currentFolder = data_path;
+  const char* base_path = SDL_GetBasePath();
+  Settings::Instance()->currentFolder = base_path;
 
   std::string current_path = Settings::Instance()->currentFolder + "resources";
   std::string fName("");
@@ -316,14 +309,10 @@ void Kuplung::onEvent(SDL_Event* ev) {
   this->gameIsRunning = this->managerControls->gameIsRunning;
 
   // window resize
-  if (ev->type == SDL_WINDOWEVENT) {
-    switch (ev->window.event) {
-    case SDL_WINDOWEVENT_SIZE_CHANGED:
-      Settings::Instance()->SDL_Window_Width = static_cast<int>(ev->window.data1);
-      Settings::Instance()->SDL_Window_Height = static_cast<int>(ev->window.data2);
-      Settings::Instance()->saveSettings();
-      break;
-    }
+  if (ev->type == SDL_EVENT_WINDOW_RESIZED) {
+    Settings::Instance()->SDL_Window_Width = static_cast<int>(ev->window.data1);
+    Settings::Instance()->SDL_Window_Height = static_cast<int>(ev->window.data2);
+    Settings::Instance()->saveSettings();
   }
 
   if (!this->managerUI->isMouseOnGUI() && !this->managerUI->isParsingOpen && !this->managerUI->isLoadingOpen) {
@@ -343,7 +332,7 @@ void Kuplung::onEvent(SDL_Event* ev) {
     if (this->managerControls->keyPressed_DELETE && this->sceneSelectedModelObject > -1 && this->meshModelFaces.size() > 0)
       this->guiModelDelete(this->sceneSelectedModelObject);
 
-    if (ev->type == SDL_KEYDOWN && ev->key.keysym.sym == SDLK_TAB)
+    if (ev->type == SDL_EVENT_KEY_DOWN && ev->key.key == SDLK_TAB)
       this->meshModelFaces[static_cast<size_t>(this->sceneSelectedModelObject)]->Setting_EditMode = this->managerControls->keyPresset_TAB;
 
     // FOV & zoom

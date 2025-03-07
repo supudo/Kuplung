@@ -41,28 +41,13 @@ std::string Consumption::getOverallStats() {
 }
 
 bool Consumption::isTimeToUpdateMemory() {
-  this->currentTimeMemory = SDL_GetTicks();
-  if (Settings::Instance()->Consumption_Interval_Memory > 0 && (this->currentTimeMemory > this->lastTimeMemory + (1000 * Settings::Instance()->Consumption_Interval_Memory))) {
-    this->lastTimeMemory = this->currentTimeMemory;
-    return true;
-  }
-  return false;
+  Uint32 deadline = SDL_GetTicks() + (1000 * Settings::Instance()->Consumption_Interval_Memory);
+  return SDL_TICKS_PASSED(SDL_GetTicks(), deadline);
 }
 
 bool Consumption::isTimeToUpdateCPU() {
-  this->currentTimeCPU = SDL_GetTicks();
-#ifdef _WIN32
-  if (Settings::Instance()->Consumption_Interval_CPU > 0 && (this->currentTimeCPU > this->lastTimeCPU + (250 * Settings::Instance()->Consumption_Interval_CPU))) {
-    this->lastTimeCPU = this->currentTimeCPU;
-    return true;
-  }
-#else
-  if (Settings::Instance()->Consumption_Interval_CPU > 0 && (this->currentTimeCPU > this->lastTimeCPU + (1000 * Settings::Instance()->Consumption_Interval_CPU))) {
-    this->lastTimeCPU = this->currentTimeCPU;
-    return true;
-  }
-#endif
-  return false;
+  Uint32 deadline = SDL_GetTicks() + (250 * Settings::Instance()->Consumption_Interval_CPU);
+  return SDL_TICKS_PASSED(SDL_GetTicks(), deadline);
 }
 
 // -------------------------

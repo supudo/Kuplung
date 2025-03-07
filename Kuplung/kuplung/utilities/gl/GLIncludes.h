@@ -21,21 +21,20 @@
 #pragma clang diagnostic ignored "-Wpadded"
 #endif
 
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
 #ifdef _WIN32
 #undef main
 #endif
 
 #ifdef _WIN32
 #include <GL/glew.h>
-#include <SDL2/SDL_syswm.h>
 #else
 //#include <OpenGL/gl3.h>
 //#include <OpenGL/glext.h>
 #endif
 
 #define GL_GLEXT_PROTOTYPES 1
-#include <SDL2/SDL_opengl.h>
+#include <SDL3/SDL_opengl.h>
 
 #ifndef _WIN32
 #pragma clang diagnostic pop
