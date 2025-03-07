@@ -742,6 +742,12 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Strings.h">
       <Filter>kuplung\utilities\helpers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Files.h">
+      <Filter>kuplung\utilities\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Helpers.h">
+      <Filter>kuplung\utilities\helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="kuplung">
