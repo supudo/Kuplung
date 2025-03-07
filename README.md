@@ -11,7 +11,6 @@ lizard.txt and lizard_duplicates.txt are result of [Lizard](https://github.com/t
 - [ImGui](https://github.com/ocornut/imgui)
 - [ImGuizmo](https://github.com/CedricGuillemet/ImGuizmo)
 - [STB libs](https://github.com/nothings/stb)
-- [Boost](http://www.boost.org/)
 - [GLM](http://glm.g-truc.net/)
 - [SDL2](https://www.libsdl.org/)
 - [protobuf](https://github.com/google/protobuf)
