@@ -139,9 +139,6 @@ mac {
 
     LIBS += -framework cocoa -framework OpenGL
 
-    LIBS += -L/usr/local/Cellar/boost/1.67.0_1/lib -lboost_system -lboost_filesystem
-    INCLUDEPATH += /usr/local/Cellar/boost/1.67.0_1/include
-
     LIBS += -L/usr/local/Cellar/glm/0.9.9.0/lib
     INCLUDEPATH += /usr/local/Cellar/glm/0.9.9.0/include
 
@@ -180,9 +177,6 @@ win32|win64 {
     OBJECTS_DIR = "./objects/"
 
     RC_FILE += resources/kuplung.rc
-
-    LIBS += -L"D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1" -lboost_system-vc141-mt-gd-1_64 -lboost_filesystem-vc141-mt-gd-1_64
-    INCLUDEPATH += "D:/Libs/boost.1.64.prebuilt"
 
     INCLUDEPATH += "D:\Libs\glm-0.9.8.4"
 
@@ -240,7 +234,6 @@ linux {
 
     LIBS += -L/usr/lib
     LIBS += -lGLEW -lGLU -lm -lGL -lm -lpthread -ldl -ldrm -lXdamage -lXfixes -lX11-xcb -lxcb-glx -lxcb-dri2 -lXxf86vm -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp
-    LIBS += -lboost_system -lboost_filesystem
     LIBS += -lSDL2
     LIBS += -lglfw
     LIBS += -lprotobuf

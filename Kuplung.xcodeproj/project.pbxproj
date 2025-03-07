@@ -2585,7 +2585,6 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/include,
 					/usr/local/include,
-					/usr/local/Cellar/boost/1.65.1/include/boost,
 					/usr/local/Cellar/glfw3/3.2.1/include,
 					/usr/local/Cellar/sdl2/2.0.7/include,
 					/usr/local/Cellar/glm/0.9.8.5/include,
@@ -2599,7 +2598,6 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
-					/usr/local/Cellar/boost/1.65.1/lib,
 					/usr/local/Cellar/glfw3/3.2.1/lib,
 					/usr/local/Cellar/sdl2/2.0.7/lib,
 					/usr/local/Cellar/assimp/4.0.1/lib,
@@ -2615,8 +2613,6 @@
 					"-framework",
 					OpenGL,
 					"-lSDL2",
-					"-lboost_system",
-					"-lboost_filesystem",
 					"-lGLFW3",
 					"-lnoise",
 					"-isystem",
@@ -2656,7 +2652,6 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/include,
 					/usr/local/include,
-					/usr/local/Cellar/boost/1.65.1/include/boost,
 					/usr/local/Cellar/glfw3/3.2.1/include,
 					/usr/local/Cellar/sdl2/2.0.7/include,
 					/usr/local/Cellar/glm/0.9.8.5/include,
@@ -2670,7 +2665,6 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
-					/usr/local/Cellar/boost/1.65.1/lib,
 					/usr/local/Cellar/glfw3/3.2.1/lib,
 					/usr/local/Cellar/sdl2/2.0.7/lib,
 					/usr/local/Cellar/assimp/4.0.1/lib,
@@ -2686,8 +2680,6 @@
 					"-framework",
 					OpenGL,
 					"-lSDL2",
-					"-lboost_system",
-					"-lboost_filesystem",
 					"-lGLFW3",
 					"-lnoise",
 					"-isystem",

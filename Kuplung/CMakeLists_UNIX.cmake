@@ -22,7 +22,6 @@ INCLUDE_DIRECTORIES("/usr/include/lua5.3")
 
 SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -L/usr/lib")
 SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lGLEW -lGLU -lm -lGL -lm -lpthread -ldl -ldrm -lXdamage -lXfixes -lX11-xcb -lxcb-glx -lxcb-dri2 -lXxf86vm -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lboost_system -lboost_filesystem")
 SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lSDL2")
 SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lglfw")
 SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lprotobuf")
@@ -525,7 +524,6 @@ FILE(GLOB PROTOBUF_MODELS "kuplung/utilities/saveopen/*.pb.cc" "kuplung/utilitie
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES} ${PROTOBUF_MODELS} kuplung/utilities/nanovg/nanovg.c kuplung/utilities/miniz/miniz.c)
 
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lGLEW -lGLU -lm -lGL -lm -lpthread -ldl -ldrm -lXdamage -lXfixes -lX11-xcb -lxcb-glx -lxcb-dri2 -lXxf86vm -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp")
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lboost_system -lboost_filesystem")
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lSDL2")
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lglfw")
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lprotobuf")

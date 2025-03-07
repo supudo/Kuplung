@@ -8,11 +8,6 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -wd4244 -wd4100 -wd4068 -wd4267 -wd4305 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DIMGUI_IMPL_OPENGL_LOADER_CUSTOM")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DKuplung_Debug_Timings")
 
-# Boost
-LINK_DIRECTORIES("D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lboost_system-vc141-mt-gd-1_64 -lboost_filesystem-vc141-mt-gd-1_64")
-INCLUDE_DIRECTORIES("D:/Libs/boost.1.64.prebuilt")
-
 # GLM
 INCLUDE_DIRECTORIES("D:/Libs/glm-0.9.8.4")
 
