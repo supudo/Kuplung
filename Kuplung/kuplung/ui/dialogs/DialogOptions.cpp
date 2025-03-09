@@ -189,12 +189,12 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle* wStyle, bool
     }
 
     if (ImGui::TreeNode("Colors")) {
-      static ImGuiColorEditFlags edit_mode = ImGuiColorEditFlags_RGB;
-      ImGui::RadioButton("RGB", &edit_mode, ImGuiColorEditFlags_RGB);
+      static ImGuiColorEditFlags edit_mode = ImGuiColorEditFlags_DisplayRGB;
+      ImGui::RadioButton("RGB", &edit_mode, ImGuiColorEditFlags_DisplayRGB);
       ImGui::SameLine();
-      ImGui::RadioButton("HSV", &edit_mode, ImGuiColorEditFlags_HSV);
+      ImGui::RadioButton("HSV", &edit_mode, ImGuiColorEditFlags_DisplayHSV);
       ImGui::SameLine();
-      ImGui::RadioButton("HEX", &edit_mode, ImGuiColorEditFlags_HEX);
+      ImGui::RadioButton("HEX", &edit_mode, ImGuiColorEditFlags_DisplayHex);
 
       static ImGuiTextFilter filter;
       filter.Draw("Filter colors", 200);

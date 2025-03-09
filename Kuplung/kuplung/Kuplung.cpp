@@ -8,7 +8,7 @@
 
 #include "Kuplung.hpp"
 #include "kuplung/utilities/imgui/imgui_impl_opengl3.h"
-#include "kuplung/utilities/imgui/imgui_impl_sdl.h"
+#include "kuplung/utilities/imgui/imgui_impl_sdl3.h"
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 #include <glm/glm.hpp>
 

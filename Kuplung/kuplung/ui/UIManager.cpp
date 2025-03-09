@@ -11,7 +11,7 @@
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 #include "kuplung/utilities/imgui/imgui_impl_opengl3.h"
-#include "kuplung/utilities/imgui/imgui_impl_sdl.h"
+#include "kuplung/utilities/imgui/imgui_impl_sdl3.h"
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 
 UIManager::UIManager(ObjectsManager& managerObjects) : managerObjects(managerObjects) {
@@ -530,7 +530,7 @@ void UIManager::popupRecentFileDoesntExists() {
   ImGui::OpenPopup("Warning");
   ImGui::BeginPopupModal("Warning", NULL, ImGuiWindowFlags_AlwaysAutoResize);
   ImGui::Text("This file no longer exists!");
-  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth(), 0))) {
+  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
     std::vector<FBEntity> recents;
     for (size_t i = 0; i < this->recentFiles.size(); i++) {
       if (std::filesystem::exists(this->recentFiles[i].path))
@@ -548,7 +548,7 @@ void UIManager::popupRecentFileImportedDoesntExists() {
   ImGui::OpenPopup("Warning");
   ImGui::BeginPopupModal("Warning", NULL, ImGuiWindowFlags_AlwaysAutoResize);
   ImGui::Text("This file no longer exists!");
-  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth(), 0))) {
+  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
     std::vector<FBEntity> recents;
     for (size_t i = 0; i < this->recentFilesImported.size(); i++) {
       if (std::filesystem::exists(this->recentFilesImported[i].path))
@@ -774,7 +774,7 @@ void UIManager::dialogShadertoyMessageWindow() {
   ImGui::OpenPopup("Paste Error");
   ImGui::BeginPopupModal("Paste Error", NULL, ImGuiWindowFlags_AlwaysAutoResize);
   ImGui::Text("Clipboard size is too big.\nPlease, reduce the shader source and paste it again.");
-  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth(), 0))) {
+  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
     this->showShadertoyMessage = false;
     ImGui::CloseCurrentPopup();
   }

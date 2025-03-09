@@ -317,9 +317,6 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.cpp">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl.cpp">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClCompile>
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_widgets.cpp">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClCompile>
@@ -334,6 +331,12 @@
     </ClCompile>
     <ClCompile Include="..\Kuplung\kuplung\utilities\cuda\CudaHelpers.cpp">
       <Filter>kuplung\utilities\cuda</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_tables.cpp">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.cpp">
+      <Filter>kuplung\utilities\imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -712,9 +715,6 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.h">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl.h">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_rectpack.h">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClInclude>
@@ -747,6 +747,9 @@
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Helpers.h">
       <Filter>kuplung\utilities\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.h">
+      <Filter>kuplung\utilities\imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

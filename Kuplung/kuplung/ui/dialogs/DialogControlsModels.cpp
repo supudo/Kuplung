@@ -729,14 +729,14 @@ void DialogControlsModels::contextModelRename(std::vector<ModelFaceBase*>* meshM
     strcpy(this->guiModelRenameText, (*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelTitle.c_str());
   ImGui::InputText("", this->guiModelRenameText, sizeof(this->guiModelRenameText));
 
-  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f, 0))) {
+  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvail().x * 0.5f, 0))) {
     (*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelTitle = std::string(this->guiModelRenameText);
     ImGui::CloseCurrentPopup();
     this->cmenu_renameModel = false;
     this->guiModelRenameText[0] = '\0';
   }
   ImGui::SameLine();
-  if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvailWidth(), 0))) {
+  if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
     ImGui::CloseCurrentPopup();
     this->cmenu_renameModel = false;
     this->guiModelRenameText[0] = '\0';
@@ -755,13 +755,13 @@ void DialogControlsModels::contextModelDelete() {
   ImGui::Text("Are you sure?\n");
   //ImGui::Text("(%s)", (*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelTitle.c_str());
 
-  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f, 0))) {
+  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvail().x * 0.5f, 0))) {
     this->funcDeleteModel(this->selectedObject);
     ImGui::CloseCurrentPopup();
     this->cmenu_deleteYn = false;
   }
   ImGui::SameLine();
-  if (ImGui::Button("No", ImVec2(ImGui::GetContentRegionAvailWidth(), 0))) {
+  if (ImGui::Button("No", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
     ImGui::CloseCurrentPopup();
     this->cmenu_deleteYn = false;
   }

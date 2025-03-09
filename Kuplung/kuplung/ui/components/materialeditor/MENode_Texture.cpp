@@ -46,7 +46,7 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool
   ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
   ImGui::BeginGroup();
 
-  ImGui::SetNextTreeNodeOpen(this->IsExpanded, ImGuiCond_Always);
+  ImGui::SetNextItemOpen(this->IsExpanded, ImGuiCond_Always);
   if (ImGui::TreeNode(this, "%s", "")) {
     ImGui::TreePop();
     this->IsExpanded = true;
@@ -79,7 +79,7 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool
     if (ImGui::Button("..."))
       this->showFileBrowser = true;
 
-    if (showPreview && ImGui::ImageButton((ImTextureID)(intptr_t)this->vboBuffer, ImVec2(100 * scale, 100 * scale)))
+    if (showPreview && ImGui::ImageButton("", (ImTextureID)(intptr_t)this->vboBuffer, ImVec2(100 * scale, 100 * scale)))
       this->showTextureWindow = !this->showTextureWindow;
 
     ImGui::PopItemWidth();

@@ -144,7 +144,7 @@ void MaterialEditor::draw(const int selectedModelID, ModelFaceBase *face, bool* 
     MELink* link = this->links[i];
     ImVec2 p1 = offset + link->NodeOutput->GetOutputSlotPos(link->SlotOutput);
     ImVec2 p2 = offset + link->NodeInput->GetInputSlotPos(link->SlotInput);
-    draw_list->AddBezierCurve(p1, p1 + link_size, p2 - link_size, p2, this->style_LinkColor, this->style_LinkThickness);
+    draw_list->AddBezierCubic(p1, p1 + link_size, p2 - link_size, p2, this->style_LinkColor, this->style_LinkThickness);
   }
 
   // Display dragging links
@@ -152,12 +152,12 @@ void MaterialEditor::draw(const int selectedModelID, ModelFaceBase *face, bool* 
     if (this->dragNode.inputSlotIndex != -1) {
       ImVec2 p1 = offset + this->dragNode.node->GetOutputSlotPos(this->dragNode.inputSlotIndex, window->FontWindowScale);
       const ImVec2& p2 = mouseScreenPos;
-      draw_list->AddBezierCurve(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness, 0);
+      draw_list->AddBezierCubic(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness, 0);
     }
     else if (this->dragNode.outputSlotIndex != -1) {
       const ImVec2& p1 = mouseScreenPos;
       ImVec2 p2 = offset + this->dragNode.node->GetInputSlotPos(this->dragNode.outputSlotIndex, window->FontWindowScale);
-      draw_list->AddBezierCurve(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness, 0);
+      draw_list->AddBezierCubic(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness, 0);
     }
   }
 

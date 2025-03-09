@@ -9,6 +9,7 @@
 #include "Settings.h"
 #include "kuplung/utilities/helpers/Strings.h"
 #include <SDL3/SDL.h>
+#include <SDL3/SDL_main.h>
 #include <iostream>
 #include <filesystem>
 #include <assimp/Exporter.hpp>

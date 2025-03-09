@@ -151,7 +151,7 @@ void ExportGLTF::modalNewFolder() {
 		strcpy(this->newFolderName, "untitled");
 	ImGui::InputText("", this->newFolderName, sizeof(this->newFolderName));
 
-	if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f, 0))) {
+	if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvail().x * 0.5f, 0))) {
 		std::string newDir = this->currentFolder + "/" + this->newFolderName;
 		if (!std::filesystem::exists(newDir)) {
 			std::filesystem::path dir(newDir);
@@ -163,7 +163,7 @@ void ExportGLTF::modalNewFolder() {
 		this->newFolderName[0] = '\0';
 	}
 	ImGui::SameLine();
-	if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvailWidth(), 0))) {
+	if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
 		ImGui::CloseCurrentPopup();
 		this->showNewFolderModel = false;
 		this->newFolderName[0] = '\0';
