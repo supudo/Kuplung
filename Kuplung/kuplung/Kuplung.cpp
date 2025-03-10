@@ -49,7 +49,7 @@ Kuplung::~Kuplung() {
   this->managerRendering.reset();
 
   ImGui_ImplOpenGL3_Shutdown();
-  ImGui_ImplSDL2_Shutdown();
+  ImGui_ImplSDL3_Shutdown();
   ImGui::DestroyContext();
 
   SDL_GL_DestroyContext(this->glContext);
@@ -129,7 +129,7 @@ bool Kuplung::init() {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, Settings::Instance()->OpenGL_MajorVersion);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, Settings::Instance()->OpenGL_MinorVersion);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-#ifdef Def_Kuplung_DEBUG_BUILD
+#ifdef Kuplung_DEBUG_BUILD
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
 #endif
 

@@ -32,7 +32,7 @@ Settings* Settings::Instance() {
 }
 
 void Settings::initSettings(const std::string& iniFolder) {
-#ifdef Def_Kuplung_OpenGL_4x
+#ifdef Kuplung_OpenGL_4x
   m_pInstance->OpenGL_MajorVersion = 4;
   m_pInstance->OpenGL_MinorVersion = 1;
 #else

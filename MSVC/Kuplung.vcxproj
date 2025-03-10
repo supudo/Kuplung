@@ -105,7 +105,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";Def_Kuplung_DEBUG_BUILD;Def_Kuplung_OpenGL_4x;GLM_ENABLE_EXPERIMENTAL;Kuplung_Debug_Timings;IMGUI_IMPL_OPENGL_LOADER_CUSTOM;IMGUI_DEFINE_MATH_OPERATORS;_CRT_NO_VA_START_VALIDATION;GLEW_STATIC;IMGUI_IMPL_OPENGL_LOADER_CUSTOM="kuplung\utilities\gl\GLIncludes.h";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;Kuplung_DEBUG_BUILD;Kuplung_OpenGL_4x;Kuplung_Debug_Timings;GLM_ENABLE_EXPERIMENTAL;IMGUI_DEFINE_MATH_OPERATORS;GLEW_STATIC;IMGUI_IMPL_OPENGL_LOADER_CUSTOM="kuplung\utilities\gl\GLIncludes.h";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <EnablePREfast>false</EnablePREfast>
@@ -361,6 +361,7 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Strings.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_rectpack.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_textedit.h" />

@@ -142,7 +142,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
     return success = false;
   }
   else {
-#ifdef Def_Kuplung_OpenGL_4x
+#ifdef Kuplung_OpenGL_4x
     glPatchParameteri(GL_PATCH_VERTICES, 3);
 #endif
 

@@ -145,7 +145,7 @@ void UIManager::init(SDL_Window* window, SDL_GLContext glContext, const std::fun
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO();
   (void)io;
-  ImGui_ImplSDL2_InitForOpenGL(this->sdlWindow, glContext);
+  ImGui_ImplSDL3_InitForOpenGL(this->sdlWindow, glContext);
   ImGui_ImplOpenGL3_Init("#version 410 core");
   ImGui::StyleColorsDark();
 
@@ -217,14 +217,14 @@ void UIManager::setSceneSelectedModelObject(int sceneSelectedModelObject) {
 }
 
 bool UIManager::processEvent(SDL_Event* event) {
-  return ImGui_ImplSDL2_ProcessEvent(event);
+  return ImGui_ImplSDL3_ProcessEvent(event);
 }
 
 void UIManager::renderStart(bool isFrame, int* sceneSelectedModelObject) {
   this->isFrame = isFrame;
 
   ImGui_ImplOpenGL3_NewFrame();
-  ImGui_ImplSDL2_NewFrame(this->sdlWindow);
+  ImGui_ImplSDL3_NewFrame();
   ImGui::NewFrame();
   ImGuizmo::BeginFrame();
 
@@ -614,7 +614,7 @@ void UIManager::recentFilesClearImported() {
 }
 
 bool UIManager::isMouseOnGUI() const {
-  return ImGui::IsAnyWindowHovered();
+  return ImGui::IsWindowHovered(ImGuiHoveredFlags_AnyWindow);
 }
 
 void UIManager::showParsing() {
