@@ -28,7 +28,7 @@ void Exporter::init(const std::function<void(float)>& doProgress) {
 	this->exporterGLTF->init(doProgress);
 }
 
-void Exporter::exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects, ImportExportFormats exportFormat, int exportFormatAssimp) {
+void Exporter::exportScene(const ::FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects, ImportExportFormats exportFormat, int exportFormatAssimp) {
 	if (exportFormat != ImportExportFormat_UNDEFINED) {
 		if (Settings::Instance()->ModelFileParser == Importer_ParserType_Own) {
 			if (exportFormat == ImportExportFormat_OBJ)
