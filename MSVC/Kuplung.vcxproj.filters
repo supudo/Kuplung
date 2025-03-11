@@ -751,9 +751,6 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.h">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3_loader.h">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="kuplung">
@@ -932,6 +929,9 @@
     </Filter>
     <Filter Include="kuplung\utilities\helpers">
       <UniqueIdentifier>{1bb7531b-6e6f-49d3-bbc6-7902d7345a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\imgui\debuggers">
+      <UniqueIdentifier>{f41f2234-3da5-4dad-92ca-7c6421eb457f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1168,10 +1168,18 @@
     <None Include="..\Kuplung\resources\shaders\axis_labels.vert">
       <Filter>resources\shaders</Filter>
     </None>
+    <None Include="..\Kuplung\kuplung\utilities\imgui\debuggers\imgui.natstepfilter">
+      <Filter>kuplung\utilities\imgui\debuggers</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Kuplung\resources\noise16.png">
       <Filter>resources</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\Kuplung\kuplung\utilities\imgui\debuggers\imgui.natvis">
+      <Filter>kuplung\utilities\imgui\debuggers</Filter>
+    </Natvis>
   </ItemGroup>
 </Project>

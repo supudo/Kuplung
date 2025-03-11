@@ -42,12 +42,12 @@ std::string Consumption::getOverallStats() {
 
 bool Consumption::isTimeToUpdateMemory() {
   Uint32 deadline = SDL_GetTicks() + (1000 * Settings::Instance()->Consumption_Interval_Memory);
-  return SDL_TICKS_PASSED(SDL_GetTicks(), deadline);
+  return SDL_GetTicks() >= deadline;
 }
 
 bool Consumption::isTimeToUpdateCPU() {
   Uint32 deadline = SDL_GetTicks() + (250 * Settings::Instance()->Consumption_Interval_CPU);
-  return SDL_TICKS_PASSED(SDL_GetTicks(), deadline);
+  return SDL_GetTicks() >= deadline;
 }
 
 // -------------------------

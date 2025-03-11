@@ -25,7 +25,7 @@
 #include "kuplung/utilities/parsers/ModelObject.h"
 #ifdef __linux__
 #include <libnoise/noise.h>
-#elif WIN32
+#elif _WIN32
 #include <noise/noise.h>
 #else
 #include "noise.h"

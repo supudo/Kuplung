@@ -10,7 +10,7 @@
 #define Consumption_hpp
 
 #include "kuplung/settings/Settings.h"
-#ifdef WIN32
+#ifdef _WIN32
 #include "WindowsCPUUsage.hpp"
 #endif
 

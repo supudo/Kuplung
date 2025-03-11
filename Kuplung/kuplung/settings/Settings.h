@@ -19,7 +19,7 @@
 #include "SettingsStructs.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <memory>
 #endif
 
