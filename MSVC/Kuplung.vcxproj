@@ -155,7 +155,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>_WIN32;_WIN64;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
@@ -361,6 +361,7 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Strings.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_rectpack.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_textedit.h" />
