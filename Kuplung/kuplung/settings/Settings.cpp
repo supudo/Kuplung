@@ -17,7 +17,7 @@
 #include <memory>
 #include <stdarg.h>
 #ifdef _WIN32
-#include <fileapi.h>
+#include <windows.h>
 #endif
 
 Settings* Settings::m_pInstance = NULL;
@@ -125,7 +125,7 @@ void Settings::initSettings(const std::string& iniFolder) {
 #ifdef _WIN32
   m_pInstance->Setting_CurrentDriveIndex = 0;
   m_pInstance->Setting_SelectedDriveIndex = 0;
-  m_pInstance->hddDriveList.empty();
+  static_cast<void>(m_pInstance->hddDriveList.empty());
   DWORD drives = ::GetLogicalDrives();
   if (drives) {
     char drive[] = "?";
@@ -146,7 +146,7 @@ void Settings::initSettings(const std::string& iniFolder) {
 
   m_pInstance->ApplicationConfigurationFolder = iniFolder;
 
-  m_pInstance->AssimpSupportedFormats_Import.empty();
+  static_cast<void>(m_pInstance->AssimpSupportedFormats_Import.empty());
   std::unique_ptr<Assimp::Importer> aImporter = std::make_unique<Assimp::Importer>();
   size_t aImporter_num = aImporter->GetImporterCount();
   for (size_t i = 0; i < aImporter_num; i++) {
@@ -164,7 +164,7 @@ void Settings::initSettings(const std::string& iniFolder) {
   }
   aImporter.release();
 
-  m_pInstance->AssimpSupportedFormats_Export.empty();
+  static_cast<void>(m_pInstance->AssimpSupportedFormats_Export.empty());
   std::unique_ptr<Assimp::Exporter> aExporter = std::make_unique<Assimp::Exporter>();
   size_t aExporter_num = aExporter->GetExportFormatCount();
   for (size_t i = 0; i < aExporter_num; i++) {

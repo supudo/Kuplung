@@ -9,6 +9,8 @@
 #include "Consumption.hpp"
 
 #ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN
+#define PSAPI_VERSION 2
 #include <windows.h>
 #include <psapi.h>
 #elif __APPLE__

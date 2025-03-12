@@ -196,9 +196,6 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imguizmo\ImGuizmo.cpp">
       <Filter>kuplung\utilities\imgui\imguizmo</Filter>
     </ClCompile>
-    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui.cpp">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClCompile>
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_demo.cpp">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClCompile>
@@ -314,9 +311,6 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.cpp">
       <Filter>kuplung\utilities\imgui\ImGuiColorTextEdit</Filter>
     </ClCompile>
-    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.cpp">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClCompile>
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_widgets.cpp">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClCompile>
@@ -333,9 +327,6 @@
       <Filter>kuplung\utilities\cuda</Filter>
     </ClCompile>
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_tables.cpp">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.cpp">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClCompile>
   </ItemGroup>
@@ -553,15 +544,6 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\gl\GLUtils.hpp">
       <Filter>kuplung\utilities\gl</Filter>
     </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imconfig.h">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui.h">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_internal.h">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imguizmo\ImGuizmo.h">
       <Filter>kuplung\utilities\imgui\imguizmo</Filter>
     </ClInclude>
@@ -712,18 +694,6 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.h">
       <Filter>kuplung\utilities\imgui\ImGuiColorTextEdit</Filter>
     </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.h">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_rectpack.h">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_textedit.h">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_truetype.h">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\meshes\helpers\Grid2D.hpp">
       <Filter>kuplung\meshes\helpers</Filter>
     </ClInclude>
@@ -747,12 +717,6 @@
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Helpers.h">
       <Filter>kuplung\utilities\helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.h">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3_loader.h">
-      <Filter>kuplung\utilities\imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
