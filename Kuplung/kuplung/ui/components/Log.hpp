@@ -9,7 +9,7 @@
 #ifndef Log_hpp
 #define Log_hpp
 
-#include "kuplung/utilities/imgui/imgui.h"
+#include <imgui.h>
 
 class Log {
 public:

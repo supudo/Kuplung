@@ -5,7 +5,7 @@
 #include <cmath>
 
 #include "TextEditor.h"
-#include "kuplung/utilities/imgui/imgui.h" // for imGui::GetCurrentWindow()
+#include <imgui.h> // for imGui::GetCurrentWindow()
 
 // TODO
 // - multiline comments vs single-line: latter is blocking start of a ML

@@ -10,8 +10,8 @@
 #include "kuplung/ui/components/Tabs.hpp"
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
-#include "kuplung/utilities/imgui/imgui_impl_opengl3.h"
-#include "kuplung/utilities/imgui/imgui_impl_sdl3.h"
+#include <imgui_impl_opengl3.h>
+#include <imgui_impl_sdl3.h>
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 
 UIManager::UIManager(ObjectsManager& managerObjects) : managerObjects(managerObjects) {

@@ -7,7 +7,7 @@
 //
 
 #include "kuplung/ui/components/FileSaver.hpp"
-#include "kuplung/utilities/imgui/imgui_internal.h"
+#include <imgui_internal.h>
 #include "kuplung/utilities/helpers/Helpers.h"
 #include <filesystem>
 #include <ctime>

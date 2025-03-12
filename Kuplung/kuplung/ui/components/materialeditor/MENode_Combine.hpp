@@ -9,7 +9,7 @@
 #ifndef MENode_Combine_hpp
 #define MENode_Combine_hpp
 
-#include "kuplung/utilities/imgui/imgui.h"
+#include <imgui.h>
 #include "kuplung/ui/components/materialeditor/MENode.hpp"
 
 class MENode_Combine: public MENode {

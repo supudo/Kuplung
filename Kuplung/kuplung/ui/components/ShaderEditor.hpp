@@ -12,7 +12,7 @@
 #include <functional>
 #include <map>
 #include <string>
-#include "kuplung/utilities/imgui/imgui.h"
+#include <imgui.h>
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/lua/LuaManager.hpp"
 

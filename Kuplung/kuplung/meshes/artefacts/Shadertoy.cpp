@@ -7,7 +7,7 @@
 //
 
 #include "Shadertoy.hpp"
-#include "kuplung/utilities/imgui/imgui.h"
+#include <imgui.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 

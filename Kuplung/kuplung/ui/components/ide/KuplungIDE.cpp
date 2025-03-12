@@ -7,7 +7,7 @@
 //
 
 #include "KuplungIDE.hpp"
-#include "kuplung/utilities/imgui/imgui.h"
+#include <imgui.h>
 #include "kuplung/settings/Settings.h"
 #include <fstream>
 

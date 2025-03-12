@@ -13,7 +13,7 @@
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/utilities/gl/GLIncludes.h"
 
-#include "kuplung/utilities/imgui/imgui.h"
+#include <imgui.h>
 
 #include "kuplung/ui/components/Log.hpp"
 #include "kuplung/ui/components/Screenshot.hpp"

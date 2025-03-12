@@ -10,7 +10,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
-#include "kuplung/utilities/imgui/imgui_internal.h"
+#include <imgui_internal.h>
 
 void DialogOptions::init() {
   this->fontLister = std::make_unique<FontsList>();

@@ -9,7 +9,7 @@
 #ifndef MENode_hpp
 #define MENode_hpp
 
-#include "kuplung/utilities/imgui/imgui.h"
+#include <imgui.h>
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/ui/components/materialeditor/MaterialEditorData.h"
 

@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 #include <math.h>
-#include "kuplung/utilities/imgui/imgui.h"
+#include <imgui.h>
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/ui/UIHelpers.hpp"
 #include "kuplung/settings/SettingsStructs.h"

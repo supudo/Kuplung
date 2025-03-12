@@ -11,7 +11,7 @@
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include "kuplung/utilities/imgui/imgui.h"
+#include <imgui.h>
 
 class ImageViewer {
 public:

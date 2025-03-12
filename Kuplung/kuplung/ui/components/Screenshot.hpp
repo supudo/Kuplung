@@ -10,8 +10,8 @@
 #define Screenshot_hpp
 
 #define _CRT_SECURE_NO_WARNINGS
-#include "kuplung/utilities/imgui/imgui.h"
-#include "kuplung/utilities/imgui/imgui_internal.h"
+#include <imgui.h>
+#include <imgui_internal.h>
 
 #include <GLFW/glfw3.h>
 

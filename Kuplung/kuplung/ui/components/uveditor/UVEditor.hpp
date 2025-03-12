@@ -14,7 +14,7 @@
 #include <string>
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include "kuplung/utilities/imgui/imgui.h"
+#include <imgui.h>
 #include "kuplung/settings/Settings.h"
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"

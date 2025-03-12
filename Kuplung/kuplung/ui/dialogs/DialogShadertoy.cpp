@@ -8,7 +8,7 @@
 
 #include "DialogShadertoy.hpp"
 #include "kuplung/settings/Settings.h"
-#include "kuplung/utilities/imgui/imgui_internal.h"
+#include <imgui_internal.h>
 #include "kuplung/utilities/stb/stb_image.h"
 #include <string>
 #include <iostream>

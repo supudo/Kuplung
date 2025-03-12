@@ -9,7 +9,7 @@
 #ifndef MENode_Texture_hpp
 #define MENode_Texture_hpp
 
-#include "kuplung/utilities/imgui/imgui.h"
+#include <imgui.h>
 #include "kuplung/ui/components/materialeditor/MENode.hpp"
 #include "kuplung/ui/components/FileBrowser.hpp"
 

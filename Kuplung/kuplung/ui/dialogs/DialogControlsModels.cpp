@@ -10,7 +10,7 @@
 #include "kuplung/ui/components/Tabs.hpp"
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
-#include "kuplung/utilities/imgui/imgui_internal.h"
+#include <imgui_internal.h>
 #include "kuplung/utilities/stb/stb_image.h"
 #include <filesystem>
 

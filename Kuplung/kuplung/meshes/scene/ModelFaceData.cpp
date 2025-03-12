@@ -10,7 +10,7 @@
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/matrix_decompose.hpp>
-#include "kuplung/utilities/imgui/imgui.h"
+#include <imgui.h>
 
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"

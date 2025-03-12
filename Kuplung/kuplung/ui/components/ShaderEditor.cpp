@@ -7,7 +7,7 @@
 //
 
 #include "kuplung/ui/components/ShaderEditor.hpp"
-#include "kuplung/utilities/imgui/imgui_internal.h"
+#include <imgui_internal.h>
 #include <fstream>
 
 const char* GUIEditor_ShaderItems[] = {
