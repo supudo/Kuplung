@@ -76,7 +76,7 @@
       <RuntimeTypeInfo>
       </RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_CONSOLE;Kuplung_DEBUG_BUILD;Kuplung_OpenGL_4x;Kuplung_Debug_Timings;GLEW_STATIC;GLM_ENABLE_EXPERIMENTAL;IMGUI_DEFINE_MATH_OPERATORS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WIN32;_WINDOWS;_DEBUG;_CONSOLE;Kuplung_DEBUG_BUILD;Kuplung_OpenGL_4x;Kuplung_Debug_Timings;GLEW_STATIC;GLM_ENABLE_EXPERIMENTAL;IMGUI_DEFINE_MATH_OPERATORS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <EnablePREfast>false</EnablePREfast>
