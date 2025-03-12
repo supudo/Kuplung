@@ -9,6 +9,7 @@
 #ifndef Controls_hpp
 #define Controls_hpp
 
+#define SDL_MAIN_HANDLED
 #include <SDL3/SDL.h>
 #ifdef _WIN32
 #  undef main

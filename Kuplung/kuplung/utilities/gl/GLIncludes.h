@@ -21,6 +21,7 @@
 #pragma clang diagnostic ignored "-Wpadded"
 #endif
 
+#define SDL_MAIN_HANDLED
 #include <SDL3/SDL.h>
 
 #ifdef _WIN32

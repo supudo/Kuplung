@@ -8,6 +8,7 @@
 
 #include "Settings.h"
 #include "kuplung/utilities/helpers/Strings.h"
+#define SDL_MAIN_HANDLED
 #include <SDL3/SDL.h>
 #include <iostream>
 #include <filesystem>

@@ -8,24 +8,6 @@
 
 #include "Consumption.hpp"
 
-#ifdef _WIN32
-#define WIN32_LEAN_AND_MEAN
-#define PSAPI_VERSION 2
-#include <windows.h>
-#include <psapi.h>
-#elif __APPLE__
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/sysctl.h>
-#include <sys/resource.h>
-#include <mach/mach.h>
-#endif
-#include <iostream>
-#include <fstream>
-#include <cmath>
-#include "kuplung/utilities/helpers/Strings.h"
-#include "kuplung/utilities/gl/GLIncludes.h"
-
 namespace KuplungApp { namespace Utilities { namespace Consumption {
 
 void Consumption::init() {

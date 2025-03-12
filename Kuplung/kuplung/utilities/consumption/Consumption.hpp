@@ -14,6 +14,25 @@
 #include "WindowsCPUUsage.hpp"
 #endif
 
+#ifdef _WIN32
+#  define WIN32_LEAN_AND_MEAN
+#  define PSAPI_VERSION 2
+#  include <Windows.h>
+#  include <psapi.h>
+#elif __APPLE__
+#  include <mach/mach.h>
+#  include <sys/resource.h>
+#  include <sys/sysctl.h>
+#  include <sys/types.h>
+#  include <unistd.h>
+#endif
+
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include "kuplung/utilities/helpers/Strings.h"
+#include "kuplung/utilities/gl/GLIncludes.h"
+
 namespace KuplungApp { namespace Utilities { namespace Consumption {
 
 class Consumption {
