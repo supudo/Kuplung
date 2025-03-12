@@ -11,7 +11,7 @@
 
 #include <filesystem>
 
-namespace Kuplung::Helpers {
+namespace KuplungApp::Helpers {
   static const inline std::string getDateToStringFormatted(const std::chrono::system_clock::duration& duration, const std::string& dateFormat) {
     const auto epoch = std::chrono::time_point<std::chrono::system_clock>();
     const auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::duration<double>(duration));
@@ -21,6 +21,6 @@ namespace Kuplung::Helpers {
     ss << std::put_time(std::localtime(&t_c), dateFormat.c_str());
     return ss.str();
   }
-} // namespace Kuplung::Helpers
+} // namespace KuplungApp::Helpers
 
 #endif /* DateTimes_h */

@@ -154,7 +154,7 @@ void Settings::initSettings(const std::string& iniFolder) {
     const aiImporterDesc* aiImporterDesc = aImporter->GetImporterInfo(i);
     std::string textensions(aiImporterDesc->mFileExtensions);
     std::transform(textensions.begin(), textensions.end(), textensions.begin(), ::toupper);
-    std::vector<std::string> elems = Kuplung::Helpers::splitString(textensions, ' ');
+    std::vector<std::string> elems = KuplungApp::Helpers::splitString(textensions, ' ');
     std::string extensions("." + elems[0]);
     for (size_t j = 1; j < elems.size(); j++) {
       extensions += ", ." + elems[j];

@@ -49,10 +49,10 @@ const ImGuiStyle& DialogStyle::load(const std::string& styleFilePath) const {
       else {
         std::string opKey, opValue;
         std::vector<std::string> lineElements = this->splitString(singleLine, regex_equalsSign);
-        opKey = Kuplung::Helpers::trim(lineElements[0]);
+        opKey = KuplungApp::Helpers::trim(lineElements[0]);
 
         if (lineElements.size() > 1)
-          opValue = Kuplung::Helpers::trim(lineElements[1]);
+          opValue = KuplungApp::Helpers::trim(lineElements[1]);
         else
           opValue.clear();
 
@@ -62,8 +62,8 @@ const ImGuiStyle& DialogStyle::load(const std::string& styleFilePath) const {
           opKey = opKey.replace(opKey.find("style.sizes."), 12, "");
         if (opKey.find("style.colors.") != std::string::npos)
           opKey = opKey.replace(opKey.find("style.colors."), 13, "");
-        opKey = Kuplung::Helpers::trimRight(opKey);
-        opValue = Kuplung::Helpers::trimRight(opValue);
+        opKey = KuplungApp::Helpers::trimRight(opKey);
+        opValue = KuplungApp::Helpers::trimRight(opValue);
 
         try {
           if (opKey == "Font")

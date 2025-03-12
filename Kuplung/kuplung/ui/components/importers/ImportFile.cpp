@@ -216,9 +216,9 @@ void ImportFile::drawFiles(ImportExportFormats* dialogImportType, int* dialogImp
 #else
         char folderDelimiter = '/';
 #endif
-        std::vector<std::string> elems = Kuplung::Helpers::splitString(entity.path, folderDelimiter);
+        std::vector<std::string> elems = KuplungApp::Helpers::splitString(entity.path, folderDelimiter);
         elems.pop_back();
-        Settings::Instance()->currentFolder = Kuplung::Helpers::joinElementsToString(elems, folderDelimiter);
+        Settings::Instance()->currentFolder = KuplungApp::Helpers::joinElementsToString(elems, folderDelimiter);
         Settings::Instance()->saveSettings();
       }
       else {
@@ -287,7 +287,7 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(ImportExportFormat
 						}
 					}
 				}
-				if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !Kuplung::Helpers::isHidden(iteratorFolder->path().string()))) {
+        if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !KuplungApp::Helpers::isHidden(iteratorFolder->path().string()))) {
 					FBEntity entity;
 					if (fs::is_directory(fileStatus))
 						entity.isFile = false;
@@ -307,7 +307,7 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(ImportExportFormat
 					else
             entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
 
-          entity.modifiedDate = Kuplung::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
+          entity.modifiedDate = KuplungApp::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
 
 					folderContents[entity.path] = entity;
 				}

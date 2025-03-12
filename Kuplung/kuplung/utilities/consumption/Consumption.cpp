@@ -11,27 +11,30 @@
 namespace KuplungApp { namespace Utilities { namespace Consumption {
 
 void Consumption::init() {
-  this->usageOverall.clear();
+  /*this->usageOverall.clear();
   this->usageMemory.clear();
   this->usageCPU.clear();
-  this->memoryMark();
+  this->memoryMark();*/
 }
 
 std::string Consumption::getOverallStats() {
-  this->usageCPU = this->getCPULoad();
+  /*this->usageCPU = this->getCPULoad();
   this->usageMemory = this->getMemoryConsumption();
   this->usageOverall = (this->usageMemory.empty() ? "Memory: n/a" : this->usageMemory) + ", " + (this->usageCPU.empty() ? "CPU: n/a" : this->usageCPU);
-  return this->usageOverall;
+  return this->usageOverall;*/
+  return "";
 }
 
 bool Consumption::isTimeToUpdateMemory() {
-  Uint32 deadline = SDL_GetTicks() + (1000 * Settings::Instance()->Consumption_Interval_Memory);
-  return SDL_GetTicks() >= deadline;
+  /*Uint32 deadline = SDL_GetTicks() + (1000 * Settings::Instance()->Consumption_Interval_Memory);
+  return SDL_GetTicks() >= deadline;*/
+  return true;
 }
 
 bool Consumption::isTimeToUpdateCPU() {
-  Uint32 deadline = SDL_GetTicks() + (250 * Settings::Instance()->Consumption_Interval_CPU);
-  return SDL_GetTicks() >= deadline;
+  /*Uint32 deadline = SDL_GetTicks() + (250 * Settings::Instance()->Consumption_Interval_CPU);
+  return SDL_GetTicks() >= deadline;*/
+  return true;
 }
 
 // -------------------------
@@ -40,12 +43,13 @@ bool Consumption::isTimeToUpdateCPU() {
 
 std::string Consumption::getMemoryConsumption() {
 #ifdef _WIN32
-  if (this->isTimeToUpdateMemory()) {
-    //double memory = this->getWorkingRSS() - this->memoryMarkPoint;
-    double memory = this->getPagefileUsage();
-    this->usageMemory = Settings::Instance()->string_format("Memory: %.2fMb", memory);
-  }
-  return this->usageMemory;
+  //if (this->isTimeToUpdateMemory()) {
+  //  //double memory = this->getWorkingRSS() - this->memoryMarkPoint;
+  //  double memory = this->getPagefileUsage();
+  //  this->usageMemory = Settings::Instance()->string_format("Memory: %.2fMb", memory);
+  //}
+  //return this->usageMemory;
+  return "";
 #else
   if (this->isTimeToUpdateMemory()) {
     double memory = this->getPeakRSS() - this->memoryMarkPoint;
@@ -91,7 +95,7 @@ void Consumption::memoryUnmark() {
 
 void Consumption::windows_printMemStruct() {
 #ifdef _WIN32
-  PROCESS_MEMORY_COUNTERS pmc2;
+ /* PROCESS_MEMORY_COUNTERS pmc2;
   if (GetProcessMemoryInfo(GetCurrentProcess(), &pmc2, sizeof(pmc2))) {
     printf("----------------------------------------------------------------\n");
     printf("PageFaultCount: %f\n", (double)pmc2.PageFaultCount / (1024 * 1024));
@@ -103,17 +107,17 @@ void Consumption::windows_printMemStruct() {
     printf("QuotaNonPagedPoolUsage: %f\n", (double)pmc2.QuotaNonPagedPoolUsage / (1024 * 1024));
     printf("PagefileUsage: %f\n", (double)pmc2.PagefileUsage / (1024 * 1024));
     printf("PeakPagefileUsage: %f\n", (double)pmc2.PeakPagefileUsage / (1024 * 1024));
-  }
+  }*/
 #endif
 }
 
 size_t Consumption::getPagefileUsage() {
 #ifdef _WIN32
-  //windows_printMemStruct();
-  PROCESS_MEMORY_COUNTERS pmc;
+  /*PROCESS_MEMORY_COUNTERS pmc;
   GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
   SIZE_T memoryUsage = pmc.PagefileUsage;
-  return size_t(memoryUsage) / (1024.0 * 1024.0);
+  return size_t(memoryUsage) / (1024.0 * 1024.0);*/
+  return 0;
 #else
   return 0;
 #endif
@@ -121,10 +125,11 @@ size_t Consumption::getPagefileUsage() {
 
 size_t Consumption::getWorkingRSS() {
 #ifdef _WIN32
-  PROCESS_MEMORY_COUNTERS pmc;
+ /* PROCESS_MEMORY_COUNTERS pmc;
   GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
   SIZE_T virtualMemUsedByMe = pmc.WorkingSetSize;
-  return size_t(virtualMemUsedByMe) / (1024.0 * 1024.0);
+  return size_t(virtualMemUsedByMe) / (1024.0 * 1024.0);*/
+  return 0;
 #else
   return 0;
 #endif
@@ -132,9 +137,10 @@ size_t Consumption::getWorkingRSS() {
 
 size_t Consumption::getPeakRSS() {
 #ifdef _WIN32
-  PROCESS_MEMORY_COUNTERS info;
+  /*PROCESS_MEMORY_COUNTERS info;
   GetProcessMemoryInfo(GetCurrentProcess(), &info, sizeof(info));
-  return (size_t)info.PeakWorkingSetSize;
+  return (size_t)info.PeakWorkingSetSize;*/
+  return 0;
 #elif __APPLE__
   struct rusage kuplung_resource_usage;
   getrusage(RUSAGE_SELF, &kuplung_resource_usage);
@@ -146,9 +152,10 @@ size_t Consumption::getPeakRSS() {
 
 size_t Consumption::getCurrentRSS() {
 #ifdef _WIN32
-  PROCESS_MEMORY_COUNTERS info;
+ /* PROCESS_MEMORY_COUNTERS info;
   GetProcessMemoryInfo(GetCurrentProcess(), &info, sizeof(info));
-  return (size_t)info.WorkingSetSize;
+  return (size_t)info.WorkingSetSize;*/
+  return 0;
 #elif __APPLE__
   struct mach_task_basic_info info;
   mach_msg_type_number_t infoCount = MACH_TASK_BASIC_INFO_COUNT;
@@ -166,18 +173,19 @@ size_t Consumption::getCurrentRSS() {
 
 std::string Consumption::getCPULoad() {
 #ifdef _WIN32
-  if (this->isTimeToUpdateCPU()) {
+  /*if (this->isTimeToUpdateCPU()) {
     short cpuUsage = this->winCPUMeter.GetUsage();
     this->usageCPU = Settings::Instance()->string_format("CPU: %d%%", cpuUsage);
   }
-  return this->usageCPU;
+  return this->usageCPU;*/
+  return "";
 #else
   if (this->isTimeToUpdateCPU()) {
     pid_t p = getpid();
     std::string c = Settings::Instance()->string_format("ps -p %i -o pcpu", int(p));
     const char* com = c.c_str();
     std::string res = this->exec(com);
-    std::vector<std::string> elems = Kuplung::Helpers::splitString(res, '\n');
+    std::vector<std::string> elems = KuplungApp::Helpers::splitString(res, '\n');
     this->usageCPU = "CPU:" + elems[1] + "%";
   }
   return this->usageCPU;

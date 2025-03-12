@@ -11,10 +11,10 @@
 
 #include <string>
 
-namespace Kuplung::Helpers {
+namespace KuplungApp::Helpers {
   static inline bool isHidden(const std::string& fileName) {
     return fileName == ".." || fileName == "." || fileName.compare(0, 1, ".");
   }
-} // namespace Kuplung::helpers
+} // namespace KuplungApp::helpers
 
 #endif /* Files_h */

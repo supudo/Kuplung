@@ -253,7 +253,7 @@ std::map<std::string, FBEntity> ExportOBJ::getFolderContents(std::string const& 
     for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
       try {
         fs::file_status fileStatus = iteratorFolder->status();
-        if (!Kuplung::Helpers::isHidden(iteratorFolder->path().string())) {
+        if (!KuplungApp::Helpers::isHidden(iteratorFolder->path().string())) {
           FBEntity entity;
           if (fs::is_directory(fileStatus))
             entity.isFile = false;
@@ -275,7 +275,7 @@ std::map<std::string, FBEntity> ExportOBJ::getFolderContents(std::string const& 
           else
             entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
 
-          entity.modifiedDate = Kuplung::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
+          entity.modifiedDate = KuplungApp::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
 
           folderContents[entity.path] = entity;
         }

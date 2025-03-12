@@ -270,11 +270,11 @@ void ConfigUtils::readFile() {
         std::string opKey, opValue;
         std::vector<std::string> lineElements = this->splitString(singleLine, this->regex_equalsSign);
         opKey = lineElements[0];
-        opKey = Kuplung::Helpers::trim(opKey);
+        opKey = KuplungApp::Helpers::trim(opKey);
 
         if (lineElements.size() > 1) {
           opValue = lineElements[1];
-          opValue = Kuplung::Helpers::trim(opValue);
+          opValue = KuplungApp::Helpers::trim(opValue);
         }
         else
           opValue.clear();

@@ -175,12 +175,6 @@
     <ClCompile Include="..\Kuplung\kuplung\ui\components\Tabs.cpp">
       <Filter>kuplung\ui\components</Filter>
     </ClCompile>
-    <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\Consumption.cpp">
-      <Filter>kuplung\utilities\consumption</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.cpp">
-      <Filter>kuplung\utilities\consumption</Filter>
-    </ClCompile>
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\Exporter.cpp">
       <Filter>kuplung\utilities\export</Filter>
     </ClCompile>
@@ -328,6 +322,12 @@
     </ClCompile>
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_tables.cpp">
       <Filter>kuplung\utilities\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\Consumption.cpp">
+      <Filter>kuplung\utilities\consumption</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.cpp">
+      <Filter>kuplung\utilities\consumption</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -523,12 +523,6 @@
     <ClInclude Include="..\Kuplung\kuplung\ui\components\Tabs.hpp">
       <Filter>kuplung\ui\components</Filter>
     </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.hpp">
-      <Filter>kuplung\utilities\consumption</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\Consumption.hpp">
-      <Filter>kuplung\utilities\consumption</Filter>
-    </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\Exporter.hpp">
       <Filter>kuplung\utilities\export</Filter>
     </ClInclude>
@@ -717,6 +711,12 @@
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Helpers.h">
       <Filter>kuplung\utilities\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\Consumption.hpp">
+      <Filter>kuplung\utilities\consumption</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.hpp">
+      <Filter>kuplung\utilities\consumption</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
