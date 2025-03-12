@@ -248,7 +248,15 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Files.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Helpers.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Strings.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imconfig.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_internal.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_rectpack.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_textedit.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_truetype.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\measurement\Timings.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\Exporter.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterOBJ.hpp" />
@@ -366,7 +374,10 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\cuda\CudaHelpers.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_widgets.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\measurement\Timings.cpp" />
