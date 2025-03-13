@@ -277,6 +277,7 @@
     <ClCompile Include="..\Kuplung\kuplung\Kuplung.cpp">
       <Filter>kuplung</Filter>
     </ClCompile>
+    <ClCompile Include="..\Kuplung\main.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\FileModelManager.cpp">
       <Filter>kuplung\utilities\parsers</Filter>
     </ClCompile>
@@ -337,7 +338,6 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.cpp">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="..\Kuplung\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -727,6 +727,9 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.hpp">
       <Filter>kuplung\utilities\consumption</Filter>
     </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_truetype.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imconfig.h">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClInclude>
@@ -746,9 +749,6 @@
       <Filter>kuplung\utilities\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_textedit.h">
-      <Filter>kuplung\utilities\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_truetype.h">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClInclude>
   </ItemGroup>
