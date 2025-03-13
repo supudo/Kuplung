@@ -277,7 +277,6 @@
     <ClCompile Include="..\Kuplung\kuplung\Kuplung.cpp">
       <Filter>kuplung</Filter>
     </ClCompile>
-    <ClCompile Include="..\Kuplung\main.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\FileModelManager.cpp">
       <Filter>kuplung\utilities\parsers</Filter>
     </ClCompile>
@@ -329,6 +328,16 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.cpp">
       <Filter>kuplung\utilities\consumption</Filter>
     </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui.cpp">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.cpp">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.cpp">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Kuplung\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -717,6 +726,30 @@
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.hpp">
       <Filter>kuplung\utilities\consumption</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imconfig.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_internal.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_rectpack.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_textedit.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_truetype.h">
+      <Filter>kuplung\utilities\imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
