@@ -100,7 +100,7 @@ void static Kuplung_printObjModels(const std::vector<MeshModel>& models, bool by
       printf("m.geometry :\n");
       for (size_t j = 0; j < m.indices.size(); j++) {
         const size_t idx = m.indices[j];
-        std::string geom = Settings::Instance()->string_format("index = %i ---> ", idx);
+        std::string geom = Settings::Instance()->string_format("index = %f ---> ", idx);
         const glm::vec3 vert = m.vertices[idx];
         const glm::vec2 tc = m.texture_coordinates[idx];
         const glm::vec3 n = m.normals[idx];

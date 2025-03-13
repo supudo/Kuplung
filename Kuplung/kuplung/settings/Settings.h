@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <sstream>
 #include <type_traits>
 #include <typeinfo>
 
@@ -88,15 +89,16 @@ public:
   }
 
 #ifdef _WIN32
-  template<typename ... Args>
-  std::string string_format(const std::string& format, Args ... args) {
-    /*std::stringstream ss;
-    ss << std::put_time(std::localtime(&t_c), dateFormat.c_str());
-    return ss.str();*/
+  template <typename... Args>
+  void string_format(const std::string& format, Args... args) {
+    return snprintf(format, args);
+  }
 
-    size_t size = snprintf(nullptr, 0, format.c_str(), args ...) + 1;
+  template <typename... Args>
+  std::string string_format_sprintf(const std::string& format, Args... args) {
+    size_t size = snprintf(nullptr, 0, format.c_str(), args...) + 1;
     std::unique_ptr<char[]> buf(new char[size]);
-    snprintf(buf.get(), size, format.c_str(), args ...);
+    snprintf(buf.get(), size, format.c_str(), args...);
     return std::string(buf.get(), buf.get() + size - 1);
   }
 #else
