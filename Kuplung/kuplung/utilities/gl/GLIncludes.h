@@ -22,6 +22,7 @@
 #endif
 
 #define SDL_MAIN_HANDLED
+#define SDL_MAIN_USE_CALLBACKS 0
 #include <SDL3/SDL.h>
 
 #ifdef _WIN32
