@@ -89,17 +89,22 @@ public:
   }
 
 #ifdef _WIN32
-  template <typename... Args>
-  void string_format(const std::string& format, Args... args) {
-    return snprintf(format, args);
+  template <typename T>
+  void string_format_stream(std::ostream& o, T t) {
+    o << t << std::endl;
+  }
+
+  template <typename T, typename... Args>
+  void string_format_stream(std::ostream& o, T t, Args... args) {
+    this->string_format_stream(o, t);
+    this->string_format_stream(o, args...);
   }
 
   template <typename... Args>
-  std::string string_format_sprintf(const std::string& format, Args... args) {
-    size_t size = snprintf(nullptr, 0, format.c_str(), args...) + 1;
-    std::unique_ptr<char[]> buf(new char[size]);
-    snprintf(buf.get(), size, format.c_str(), args...);
-    return std::string(buf.get(), buf.get() + size - 1);
+  std::string string_format(Args... args) {
+    std::ostringstream oss;
+    this->string_format_stream(oss, args...);
+    return oss.str();
   }
 #else
   std::string string_format(const std::string& fmt_str, ...);
