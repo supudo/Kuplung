@@ -61,8 +61,10 @@ Kuplung::~Kuplung() {
 }
 
 int Kuplung::run() {
-  if (!this->init())
+  if (!this->init()) {
+    printf("Initialization failed (see above), cannot run Kuplung!\n");
     return 1;
+  }
 
   SDL_Event ev;
   int frameCounter = 1;
@@ -230,7 +232,8 @@ bool Kuplung::init() {
       }
     }
   }
-  Settings::Instance()->logTimings(__FILE__, __func__);
+  if (success)
+    Settings::Instance()->logTimings(__FILE__, __func__);
   return success;
 }
 
