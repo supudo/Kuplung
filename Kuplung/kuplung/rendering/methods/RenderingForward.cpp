@@ -57,7 +57,7 @@ RenderingForward::~RenderingForward() {
     this->mfLights_Spot[i].reset();
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
 }
 
 bool RenderingForward::init() {
@@ -263,7 +263,7 @@ bool RenderingForward::initShaderProgram() {
     this->glPBR_AO = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_PBR_AO");
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
 
   return success;
 }
@@ -963,5 +963,5 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
 
   glUseProgram(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
 }

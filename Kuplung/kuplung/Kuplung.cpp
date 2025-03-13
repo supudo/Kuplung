@@ -99,8 +99,7 @@ int Kuplung::run() {
     if (Settings::Instance()->showFrameRenderTime) {
       if (frameCounter > ImGui::GetIO().Framerate) {
         float fte = (1.0 * std::clock() / CLOCKS_PER_SEC);
-        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] FRAME draw time : %f ms (%f seconds)", (fte - fts) * 1000, (fte - fts)));
-        // Settings::Instance()->logTimings(__FILE__, __func__);
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] FRAME draw time : ", (fte - fts) * 1000, " ms (", (fte - fts), " seconds)"));
         frameCounter = 1;
       }
       else

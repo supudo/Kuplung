@@ -88,7 +88,7 @@ bool RenderingSimple::init() {
     this->solidLight->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthSpecular");
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
   return true;
 }
 
@@ -158,5 +158,5 @@ void RenderingSimple::render(const std::vector<ModelFaceData*>& meshModelFaces, 
 
   glUseProgram(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
 }

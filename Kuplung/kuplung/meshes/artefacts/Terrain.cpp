@@ -34,7 +34,7 @@ Terrain::~Terrain() {
 
   glDeleteVertexArrays(1, &this->glVAO);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
 }
 
 Terrain::Terrain()
@@ -88,7 +88,7 @@ bool Terrain::initShaderProgram() {
   glDisable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
 
   return success;
 }
@@ -170,7 +170,7 @@ void Terrain::initBuffers(std::string const& assetsFolder, const int width, cons
 
   glBindVertexArray(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
 }
 
 void Terrain::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel) {
@@ -201,5 +201,5 @@ void Terrain::render(const glm::mat4& matrixProjection, const glm::mat4& matrixC
     glUseProgram(0);
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
 }

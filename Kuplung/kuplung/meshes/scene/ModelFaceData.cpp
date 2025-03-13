@@ -53,7 +53,7 @@ ModelFaceData::~ModelFaceData() {
 
   glDeleteVertexArrays(1, &this->glVAO);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
 }
 
 void ModelFaceData::init(MeshModel const& model, std::string const& assetsFolder) {
@@ -143,7 +143,7 @@ void ModelFaceData::initBuffers() {
 
   glBindVertexArray(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
 }
 
 void ModelFaceData::renderModel(const bool useTessellation) {
@@ -221,5 +221,5 @@ void ModelFaceData::renderModel(const bool useTessellation) {
     }
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
 }

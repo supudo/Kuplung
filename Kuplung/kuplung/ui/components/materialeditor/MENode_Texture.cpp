@@ -168,7 +168,7 @@ void MENode_Texture::createTextureBuffer(int* width, int* height) {
   int tChannels;
   unsigned char* tPixels = stbi_load(this->TextureImage.c_str(), width, height, &tChannels, 0);
   if (!tPixels)
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[MENode_Texture] Can't load texture image %s with error %s!\n", this->TextureImage.c_str(), stbi_failure_reason()));
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[MENode_Texture] Can't load texture image ", this->TextureImage.c_str(), " with error ", stbi_failure_reason(), "!\n"));
   else {
     glGenTextures(1, &this->vboBuffer);
     glBindTexture(GL_TEXTURE_2D, this->vboBuffer);
