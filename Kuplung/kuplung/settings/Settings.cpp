@@ -32,13 +32,8 @@ Settings* Settings::Instance() {
 }
 
 void Settings::initSettings(const std::string& iniFolder) {
-#ifdef Kuplung_OpenGL_4x
   m_pInstance->OpenGL_MajorVersion = 4;
   m_pInstance->OpenGL_MinorVersion = 1;
-#else
-  m_pInstance->OpenGL_MajorVersion = 2;
-  m_pInstance->OpenGL_MinorVersion = 1;
-#endif
   m_pInstance->mRayDraw = false;
   m_pInstance->mRayAnimate = false;
   m_pInstance->mRayOriginX = 0.0f;
@@ -334,7 +329,6 @@ const bool Settings::hasEnding(std::string const& fullString, std::string const&
 }
 
 void Settings::logTimings(const std::string& file, const std::string& method) {
-#ifdef Kuplung_Debug_Timings
-  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] [", file.c_str(), " - ", method.c_str(), "] : ", (1.0 * std::clock() / CLOCKS_PER_SEC), " seconds."));
-#endif
+  if (this->showFrameRenderTime)
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] [", file.c_str(), " - ", method.c_str(), "] : ", (1.0 * std::clock() / CLOCKS_PER_SEC), " seconds."));
 }

@@ -126,9 +126,7 @@ bool DefaultForwardRenderer::initShaderProgram() {
     return success = false;
   }
   else {
-#ifdef Kuplung_OpenGL_4x
     glPatchParameteri(GL_PATCH_VERTICES, 3);
-#endif
 
     this->glGS_GeomDisplacementLocation = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
     this->glTCS_UseCullFace = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "tcs_UseCullFace");

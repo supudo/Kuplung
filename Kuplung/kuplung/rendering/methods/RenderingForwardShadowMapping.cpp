@@ -142,9 +142,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
     return success = false;
   }
   else {
-#ifdef Kuplung_OpenGL_4x
     glPatchParameteri(GL_PATCH_VERTICES, 3);
-#endif
 
     glDetachShader(this->shaderProgramShadows, this->shaderShadowsVertex);
     glDetachShader(this->shaderProgramShadows, this->shaderShadowsFragment);
