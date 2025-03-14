@@ -56,7 +56,7 @@ const std::string SceneRenderer::renderImage2(const FBEntity& file, std::vector<
   int height = Settings::Instance()->SDL_Window_Height;
 
   if (!SDL_Init(SDL_INIT_VIDEO))
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[SceneRenderer] Render Error: SDL could not initialize! SDL Error: %s\n", SDL_GetError()));
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[SceneRenderer] Render Error: SDL could not initialize! SDL Error: ", SDL_GetError(), '\n'));
   else {
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
@@ -74,13 +74,13 @@ const std::string SceneRenderer::renderImage2(const FBEntity& file, std::vector<
     SDL_Window *gWindow = SDL_CreateWindow("Kuplung", width, height, Settings::Instance()->SDL_Window_Flags);
     SDL_GLContext glContext;
     if (gWindow == nullptr)
-        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[SceneRenderer] Render Error: Window could not be created! SDL Error: %s\n", SDL_GetError()));
+      Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[SceneRenderer] Render Error: Window could not be created! SDL Error: ", SDL_GetError(), '\n'));
     else {
       glContext = SDL_GL_CreateContext(gWindow);
       if (!glContext)
-        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[SceneRenderer] Render Error: Unable to create OpenGL context! SDL Error: %s\n", SDL_GetError()));
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[SceneRenderer] Render Error: Unable to create OpenGL context! SDL Error: ", SDL_GetError(), '\n'));
       else if (!SDL_GL_MakeCurrent(gWindow, glContext))
-        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[SceneRenderer] Render Warning: Unable to set current context! SDL Error: %s\n", SDL_GetError()));
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[SceneRenderer] Render Warning: Unable to set current context! SDL Error: ", SDL_GetError(), '\n'));
       else {
         glViewport(0, 0, width, height);
         glClearColor(Settings::Instance()->guiClearColor.r, Settings::Instance()->guiClearColor.g, Settings::Instance()->guiClearColor.b, Settings::Instance()->guiClearColor.w);

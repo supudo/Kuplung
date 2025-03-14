@@ -215,12 +215,12 @@ int KuplungMinizip::Add(std::string contentPath, std::string zipPath, int flags)
                                  password, crcFile, zip64);
 
     if (err != ZIP_OK)
-        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in opening %s in zipfile!\n", contentPath.c_str()));
+      Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in opening ", contentPath.c_str(), " in zipfile!\n"));
     else {
         fin = FOPEN_FUNC((char*)contentPath.c_str(), "rb");
         if (fin == NULL) {
             err = ZIP_ERRNO;
-            Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in opening %s for reading\n", contentPath.c_str()));
+          Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in opening ", contentPath.c_str(), " for reading\n"));
         }
     }
 
@@ -231,7 +231,7 @@ int KuplungMinizip::Add(std::string contentPath, std::string zipPath, int flags)
             size_read = (int)fread(buf, 1, size_buf, fin);
             if (size_read < size_buf) {
                 if (feof(fin) == 0) {
-                    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in reading %s\n", contentPath.c_str()));
+                Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in reading ", contentPath.c_str(), '\n'));
                     err = ZIP_ERRNO;
                 }
             }
@@ -239,7 +239,7 @@ int KuplungMinizip::Add(std::string contentPath, std::string zipPath, int flags)
             if (size_read > 0) {
                 err = zipWriteInFileInZip (this->zf, buf, size_read);
                 if (err < 0)
-                    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in writing %s in the zipfile\n", contentPath.c_str()));
+                  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in writing ", contentPath.c_str(), " in the zipfile\n"));
             }
         }
         while ((err == ZIP_OK) && (size_read > 0));
@@ -279,7 +279,7 @@ bool KuplungMinizip::UnzipFile(std::string const& unzipFolder) {
             printf("dir:%s\n", filename);
             std::filesystem::path zFolder(filename);
             if (!std::filesystem::create_directory(zFolder))
-                Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungMinizip] Can't create folder - %s", zFolder.c_str()));
+              Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungMinizip] Can't create folder - ", zFolder.c_str(), '\n'));
         }
         else {
             if (unzOpenCurrentFile(this->zf) != UNZ_OK) {
@@ -299,7 +299,7 @@ bool KuplungMinizip::UnzipFile(std::string const& unzipFolder) {
             do {
                 error = unzReadCurrentFile(this->zf, read_buffer, WRITEBUFFERSIZE);
                 if (error < 0) {
-                    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungMinizip] Error %d!", error));
+                  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungMinizip] Error ", error, "!"));
                     unzCloseCurrentFile(this->zf);
                     return false;
                 }
@@ -355,7 +355,7 @@ int KuplungMinizip::getFileCrc(const char* filenameinzip, void* buf, unsigned lo
              size_read = (int)fread(buf, 1, size_buf, fin);
              if (size_read < size_buf) {
                  if (feof(fin) == 0) {
-                     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in reading %s\n", filenameinzip));
+                 Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in reading ", filenameinzip, '\n'));
                      err = ZIP_ERRNO;
                  }
              }

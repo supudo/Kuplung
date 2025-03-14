@@ -20,7 +20,7 @@ void LuaManager::initLua() {
 
 void LuaManager::execute(const std::string& fileName) {
 //     int lua_result;
-//     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager] Evaluating file: %s", fileName.c_str()));
+//     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager] Evaluating file: ", fileName.c_str()));
 //     lua_register(
 //                 this->luaState,
 //                 "testFromLua",
@@ -43,9 +43,9 @@ void LuaManager::execute(const std::string& fileName) {
 // #endif
 // int LuaManager::testFromLua(lua_State* state) {
 //     int args = lua_gettop(state);
-//     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager] This was called from Lua with %d arguments!", args));
+//     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager] This was called from Lua with ", args, " arguments!"));
 //     for (int n=1; n <= args; ++n) {
-//         Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager]  Argument %d: '%s'", n, lua_tostring(state, n)));
+//         Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager]  Argument ", n, ": '", lua_tostring(state, n), "'"));
 //     }
 //     lua_pushnumber(state, 123);
 //     return 1;
@@ -54,7 +54,7 @@ void LuaManager::execute(const std::string& fileName) {
 void LuaManager::checkLuaErrors() {
   // const char* message = lua_tostring(this->luaState, -1);
   // if (message != NULL)
-  //     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager] Error occured: %s!\n", message));
+  //     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager] Error occured: ", message, "!\n"));
   // lua_pop(this->luaState, 1);
 }
 

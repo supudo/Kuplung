@@ -301,11 +301,11 @@ std::vector<FBEntity> Settings::loadRecentFilesImported() {
 }
 
 void Settings::timerStart(const std::string& msg) {
-  this->funcDoLog(this->string_format("[Timer START] %s - %s", msg.c_str(), this->getTimeNow().c_str()));
+  this->funcDoLog(this->string_format("[Timer START] ", msg.c_str(), " - ", this->getTimeNow().c_str()));
 }
 
 void Settings::timerEnd(const std::string& msg) {
-  this->funcDoLog(this->string_format("[Timer END] %s - %s", msg.c_str(), this->getTimeNow().c_str()));
+  this->funcDoLog(this->string_format("[Timer END] ", msg.c_str(), " - ", this->getTimeNow().c_str()));
 }
 
 const std::string Settings::getTimeNow() const {
@@ -335,6 +335,6 @@ const bool Settings::hasEnding(std::string const& fullString, std::string const&
 
 void Settings::logTimings(const std::string& file, const std::string& method) {
 #ifdef Kuplung_Debug_Timings
-  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] [%s - %s] : %f seconds.", file.c_str(), method.c_str(), (1.0 * std::clock() / CLOCKS_PER_SEC)));
+  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] [", file.c_str(), " - ", method.c_str(), "] : ", (1.0 * std::clock() / CLOCKS_PER_SEC), " seconds."));
 #endif
 }

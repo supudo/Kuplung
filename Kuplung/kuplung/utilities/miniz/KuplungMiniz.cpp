@@ -54,7 +54,7 @@ bool KuplungMiniz::unzipArchive(std::string const& archiveFile, std::string cons
 
         std::string unzippedFile = archiveFolder + "/" + std::string(file_stat.m_filename);
         if (!mz_zip_reader_extract_to_file(&zipFile, i, unzippedFile.c_str(), 0))
-          Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Kuplung-Miniz-unzipArchive] unzippedFile failed - %s!", unzippedFile.c_str()));
+          Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Kuplung-Miniz-unzipArchive] unzippedFile failed - ", unzippedFile.c_str(), "!"));
       }
     }
   }
@@ -65,7 +65,7 @@ bool KuplungMiniz::unzipArchive(std::string const& archiveFile, std::string cons
     mz_zip_archive src_archive;
     memset(&src_archive, 0, sizeof(src_archive));
     if (!mz_zip_reader_init_file(&src_archive, archiveFile.c_str(), 0)) {
-        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Kuplung-Miniz-unzipArchive] failed opening archive - %s!", archiveFile.c_str()));
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Kuplung-Miniz-unzipArchive] failed opening archive - ", archiveFile.c_str(), "!"));
         return false;
     }
 

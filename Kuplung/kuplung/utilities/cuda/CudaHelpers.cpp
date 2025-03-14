@@ -125,7 +125,7 @@ int CudaHelpers::_ConvertSMVer2Cores(int major, int minor) {
   }
 
   // If we don't find the values, we default use the previous one to run properly
-  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[CudaHelpers] MapSMtoCores for SM %d.%d is undefined. Default to use %d Cores/SM", major, minor, nGpuArchCoresPerSM[index - 1].Cores));
+  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[CudaHelpers] MapSMtoCores for SM ", major, ".", minor, " is undefined. Default to use ", nGpuArchCoresPerSM[index - 1].Cores, " Cores/SM"));
   return nGpuArchCoresPerSM[index-1].Cores;
 }
 

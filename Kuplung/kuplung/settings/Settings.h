@@ -91,7 +91,7 @@ public:
 #ifdef _WIN32
   template <typename T>
   void string_format_stream(std::ostream& o, T t) {
-    o << t << std::endl;
+    o << t;
   }
 
   template <typename T, typename... Args>

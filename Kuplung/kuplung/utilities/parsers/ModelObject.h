@@ -100,13 +100,13 @@ void static Kuplung_printObjModels(const std::vector<MeshModel>& models, bool by
       printf("m.geometry :\n");
       for (size_t j = 0; j < m.indices.size(); j++) {
         const size_t idx = m.indices[j];
-        std::string geom = Settings::Instance()->string_format("index = %f ---> ", idx);
+        std::string geom = Settings::Instance()->string_format("index = ", idx, " ---> ");
         const glm::vec3 vert = m.vertices[idx];
         const glm::vec2 tc = m.texture_coordinates[idx];
         const glm::vec3 n = m.normals[idx];
-        geom += Settings::Instance()->string_format("vertex = [%g, %g, %g]", vert.x, vert.y, vert.z);
-        geom += Settings::Instance()->string_format(", uv = [%g, %g]", tc.x, tc.y);
-        geom += Settings::Instance()->string_format(", normal = [%g, %g, %g]", n.x, n.y, n.z);
+        geom += Settings::Instance()->string_format("vertex = [", vert.x, " ", vert.y, " ", vert.z, "]");
+        geom += Settings::Instance()->string_format(", uv = [", tc.x, " ", tc.y, "]");
+        geom += Settings::Instance()->string_format(", normal = [", n.x, " ", n.y, " ", n.z, "]");
         //printf("%s\n", geom.c_str());
       }
     }
@@ -114,26 +114,26 @@ void static Kuplung_printObjModels(const std::vector<MeshModel>& models, bool by
       std::string verts;
       for (size_t j = 0; j < m.vertices.size(); j++) {
         const glm::vec3 v = m.vertices[j];
-        verts += Settings::Instance()->string_format("[%g, %g, %g], ", v.x, v.y, v.z);
+        verts += Settings::Instance()->string_format("[", v.x, " ", v.y, " ", v.z, "]");
       }
       printf("m.vertices : %s\n", verts.c_str());
 
       std::string uvs;
       for (size_t j = 0; j < m.texture_coordinates.size(); j++) {
-        uvs += Settings::Instance()->string_format("[%g, %g], ", m.texture_coordinates[j].x, m.texture_coordinates[j].y);
+        uvs += Settings::Instance()->string_format("[", m.texture_coordinates[j].x, " ", m.texture_coordinates[j].y, "]");
       }
       printf("m.texture_coordinates : %s\n", uvs.c_str());
 
       std::string normals;
       for (size_t j = 0; j < m.normals.size(); j++) {
         const glm::vec3 n = m.normals[j];
-        normals += Settings::Instance()->string_format("[%f, %f, %f], ", n.x, n.y, n.z);
+        normals += Settings::Instance()->string_format("[", n.x, " ", n.y, " ", n.z, "]");
       }
       printf("m.normals : %s\n", normals.c_str());
 
       std::string indices;
       for (size_t j = 0; j < m.indices.size(); j++) {
-        indices += Settings::Instance()->string_format("%i, ", m.indices[j]);
+        indices += Settings::Instance()->string_format(m.indices[j], ", ");
       }
       printf("m.indices : %s\n", indices.c_str());
     }

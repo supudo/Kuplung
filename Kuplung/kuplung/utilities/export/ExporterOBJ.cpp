@@ -189,15 +189,15 @@ void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
     if (materials[mat.MaterialTitle].empty()) {
       materials[mat.MaterialTitle] = this->nlDelimiter;
       materials[mat.MaterialTitle] += "newmtl " + mat.MaterialTitle + this->nlDelimiter;
-      materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ns %g", mat.SpecularExp) + this->nlDelimiter;
-      materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ka %g %g %g", mat.AmbientColor.r, mat.AmbientColor.g, mat.AmbientColor.b) + this->nlDelimiter;
-      materials[mat.MaterialTitle] += Settings::Instance()->string_format("Kd %g %g %g", mat.DiffuseColor.r, mat.DiffuseColor.g, mat.DiffuseColor.b) + this->nlDelimiter;
-      materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ks %g %g %g", mat.SpecularColor.r, mat.SpecularColor.g, mat.SpecularColor.b) + this->nlDelimiter;
-      materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ke %g %g %g", mat.EmissionColor.r, mat.EmissionColor.g, mat.EmissionColor.b) + this->nlDelimiter;
+      materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ns ", mat.SpecularExp) + this->nlDelimiter;
+      materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ka ", mat.AmbientColor.r, " ", mat.AmbientColor.g, " ", mat.AmbientColor.b) + this->nlDelimiter;
+      materials[mat.MaterialTitle] += Settings::Instance()->string_format("Kd ", mat.DiffuseColor.r, " ", mat.DiffuseColor.g, " ", mat.DiffuseColor.b) + this->nlDelimiter;
+      materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ks ", mat.SpecularColor.r, " ", mat.SpecularColor.g, " ", mat.SpecularColor.b) + this->nlDelimiter;
+      materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ke ", mat.EmissionColor.r, " ", mat.EmissionColor.g, " ", mat.EmissionColor.b) + this->nlDelimiter;
       if (mat.OpticalDensity >= 0.0f)
-        materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ni %g", mat.OpticalDensity) + this->nlDelimiter;
-      materials[mat.MaterialTitle] += Settings::Instance()->string_format("d %g", mat.Transparency) + this->nlDelimiter;
-      materials[mat.MaterialTitle] += Settings::Instance()->string_format("illum %i", mat.IlluminationMode) + this->nlDelimiter;
+        materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ni ", mat.OpticalDensity) + this->nlDelimiter;
+      materials[mat.MaterialTitle] += Settings::Instance()->string_format("d ", mat.Transparency) + this->nlDelimiter;
+      materials[mat.MaterialTitle] += Settings::Instance()->string_format("illum ", mat.IlluminationMode) + this->nlDelimiter;
 
       if (!mat.TextureAmbient.Image.empty())
         materials[mat.MaterialTitle] += "map_Ka " + mat.TextureAmbient.Image + this->nlDelimiter;
@@ -242,15 +242,15 @@ void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
 //        if (materials[mat.MaterialTitle].empty()) {
 //            materials[mat.MaterialTitle] = this->nlDelimiter;
 //            materials[mat.MaterialTitle] += "newmtl " + mat.MaterialTitle + this->nlDelimiter;
-//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ns %f", mat.SpecularExp) + this->nlDelimiter;
-//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ka %f %f %f", mat.AmbientColor.r, mat.AmbientColor.g, mat.AmbientColor.b) + this->nlDelimiter;
-//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Kd %f %f %f", mat.DiffuseColor.r, mat.DiffuseColor.g, mat.DiffuseColor.b) + this->nlDelimiter;
-//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ks %f %f %f", mat.SpecularColor.r, mat.SpecularColor.g, mat.SpecularColor.b) + this->nlDelimiter;
-//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ke %f %f %f", mat.EmissionColor.r, mat.EmissionColor.g, mat.EmissionColor.b) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ns ", mat.SpecularExp) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ka ", mat.AmbientColor.r, " ", mat.AmbientColor.g, " ", mat.AmbientColor.b) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Kd ", mat.DiffuseColor.r, " ", mat.DiffuseColor.g, " ", mat.DiffuseColor.b) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ks ", mat.SpecularColor.r, " ", mat.SpecularColor.g, " ", mat.SpecularColor.b) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ke ", mat.EmissionColor.r, " ", mat.EmissionColor.g, " ", mat.EmissionColor.b) + this->nlDelimiter;
 //            if (mat.OpticalDensity >= 0.0f)
-//                materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ni %f", mat.OpticalDensity) + this->nlDelimiter;
-//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("d %f", mat.Transparency) + this->nlDelimiter;
-//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("illum %i", mat.IlluminationMode) + this->nlDelimiter;
+//                materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ni ", mat.OpticalDensity) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("d ", mat.Transparency) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("illum ", mat.IlluminationMode) + this->nlDelimiter;
 
 //            if (!mat.TextureAmbient.Image.empty())
 //                materials[mat.MaterialTitle] += "map_Ka " + mat.TextureAmbient.Image + this->nlDelimiter;

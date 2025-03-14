@@ -46,7 +46,7 @@ std::string Consumption::getMemoryConsumption() {
   //if (this->isTimeToUpdateMemory()) {
   //  //double memory = this->getWorkingRSS() - this->memoryMarkPoint;
   //  double memory = this->getPagefileUsage();
-  //  this->usageMemory = Settings::Instance()->string_format("Memory: %.2fMb", memory);
+  //  this->usageMemory = Settings::Instance()->string_format("Memory: ", memory, "Mb");
   //}
   //return this->usageMemory;
   return "";
@@ -54,9 +54,9 @@ std::string Consumption::getMemoryConsumption() {
   if (this->isTimeToUpdateMemory()) {
     double memory = this->getPeakRSS() - this->memoryMarkPoint;
     if (std::fabs(this->memoryMarkPoint) < 1e-6)
-      this->usageMemory = Settings::Instance()->string_format("Total Memory: %.2fMb", memory);
+      this->usageMemory = Settings::Instance()->string_format("Total Memory: ", memory, "Mb");
     else
-      this->usageMemory = Settings::Instance()->string_format("Memory: %.2fMb", memory);
+      this->usageMemory = Settings::Instance()->string_format("Memory: ", memory, "Mb");
   }
   return this->usageMemory;
 #endif
@@ -175,14 +175,14 @@ std::string Consumption::getCPULoad() {
 #ifdef _WIN32
   /*if (this->isTimeToUpdateCPU()) {
     short cpuUsage = this->winCPUMeter.GetUsage();
-    this->usageCPU = Settings::Instance()->string_format("CPU: %d%%", cpuUsage);
+    this->usageCPU = Settings::Instance()->string_format("CPU: ", cpuUsage, "%");
   }
   return this->usageCPU;*/
   return "";
 #else
   if (this->isTimeToUpdateCPU()) {
     pid_t p = getpid();
-    std::string c = Settings::Instance()->string_format("ps -p %i -o pcpu", int(p));
+    std::string c = Settings::Instance()->string_format("ps -p ", int(p), " -o pcpu");
     const char* com = c.c_str();
     std::string res = this->exec(com);
     std::vector<std::string> elems = KuplungApp::Helpers::splitString(res, '\n');
