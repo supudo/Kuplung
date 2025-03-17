@@ -107,8 +107,8 @@
       <AdditionalLibraryDirectories>D:\vcpkg\installed\x64-windows-static\lib;D:\vcpkg\installed\x64-windows\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>Debug</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/Software/C++/Kuplung/MSVC/Release/Debug/Kuplung.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Software/C++/Kuplung/MSVC/Release/Debug/Kuplung.pdb</ProgramDataBaseFile>
+      <ImportLibrary>$(OutDir)Kuplung.lib</ImportLibrary>
+      <ProgramDataBaseFile>$(OutDir)Kuplung.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version>
       </Version>
