@@ -11,7 +11,7 @@
 
 namespace KuplungApp { namespace Utilities { namespace Consumption {
 
-#include <windows.h>
+#include <Windows.h>
 
 class WindowsCPUUsage {
 public:
