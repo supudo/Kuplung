@@ -17,8 +17,8 @@
 #ifdef _WIN32
 //#define WIN32_LEAN_AND_MEAN
 //#define PSAPI_VERSION 2
-#include <Windows.h>
-#include <psapi.h>
+//#include <Windows.h>
+//#include <Psapi.h>
 #elif __APPLE__
 #include <mach/mach.h>
 #include <sys/resource.h>
