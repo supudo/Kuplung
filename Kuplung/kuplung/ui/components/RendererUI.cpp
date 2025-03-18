@@ -8,7 +8,7 @@
 
 #include "RendererUI.hpp"
 #include "kuplung/utilities/helpers/Strings.h"
-#include <imgui_internal.h>
+#include "kuplung/utilities/imgui/imgui_internal.h"
 #include "kuplung/utilities/stb/stb_image.h"
 #include "kuplung/utilities/stb/stb_image_write.h"
 #include <filesystem>

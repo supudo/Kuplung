@@ -7,14 +7,14 @@
 //
 
 #include "Kuplung.hpp"
-#include <imgui_impl_opengl3.h>
-#include <imgui_impl_sdl3.h>
+#include "kuplung/utilities/imgui/imgui_impl_opengl3.h"
+#include "kuplung/utilities/imgui/imgui_impl_sdl3.h"
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 #include <glm/glm.hpp>
 
-Kuplung::Kuplung() {
-  this->sdlWindow = NULL;
-  this->glContext = NULL;
+Kuplung::Kuplung() noexcept {
+  this->sdlWindow = nullptr;
+  this->glContext = nullptr;
 
   this->gameIsRunning = false;
   this->objParserThreadFinished = true;
@@ -26,12 +26,10 @@ Kuplung::Kuplung() {
 
 Kuplung::~Kuplung() {
   for (size_t i = 0; i < this->meshModelFaces.size(); i++) {
-    ModelFaceData* mfd = (ModelFaceData*)this->meshModelFaces[i];
-    delete mfd;
+    delete (ModelFaceData*)this->meshModelFaces[i];
   }
   for (size_t i = 0; i < this->rayLines.size(); i++) {
-    RayLine* rl = this->rayLines[i];
-    delete rl;
+    delete this->rayLines[i];
   } 
 
   this->managerUI.reset();
@@ -53,10 +51,7 @@ Kuplung::~Kuplung() {
   ImGui::DestroyContext();
 
   SDL_GL_DestroyContext(this->glContext);
-
   SDL_DestroyWindow(this->sdlWindow);
-  this->sdlWindow = NULL;
-
   SDL_Quit();
 }
 
@@ -70,7 +65,7 @@ int Kuplung::run() {
   int frameCounter = 1;
 
   while (this->gameIsRunning) {
-    float fts = (1.0 * std::clock() / CLOCKS_PER_SEC);
+    const float fts = (1.0 * std::clock() / CLOCKS_PER_SEC);
 
     if (Settings::Instance()->maybeGracefullApplicationQuit) {
       this->gameIsRunning = false;
@@ -98,7 +93,7 @@ int Kuplung::run() {
 
     if (Settings::Instance()->showFrameRenderTime) {
       if (frameCounter > ImGui::GetIO().Framerate) {
-        float fte = (1.0 * std::clock() / CLOCKS_PER_SEC);
+        const float fte = (1.0 * std::clock() / CLOCKS_PER_SEC);
         Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] FRAME draw time : ", (fte - fts) * 1000, " ms (", (fte - fts), " seconds)"));
         frameCounter = 1;
       }
@@ -125,7 +120,7 @@ bool Kuplung::init() {
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
-    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4); //4);
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, Settings::Instance()->OpenGL_MajorVersion);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, Settings::Instance()->OpenGL_MinorVersion);
@@ -712,12 +707,10 @@ void Kuplung::doLog(std::string const& logMessage) {
 
 void Kuplung::guiClearScreen() {
   for (size_t i = 0; i < this->meshModelFaces.size(); i++) {
-    ModelFaceData* mfd = (ModelFaceData*)this->meshModelFaces[i];
-    delete mfd;
+    delete (ModelFaceData*)this->meshModelFaces[i];
   }
   for (size_t i = 0; i < this->rayLines.size(); i++) {
-    RayLine* mfd = (RayLine*)this->rayLines[i];
-    delete mfd;
+    delete (RayLine*)this->rayLines[i];
   }
   this->rayLines.clear();
   this->meshModels.clear();

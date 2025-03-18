@@ -8,7 +8,7 @@
 
 #include "Consumption.hpp"
 
-namespace KuplungApp { namespace Utilities { namespace Consumption {
+namespace KuplungApp::Utilities::Consumption {
 
 void Consumption::init() {
   /*this->usageOverall.clear();
@@ -192,4 +192,4 @@ std::string Consumption::getCPULoad() {
 #endif
 }
 
-}}}
+}

@@ -10,7 +10,7 @@
 #include <fstream>
 #include <glm/gtx/matrix_decompose.hpp>
 
-namespace KuplungApp { namespace Utilities { namespace Export {
+namespace KuplungApp::Utilities::Export {
 
 ExporterAssimp::~ExporterAssimp() {
 }
@@ -161,4 +161,4 @@ void ExporterAssimp::saveFile(int exportFormat, aiScene* scene) {
 	this->exporter->Export(scene, eFormat.c_str(), eFilename.c_str(), aiProcess_FlipUVs);
 }
 
-}}}
+}

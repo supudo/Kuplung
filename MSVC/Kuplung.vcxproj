@@ -121,7 +121,7 @@
       <LinkTimeCodeGeneration />
     </Link>
     <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <PostBuildEvent>
       <Command>cmd /c xcopy /S /I /Y "$(ProjectDir)..\Kuplung\resources" "$(TargetDir)..\..\resources"</Command>

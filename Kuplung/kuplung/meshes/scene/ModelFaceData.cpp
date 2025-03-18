@@ -10,7 +10,8 @@
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/matrix_decompose.hpp>
-#include <imgui.h>
+#include "kuplung/utilities/imgui/imgui.h"
+#include <source_location>
 
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"
@@ -53,7 +54,7 @@ ModelFaceData::~ModelFaceData() {
 
   glDeleteVertexArrays(1, &this->glVAO);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name()));
 }
 
 void ModelFaceData::init(MeshModel const& model, std::string const& assetsFolder) {
@@ -143,7 +144,7 @@ void ModelFaceData::initBuffers() {
 
   glBindVertexArray(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name()));
 }
 
 void ModelFaceData::renderModel(const bool useTessellation) {
@@ -154,16 +155,19 @@ void ModelFaceData::renderModel(const bool useTessellation) {
     glBeginConditionalRender(this->occQuery, GL_QUERY_BY_REGION_WAIT);
 
   glBindVertexArray(this->glVAO);
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name(), " - glBindVertexArray(VAO)"));
 
   if (useTessellation)
     glDrawElements(GL_PATCHES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
   else
     glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, 0);
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name(), "glDrawElements"));
 
   if (Settings::Instance()->grOcclusionCulling)
     glEndConditionalRender();
 
   glBindVertexArray(0);
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name(), " - glBindVertexArray(0)"));
 
   if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -221,5 +225,5 @@ void ModelFaceData::renderModel(const bool useTessellation) {
     }
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name()));
 }

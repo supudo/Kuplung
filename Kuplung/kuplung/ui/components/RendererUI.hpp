@@ -13,7 +13,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/ui/components/FileSaver.hpp"
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include <imgui.h>
+#include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/utilities/renderers/ImageRenderer.hpp"
 
 class RendererUI {

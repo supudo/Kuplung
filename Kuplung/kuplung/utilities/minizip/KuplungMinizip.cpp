@@ -10,7 +10,7 @@
 
 #include "KuplungMinizip.hpp"
 
-namespace KuplungApp { namespace Utilities { namespace Minizip {
+namespace KuplungApp::Utilities::Minizip {
 
 KuplungMinizip::~KuplungMinizip(void) {
 }
@@ -35,7 +35,7 @@ bool KuplungMinizip::UnzipFile(std::string const& unzipFolder) {
     return false;
 }
 
-}}}
+}
 
 #else
 
@@ -93,7 +93,7 @@ bool KuplungMinizip::UnzipFile(std::string const& unzipFolder) {
 #define FSEEKO_FUNC(stream, offset, origin) fseeko64(stream, offset, origin)
 #endif
 
-namespace KuplungApp { namespace Utilities { namespace Minizip {
+namespace KuplungApp::Utilities::Minizip {
 
 KuplungMinizip::~KuplungMinizip(void) {
 }
@@ -374,6 +374,6 @@ int KuplungMinizip::getFileCrc(const char* filenameinzip, void* buf, unsigned lo
      return err;
 }
 
-}}}
+}
 
 #endif

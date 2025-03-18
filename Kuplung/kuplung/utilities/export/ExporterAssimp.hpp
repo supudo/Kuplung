@@ -18,7 +18,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-namespace KuplungApp { namespace Utilities { namespace Export {
+namespace KuplungApp::Utilities::Export {
 
 
 class ExporterAssimp {
@@ -46,6 +46,6 @@ private:
 	std::vector<std::string> objSettings;
 };
 
-}}}
+}
 
 #endif /* ExporterAssimp_hpp */

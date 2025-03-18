@@ -10,7 +10,7 @@
 #include <iostream>
 #include <fstream>
 
-namespace KuplungApp { namespace Utilities { namespace Miniz {
+namespace KuplungApp::Utilities::Miniz {
 
 KuplungMiniz::~KuplungMiniz(void) {
 }
@@ -122,4 +122,4 @@ bool KuplungMiniz::unzipArchive(std::string const& archiveFile, std::string cons
     */
 }
 
-}}}
+}

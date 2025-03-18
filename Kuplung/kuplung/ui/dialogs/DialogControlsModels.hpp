@@ -12,7 +12,7 @@
 #include <regex>
 #include <string>
 #include <vector>
-#include <imgui.h>
+#include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/ui/UIHelpers.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"

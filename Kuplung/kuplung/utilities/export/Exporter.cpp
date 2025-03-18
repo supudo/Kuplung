@@ -8,7 +8,7 @@
 
 #include "Exporter.hpp"
 
-namespace KuplungApp { namespace Utilities { namespace Export {
+namespace KuplungApp::Utilities::Export {
 
 Exporter::~Exporter() {
 	this->exporterAssimp.reset();
@@ -43,4 +43,4 @@ void Exporter::exportScene(const ::FBEntity& file, const std::vector<ModelFaceBa
 		this->exporterAssimp->exportToFile(exportFormatAssimp, file, faces, settings, managerObjects);
 }
 
-}}}
+}

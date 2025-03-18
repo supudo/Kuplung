@@ -12,7 +12,7 @@
 #include "kuplung/settings/FontsList.hpp"
 #include "kuplung/settings/Settings.h"
 #include "kuplung/ui/dialogs/DialogStyle.hpp"
-#include <imgui.h>
+#include "kuplung/utilities/imgui/imgui.h"
 
 class DialogOptions {
 public:

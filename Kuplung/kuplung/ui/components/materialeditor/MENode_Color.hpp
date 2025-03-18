@@ -9,7 +9,7 @@
 #ifndef MENode_Color_hpp
 #define MENode_Color_hpp
 
-#include <imgui.h>
+#include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/ui/components/materialeditor/MENode.hpp"
 
 class MENode_Color: public MENode {

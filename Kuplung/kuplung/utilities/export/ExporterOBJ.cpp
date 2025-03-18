@@ -11,9 +11,7 @@
 #include <fstream>
 #include <glm/gtx/matrix_decompose.hpp>
 
-namespace KuplungApp {
-namespace Utilities {
-namespace Export {
+namespace KuplungApp::Utilities::Export {
 
 ExporterOBJ::~ExporterOBJ() {}
 
@@ -301,6 +299,4 @@ void ExporterOBJ::saveFile(const std::string& fileContents, const std::string& f
   }
 }
 
-} // namespace Export
-} // namespace Utilities
-} // namespace KuplungApp
+}

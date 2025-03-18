@@ -9,7 +9,7 @@
 #ifndef ColorPicker_hpp
 #define ColorPicker_hpp
 
-#include <imgui.h>
+#include "kuplung/utilities/imgui/imgui.h"
 
 class ColorPicker {
 public:

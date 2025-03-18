@@ -8,7 +8,7 @@
 
 #include "ExportOBJ.hpp"
 #include "kuplung/utilities/helpers/Helpers.h"
-#include <imgui_internal.h>
+#include "kuplung/utilities/imgui/imgui_internal.h"
 #include <ctime>
 #include <iostream>
 #include <sstream>

@@ -9,7 +9,7 @@
 #ifndef MaterialEditor_hpp
 #define MaterialEditor_hpp
 
-#include <imgui.h>
+#include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/ui/components/materialeditor/MaterialEditorData.h"
 #include "kuplung/ui/components/materialeditor/MELink.hpp"

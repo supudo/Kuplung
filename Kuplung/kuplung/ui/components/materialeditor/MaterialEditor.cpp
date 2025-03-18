@@ -10,7 +10,7 @@
 #include <math.h>
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
-#include <imgui_internal.h>
+#include "kuplung/utilities/imgui/imgui_internal.h"
 
 // Creating a node graph editor for ImGui
 // Quick demo, not production code! This is more of a demo of how to use ImGui to create custom stuff.

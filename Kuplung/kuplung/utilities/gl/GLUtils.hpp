@@ -14,7 +14,7 @@
 #include <vector>
 #include "kuplung/utilities/gl/GLIncludes.h"
 
-namespace KuplungApp { namespace Utilities { namespace GL {
+namespace KuplungApp::Utilities::GL {
 
 class GLUtils {
 public:
@@ -22,7 +22,7 @@ public:
   explicit GLUtils(const std::function<void(std::string)>& logFunction);
   GLUtils();
   bool compileAndAttachShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source);
-  bool compileShader(GLuint &shader, GLenum shaderType, const char *shader_source);
+  bool compileShader(const GLuint &shader, GLenum shaderType, const char *shader_source);
   std::string readFile(const char *filePath);
   void CheckForGLErrors(const std::string& message);
 
@@ -40,6 +40,6 @@ private:
   std::vector<std::string> reportedErrors;
 };
 
-}}}
+}
 
 #endif /* GLUtils_hpp */

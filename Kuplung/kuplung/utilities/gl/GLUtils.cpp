@@ -10,9 +10,7 @@
 #include "kuplung/settings/Settings.h"
 #include <fstream>
 
-namespace KuplungApp {
-namespace Utilities {
-namespace GL {
+namespace KuplungApp::Utilities::GL {
 
 GLUtils::~GLUtils() {}
 
@@ -39,15 +37,15 @@ bool GLUtils::compileAndAttachShader(GLuint& shaderProgram, GLuint& shader, GLen
   return true;
 }
 
-bool GLUtils::compileShader(GLuint& shaderProgram, GLenum shaderType, const char* shader_source) {
-  GLuint shader = glCreateShader(shaderType);
+bool GLUtils::compileShader(const GLuint& shaderProgram, GLenum shaderType, const char* shader_source) {
+  const GLuint shader = glCreateShader(shaderType);
   glShaderSource(shader, 1, &shader_source, nullptr);
   glCompileShader(shader);
 
   GLint isOK = GL_FALSE;
   glGetShaderiv(shader, GL_COMPILE_STATUS, &isOK);
   if (isOK != GL_TRUE) {
-    this->funcLog("Unable to compile shader " + std::to_string(shader) + "!");
+    this->funcLog(Settings::Instance()->string_format("Unable to compile shader ", shader, "!"));
     this->printShaderLog(shader);
     glDeleteShader(shader);
     return false;
@@ -60,9 +58,9 @@ bool GLUtils::compileShader(GLuint& shaderProgram, GLenum shaderType, const char
 
 void GLUtils::CheckForGLErrors(const std::string& message) {
   if (Settings::Instance()->showGLErrors) {
-    GLenum error = glGetError();
+    const GLenum error = glGetError();
     if (error != GL_NO_ERROR) {
-      std::string errMessage = "[GLError] [" + message + "] glError = " + std::to_string(error);
+      std::string errMessage = Settings::Instance()->string_format("[GLError] [", message, "] glError = ", error);
       if (std::find(this->reportedErrors.begin(), this->reportedErrors.end(), errMessage) == this->reportedErrors.end()) {
         Settings::Instance()->funcDoLog(errMessage);
         this->reportedErrors.push_back(errMessage);
@@ -72,16 +70,17 @@ void GLUtils::CheckForGLErrors(const std::string& message) {
 }
 
 GLint GLUtils::glGetAttribute(GLuint program, const char* var_name) {
-  GLint var = glGetAttribLocation(program, var_name);
+  const GLint var = glGetAttribLocation(program, var_name);
   if (var == -1)
     this->funcLog("[GLUtils] Cannot fetch shader attribute " + std::string(var_name) + "!");
   return var;
 }
 
 GLint GLUtils::glGetUniform(GLuint program, const char* var_name) {
-  GLint var = glGetUniformLocation(program, var_name);
+  const GLint var = glGetUniformLocation(program, var_name);
   if (var == -1)
     this->funcLog("[GLUtils] Cannot fetch shader uniform - " + std::string(var_name));
+  this->CheckForGLErrors("[GLUtils] Error at glGetUniform: " + std::string(var_name) + "!");
   return var;
 }
 
@@ -207,6 +206,4 @@ std::string GLUtils::readFile(const char* filePath) {
   return content;
 }
 
-} // namespace GL
-} // namespace Utilities
-} // namespace KuplungApp
+}

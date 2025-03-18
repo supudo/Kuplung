@@ -14,7 +14,7 @@
 #include "kuplung/utilities/parsers/ParserUtils.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 
-namespace KuplungApp { namespace Utilities { namespace Export {
+namespace KuplungApp::Utilities::Export {
 
 class ExporterOBJ {
 public:
@@ -45,6 +45,6 @@ private:
   std::vector<std::string> objSettings;
 };
 
-}}}
+}
 
 #endif /* ExporterOBJ_hpp */

@@ -8,9 +8,7 @@
 
 #include "Timings.hpp"
 
-namespace KuplungApp {
-namespace Utilities {
-namespace Measurement {
+namespace KuplungApp::Utilities::Measurement {
 
 std::chrono::high_resolution_clock::time_point tStart;
 std::chrono::high_resolution_clock::time_point tEnd;
@@ -35,6 +33,4 @@ void timingPrintPretty(const char* fileName, const char* functionName, const int
   Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] ", durationS, " s: [", fileName, "] @ [", functionName, "] on line [", lineNumber, "]"));
 }
 
-} // namespace Measurement
-} // namespace Utilities
-} // namespace KuplungApp
+}

@@ -16,7 +16,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-namespace KuplungApp { namespace Utilities { namespace Export {
+namespace KuplungApp::Utilities::Export {
 
 ExporterGLTF::~ExporterGLTF() {
 }
@@ -478,4 +478,4 @@ const bool ExporterGLTF::saveBufferFile(std::string buffer) const {
 	return true;
 }
 
-}}}
+}

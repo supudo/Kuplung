@@ -16,9 +16,7 @@
 #include "kuplung/utilities/export/ExporterGLTF.hpp"
 #include "kuplung/utilities/export/ExporterOBJ.hpp"
 
-namespace KuplungApp {
-namespace Utilities {
-namespace Export {
+namespace KuplungApp::Utilities::Export {
 
 class Exporter {
   public:
@@ -33,8 +31,6 @@ class Exporter {
   std::unique_ptr<ExporterGLTF> exporterGLTF;
 };
 
-} // namespace Export
-} // namespace Utilities
-} // namespace KuplungApp
+}
 
 #endif /* Exporter_hpp */

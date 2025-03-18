@@ -9,7 +9,7 @@
 #ifndef WindowsCPUUsage_hpp
 #define WindowsCPUUsage_hpp
 
-namespace KuplungApp { namespace Utilities { namespace Consumption {
+namespace KuplungApp::Utilities::Consumption {
 
 #include <Windows.h>
 
@@ -37,6 +37,6 @@ private:
   volatile LONG m_lRunCount;
 };
 
-}}}
+}
 
 #endif /* WindowsCPUUsage_hpp */

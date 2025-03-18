@@ -10,7 +10,7 @@
 #define DialogShadertoy_hpp
 
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include <imgui.h>
+#include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/meshes/artefacts/Shadertoy.hpp"
 
 class DialogShadertoy {

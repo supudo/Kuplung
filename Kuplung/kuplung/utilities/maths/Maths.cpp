@@ -8,7 +8,7 @@
 
 #include "Maths.hpp"
 
-namespace KuplungApp { namespace Utilities { namespace Math {
+namespace KuplungApp::Utilities::Math {
 
 void Maths::computeTangentBasis(
   // inputs
@@ -68,4 +68,4 @@ void Maths::computeTangentBasis(
   }
 }
 
-}}}
+}

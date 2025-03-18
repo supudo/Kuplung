@@ -7,7 +7,7 @@
 //
 
 #include "ImageViewer.hpp"
-#include <imgui_internal.h>
+#include "kuplung/utilities/imgui/imgui_internal.h"
 #include "kuplung/utilities/stb/stb_image.h"
 #include <filesystem>
 

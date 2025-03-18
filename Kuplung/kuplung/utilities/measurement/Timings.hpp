@@ -17,7 +17,7 @@
 #define TimingPrint() KuplungApp::Utilities::Measurement::timingPrint();
 #define TimingPrintPretty(fileName, functionName, lineNumber) KuplungApp::Utilities::Measurement::timingPrintPretty(fileName, functionName, lineNumber);
 
-namespace KuplungApp { namespace Utilities { namespace Measurement {
+namespace KuplungApp::Utilities::Measurement {
 
 void timingStart();
 void timingEnd();
@@ -25,6 +25,6 @@ void timingPrint();
 // KuplungApp::Utilities::Measurement::timingPrintPretty(__FILE__, __PRETTY_FUNCTION__, __LINE__);
 void timingPrintPretty(const char* fileName, const char* functionName, const int lineNumber);
 
-}}}
+}
 
 #endif /* Timings_hpp */

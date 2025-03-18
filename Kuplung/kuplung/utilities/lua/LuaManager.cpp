@@ -8,7 +8,7 @@
 
 #include "LuaManager.hpp"
 
-namespace KuplungApp { namespace Utilities { namespace Lua {
+namespace KuplungApp::Utilities::Lua {
 
 LuaManager::LuaManager() {
 	// this->luaState = luaL_newstate();
@@ -62,4 +62,4 @@ void LuaManager::closeLua() {
   // lua_close(this->luaState);
 }
 
-}}}
+}

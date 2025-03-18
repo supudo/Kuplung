@@ -33,7 +33,7 @@
 #include "kuplung/utilities/helpers/Strings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
 
-namespace KuplungApp { namespace Utilities { namespace Consumption {
+namespace KuplungApp::Utilities::Consumption {
 
 class Consumption {
 public:
@@ -69,6 +69,6 @@ private:
 #endif
 };
 
-}}}
+}
 
 #endif /* Consumption_hpp */

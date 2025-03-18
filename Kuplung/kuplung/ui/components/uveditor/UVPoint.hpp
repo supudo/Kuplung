@@ -9,7 +9,7 @@
 #ifndef UVPoint_hpp
 #define UVPoint_hpp
 
-#include <imgui.h>
+#include "kuplung/utilities/imgui/imgui.h"
 
 class UVPoint {
 public:

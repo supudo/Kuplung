@@ -8,7 +8,7 @@
 
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/utilities/helpers/Helpers.h"
-#include <imgui_internal.h>
+#include "kuplung/utilities/imgui/imgui_internal.h"
 #include <filesystem>
 #include <ctime>
 #include <iostream>

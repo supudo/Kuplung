@@ -16,9 +16,7 @@
 #endif
 #include "kuplung/settings/Settings.h"
 
-namespace KuplungApp {
-namespace Utilities {
-namespace Input {
+namespace KuplungApp::Utilities::Input {
 
 struct ControlPoint {
   int x, y;
@@ -54,8 +52,6 @@ private:
   void handleMouseMotion(const SDL_Event* ev);
 };
 
-} // namespace Input
-} // namespace Utilities
-} // namespace KuplungApp
+}
 
 #endif /* Controls_hpp */

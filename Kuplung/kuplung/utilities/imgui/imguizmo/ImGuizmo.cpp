@@ -20,12 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <imgui.h>
+#include "kuplung/utilities/imgui/imgui.h"
 #ifndef IMGUI_DEFINE_MATH_OPERATORS
 #  define IMGUI_DEFINE_MATH_OPERATORS
 #endif
 #include "ImGuizmo.h"
-#include <imgui_internal.h>
+#include "kuplung/utilities/imgui/imgui_internal.h"
 
 // includes patches for multiview from
 // https://github.com/CedricGuillemet/ImGuizmo/issues/15

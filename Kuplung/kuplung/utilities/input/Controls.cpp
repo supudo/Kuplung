@@ -8,9 +8,7 @@
 
 #include "Controls.hpp"
 
-namespace KuplungApp {
-namespace Utilities {
-namespace Input {
+namespace KuplungApp::Utilities::Input {
 
 Controls::~Controls() {}
 
@@ -203,6 +201,4 @@ void Controls::handleMouseMotion(const SDL_Event* ev) {
   }
 }
 
-} // namespace Input
-} // namespace Utilities
-} // namespace KuplungApp
+}

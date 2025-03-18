@@ -9,7 +9,7 @@
 #include "UIHelpers.hpp"
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
-#include <imgui.h>
+#include "kuplung/utilities/imgui/imgui.h"
 
 UIHelpers::UIHelpers() : componentColorPicker(std::make_unique<ColorPicker>()) {}
 
