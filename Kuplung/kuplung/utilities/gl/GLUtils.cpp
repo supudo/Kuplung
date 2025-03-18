@@ -8,6 +8,7 @@
 
 #include "GLUtils.hpp"
 #include "kuplung/settings/Settings.h"
+#include "kuplung/utilities/helpers/Files.h"
 #include <fstream>
 
 namespace KuplungApp::Utilities::GL {
@@ -56,11 +57,11 @@ bool GLUtils::compileShader(const GLuint& shaderProgram, GLenum shaderType, cons
   return true;
 }
 
-void GLUtils::CheckForGLErrors(const std::string& message) {
+void GLUtils::CheckForGLErrors(const std::source_location& location) {
   if (Settings::Instance()->showGLErrors) {
     const GLenum error = glGetError();
     if (error != GL_NO_ERROR) {
-      std::string errMessage = Settings::Instance()->string_format("[GLError] [", message, "] glError = ", error);
+      std::string errMessage = Settings::Instance()->string_format("[GLError] glError = ", error, " [", KuplungApp::Helpers::getFilename(location.file_name()), ":", location.line(), "]");
       if (std::find(this->reportedErrors.begin(), this->reportedErrors.end(), errMessage) == this->reportedErrors.end()) {
         Settings::Instance()->funcDoLog(errMessage);
         this->reportedErrors.push_back(errMessage);
@@ -72,15 +73,14 @@ void GLUtils::CheckForGLErrors(const std::string& message) {
 GLint GLUtils::glGetAttribute(GLuint program, const char* var_name, const std::source_location& location) const {
   const GLint var = glGetAttribLocation(program, var_name);
   if (var == -1)
-    this->funcLog(Settings::Instance()->string_format("[GLUtils] Cannot fetch shader attribute ", var_name, " [", location.file_name(), ":", location.function_name(), ":", location.line(), "]!"));
+    this->funcLog(Settings::Instance()->string_format("[GLUtils] Cannot fetch shader attribute ", var_name, " [", KuplungApp::Helpers::getFilename(location.file_name()), ": ", location.line(), "]"));
   return var;
 }
 
 GLint GLUtils::glGetUniform(GLuint program, const char* var_name, const std::source_location& location) const {
   const GLint var = glGetUniformLocation(program, var_name);
   if (var == -1)
-    this->funcLog(Settings::Instance()->string_format("[GLUtils] Cannot fetch shader uniform - ", var_name, " [", location.file_name(), ":", location.function_name(), ":", location.line(), "]!"));
-  //this->CheckForGLErrors(Settings::Instance()->string_format("[GLUtils] Error at glGetUniform: ", var_name, " [", location.file_name(), ":", location.function_name(), ":", location.line(), "]!"));
+    this->funcLog(Settings::Instance()->string_format("[GLUtils] Cannot fetch shader uniform - ", var_name, " [", KuplungApp::Helpers::getFilename(location.file_name()), ": ", location.line(), "]"));
   return var;
 }
 

@@ -173,7 +173,7 @@ RenderingForwardShadowMapping::~RenderingForwardShadowMapping() {
     this->mfLights_Spot[i].reset();
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name()));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 bool RenderingForwardShadowMapping::init() {
@@ -407,7 +407,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
   success &= this->initShadows();
   success &= this->initShadowsDepth();
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name()));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return success;
 }
@@ -451,7 +451,7 @@ bool RenderingForwardShadowMapping::initShadowsDepthShader() {
     this->glDepth_SamplerTexture = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "depthMap");
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name()));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return true;
 }
@@ -470,18 +470,23 @@ bool RenderingForwardShadowMapping::initShadowsShader() {
   const char* shader_fragment = shaderSourceFragment.c_str();
 
   this->shaderProgramShadows = glCreateProgram();
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   bool shaderCompilation = true;
   shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramShadows, this->shaderShadowsVertex, GL_VERTEX_SHADER, shader_vertex);
+  Settings::Instance()->glUtils->CheckForGLErrors();
   shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramShadows, this->shaderShadowsFragment, GL_FRAGMENT_SHADER, shader_fragment);
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   if (!shaderCompilation)
     return false;
 
   glLinkProgram(this->shaderProgramShadows);
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   GLint programSuccess = GL_TRUE;
   glGetProgramiv(this->shaderProgramShadows, GL_LINK_STATUS, &programSuccess);
+  Settings::Instance()->glUtils->CheckForGLErrors();
   if (programSuccess != GL_TRUE) {
     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Error linking program ", this->shaderProgramShadows, "!\n"));
     Settings::Instance()->glUtils->printProgramLog(this->shaderProgramShadows);
@@ -492,7 +497,7 @@ bool RenderingForwardShadowMapping::initShadowsShader() {
     this->glShadow_LightSpaceMatrix = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_lightSpaceMatrix");
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name()));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return true;
 }
@@ -524,7 +529,7 @@ bool RenderingForwardShadowMapping::initShadowsBuffers() {
     return false;
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name()));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return true;
 }
@@ -580,7 +585,7 @@ void RenderingForwardShadowMapping::renderShadows(const std::vector<ModelFaceDat
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name()));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void RenderingForwardShadowMapping::renderDepth() {
@@ -613,7 +618,7 @@ void RenderingForwardShadowMapping::renderDepth() {
 
   glUseProgram(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name()));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const GLuint& sProgram, const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
@@ -1071,5 +1076,5 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
 
   glUseProgram(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(std::source_location::current().file_name(), " - ", std::source_location::current().function_name()));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }

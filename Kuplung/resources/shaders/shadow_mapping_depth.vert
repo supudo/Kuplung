@@ -2,6 +2,8 @@
 
 layout (location = 0) in vec3 vs_vertexPosition;
 
+out vec4 FragColor;
+
 uniform mat4 shadow_lightSpaceMatrix;
 uniform mat4 shadow_model;
 

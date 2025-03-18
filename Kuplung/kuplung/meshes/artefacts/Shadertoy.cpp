@@ -33,7 +33,7 @@ Shadertoy::~Shadertoy() {
 
   glDeleteVertexArrays(1, &this->glVAO);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 Shadertoy::Shadertoy() {
@@ -162,7 +162,7 @@ void main() {\n\
   glDisable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return success;
 }
@@ -184,7 +184,7 @@ void Shadertoy::initBuffers() {
 
   glBindVertexArray(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void Shadertoy::initTextures() {
@@ -263,7 +263,7 @@ void Shadertoy::addTexture(std::string const& textureImage, GLuint* vboTexture, 
     }
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void Shadertoy::render(const int mouseX, const int mouseY, const float seconds) {
@@ -332,7 +332,7 @@ void Shadertoy::render(const int mouseX, const int mouseY, const float seconds) 
     glUseProgram(0);
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void Shadertoy::initFBO(const int windowWidth, const int windowHeight, GLuint* vboTexture) {
@@ -366,14 +366,14 @@ void Shadertoy::initFBO(const int windowWidth, const int windowHeight, GLuint* v
 
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void Shadertoy::bindFBO() {
   glBindFramebuffer(GL_FRAMEBUFFER, this->tFBO);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void Shadertoy::unbindFBO(GLuint* vboTexture) {
@@ -382,7 +382,7 @@ void Shadertoy::unbindFBO(GLuint* vboTexture) {
   glGenerateMipmap(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, 0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format(__FILE__, " - ", __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void Shadertoy::renderToTexture(const int mouseX, const int mouseY, const float seconds, GLuint* vboTexture) {

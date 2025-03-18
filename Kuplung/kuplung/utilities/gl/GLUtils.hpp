@@ -25,7 +25,7 @@ public:
   bool compileAndAttachShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source);
   bool compileShader(const GLuint &shader, GLenum shaderType, const char *shader_source);
   std::string readFile(const char *filePath);
-  void CheckForGLErrors(const std::string& message);
+  void CheckForGLErrors(const std::source_location& location = std::source_location::current());
 
   void printProgramLog(GLuint program);
   void printShaderLog(GLuint shader);

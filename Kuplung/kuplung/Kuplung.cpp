@@ -232,7 +232,6 @@ bool Kuplung::init() {
 }
 
 void Kuplung::initFolders() {
-
   std::string homeFolder(""), iniFolder("");
 #ifdef _WIN32
   homeFolder.append(getenv("LOCALAPPDATA"));
@@ -703,6 +702,11 @@ void Kuplung::guiQuit() {
 void Kuplung::doLog(std::string const& logMessage) {
   if (this->managerUI)
     this->managerUI->doLog(logMessage);
+#ifdef _WIN32
+  std::wostringstream wos;
+  wos << logMessage.c_str() << '\n';
+  OutputDebugString(wos.str().c_str());
+#endif
 }
 
 void Kuplung::guiClearScreen() {
