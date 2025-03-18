@@ -86,7 +86,7 @@ void ModelFaceData::initBuffers() {
   glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
 
   // textures and colors
-  if (this->meshModel.texture_coordinates.size() > 0) {
+  if (!this->meshModel.texture_coordinates.empty()) {
     glGenBuffers(1, &this->vboTextureCoordinates);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(this->meshModel.texture_coordinates.size() * sizeof(glm::vec2)), &this->meshModel.texture_coordinates[0], GL_STATIC_DRAW);
@@ -120,7 +120,7 @@ void ModelFaceData::initBuffers() {
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->meshModel.countIndices) * sizeof(GLuint), &this->meshModel.indices[0], GL_STATIC_DRAW);
 
-  if (!this->meshModel.ModelMaterial.TextureBump.Image.empty() && this->meshModel.vertices.size() > 0 && this->meshModel.texture_coordinates.size() > 0 && this->meshModel.normals.size() > 0) {
+  if (!this->meshModel.ModelMaterial.TextureBump.Image.empty() && !this->meshModel.vertices.empty() && !this->meshModel.texture_coordinates.empty() && !this->meshModel.normals.empty()) {
     std::vector<glm::vec3> tangents;
     std::vector<glm::vec3> bitangents;
     this->mathHelper->computeTangentBasis(this->meshModel.vertices, this->meshModel.texture_coordinates, this->meshModel.normals, tangents, bitangents);
@@ -128,14 +128,14 @@ void ModelFaceData::initBuffers() {
     // tangents
     glGenBuffers(1, &this->vboTangents);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboTangents);
-    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(tangents.size() * sizeof(glm::vec3)), &tangents[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(tangents.size() * sizeof(glm::vec3)), &tangents[0].x, GL_STATIC_DRAW);
     glEnableVertexAttribArray(3);
     glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
 
     // bitangents
     glGenBuffers(1, &this->vboBitangents);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboBitangents);
-    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(bitangents.size() * sizeof(glm::vec3)), &bitangents[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(bitangents.size() * sizeof(glm::vec3)), &bitangents[0].x, GL_STATIC_DRAW);
     glEnableVertexAttribArray(4);
     glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
   }
@@ -172,7 +172,7 @@ void ModelFaceData::renderModel(const bool useTessellation) {
   if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-  glm::mat4 matrixBB = glm::mat4(1.0f);
+  auto matrixBB = glm::mat4(1.0f);
   matrixBB *= this->matrixProjection;
   matrixBB *= this->matrixCamera;
   matrixBB *= this->matrixModel;
