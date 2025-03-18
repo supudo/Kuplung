@@ -507,7 +507,7 @@ void RenderingForwardShadowMapping::renderDepth() {
     glGenBuffers(1, &this->depthQuadVBO);
     glBindVertexArray(this->depthQuadVAO);
     glBindBuffer(GL_ARRAY_BUFFER, this->depthQuadVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(1);
@@ -532,7 +532,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
     if (mfd->getOptionsSelected())
       selectedModelID = static_cast<int>(i);
 
-    glm::mat4 matrixModel = glm::mat4(1.0);
+    auto matrixModel = glm::mat4(1.0);
     matrixModel *= this->managerObjects.grid->matrixModel;
     // scale
     matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
@@ -630,7 +630,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
     glUniform1f(this->glFS_ScreenResY, Settings::Instance()->SDL_Window_Height);
 
     // Outline color
-    glm::vec4 outline_color = mfd->getOptionsOutlineColor();
+    const glm::vec4 outline_color = mfd->getOptionsOutlineColor();
     glUniform3f(this->glFS_OutlineColor, outline_color.r, outline_color.g, outline_color.b);
 
     // ambient color for editor
@@ -699,7 +699,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
           glUniform1i(f->gl_InUse, 1);
 
           // light
-          glm::vec3 vec_pos = glm::vec3(light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
+          const glm::vec3 vec_pos = glm::vec3(light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
           glUniform3f(f->gl_Position, vec_pos.x, vec_pos.y, vec_pos.z);
 
           // factors
@@ -938,7 +938,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
 
     ModelFaceData* mfd = meshModelFaces[selectedModelID];
 
-    glm::vec4 v0 = glm::vec4(this->managerObjects.VertexEditorMode, 1.0);
+    auto v0 = glm::vec4(this->managerObjects.VertexEditorMode, 1.0);
     v0 = mfd->matrixModel * v0;
     glm::mat4 matrixVertex = mfd->matrixModel;
     matrixVertex[3] = v0;
