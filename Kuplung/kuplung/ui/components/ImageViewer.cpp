@@ -46,7 +46,7 @@ void ImageViewer::createTextureBuffer() {
   int tChannels;
   unsigned char* tPixels = stbi_load(this->imagePath.c_str(), &this->tWidth, &this->tHeight, &tChannels, 0);
   if (!tPixels)
-    Settings::Instance()->funcDoLog("[Kuplung-ImageViewer] Can't load texture image - " + this->imagePath + " with error - " + std::string(stbi_failure_reason()));
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Kuplung-ImageViewer] Can't load texture image - ", this->imagePath, " with error - ", stbi_failure_reason()));
   else {
     glGenTextures(1, &this->vboBuffer);
     glBindTexture(GL_TEXTURE_2D, this->vboBuffer);

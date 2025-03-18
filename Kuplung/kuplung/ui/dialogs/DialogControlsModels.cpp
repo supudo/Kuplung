@@ -68,7 +68,7 @@ void DialogControlsModels::createTextureBuffer(std::string imageFile, GLuint* vb
   int tChannels;
   unsigned char* tPixels = stbi_load(imageFile.c_str(), width, height, &tChannels, 0);
   if (!tPixels)
-    Settings::Instance()->funcDoLog("Can't load texture image - " + imageFile + " with error - " + std::string(stbi_failure_reason()));
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Can't load texture image - ", imageFile, " with error - ", stbi_failure_reason()));
   else {
     glGenTextures(1, vboBuffer);
     glBindTexture(GL_TEXTURE_2D, *vboBuffer);

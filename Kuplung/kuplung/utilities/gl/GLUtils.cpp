@@ -69,18 +69,18 @@ void GLUtils::CheckForGLErrors(const std::string& message) {
   }
 }
 
-GLint GLUtils::glGetAttribute(GLuint program, const char* var_name) {
+GLint GLUtils::glGetAttribute(GLuint program, const char* var_name, const std::source_location& location) const {
   const GLint var = glGetAttribLocation(program, var_name);
   if (var == -1)
-    this->funcLog("[GLUtils] Cannot fetch shader attribute " + std::string(var_name) + "!");
+    this->funcLog(Settings::Instance()->string_format("[GLUtils] Cannot fetch shader attribute ", var_name, " [", location.file_name(), ":", location.function_name(), ":", location.line(), "]!"));
   return var;
 }
 
-GLint GLUtils::glGetUniform(GLuint program, const char* var_name) {
+GLint GLUtils::glGetUniform(GLuint program, const char* var_name, const std::source_location& location) const {
   const GLint var = glGetUniformLocation(program, var_name);
   if (var == -1)
-    this->funcLog("[GLUtils] Cannot fetch shader uniform - " + std::string(var_name));
-  this->CheckForGLErrors("[GLUtils] Error at glGetUniform: " + std::string(var_name) + "!");
+    this->funcLog(Settings::Instance()->string_format("[GLUtils] Cannot fetch shader uniform - ", var_name, " [", location.file_name(), ":", location.function_name(), ":", location.line(), "]!"));
+  //this->CheckForGLErrors(Settings::Instance()->string_format("[GLUtils] Error at glGetUniform: ", var_name, " [", location.file_name(), ":", location.function_name(), ":", location.line(), "]!"));
   return var;
 }
 
@@ -163,7 +163,7 @@ bool GLUtils::logOpenGLError(const char* file, int line) {
         break;
     }
     success = false;
-    this->funcLog("Error occured at " + std::string(file) + " on line " + std::to_string(line) + " : " + error);
+    this->funcLog(Settings::Instance()->string_format("Error occured at ", file, " on line ", line, " : ", error));
     err = glGetError();
   }
 
@@ -194,7 +194,7 @@ std::string GLUtils::readFile(const char* filePath) {
   std::string content;
   std::ifstream fileStream(filePath, std::ios::in);
   if (!fileStream.is_open()) {
-    this->funcLog("Could not read file " + std::string(filePath) + ". File does not exist.");
+    this->funcLog(Settings::Instance()->string_format("Could not read file ", filePath, ". File does not exist."));
     return "";
   }
   std::string line("");

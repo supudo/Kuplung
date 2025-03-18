@@ -428,7 +428,7 @@ void UVEditor::initTextureBuffer() {
     int tChannels;
     unsigned char* tPixels = stbi_load(this->textureImage.c_str(), &this->textureWidth, &this->textureHeight, &tChannels, 0);
     if (!tPixels)
-      Settings::Instance()->funcDoLog("[UVEditor] Can't load texture image - " + this->textureImage + " with error - " + std::string(stbi_failure_reason()));
+      Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[UVEditor] Can't load texture image - ", this->textureImage, " with error - ", stbi_failure_reason()));
     else {
       glGenTextures(1, &this->vboTexture);
       glBindTexture(GL_TEXTURE_2D, this->vboTexture);

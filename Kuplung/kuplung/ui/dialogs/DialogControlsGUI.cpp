@@ -702,7 +702,7 @@ void DialogControlsGUI::drawPropertiesPane(bool* isFrame) {
               int tChannels;
               unsigned char* tPixels = stbi_load(this->heightmapImage.c_str(), &this->heightmapWidth, &this->heightmapHeight, &tChannels, 0);
               if (!tPixels)
-                Settings::Instance()->funcDoLog("Can't load heightmap preview image - " + this->heightmapImage + " with error - " + std::string(stbi_failure_reason()));
+                Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Can't load heightmap preview image - ", this->heightmapImage, " with error - ", stbi_failure_reason()));
               else {
                 glGenTextures(1, &this->vboTexHeightmap);
                 glBindTexture(GL_TEXTURE_2D, this->vboTexHeightmap);

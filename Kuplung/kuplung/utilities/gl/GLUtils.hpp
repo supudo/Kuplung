@@ -13,6 +13,7 @@
 #include <functional>
 #include <vector>
 #include "kuplung/utilities/gl/GLIncludes.h"
+#include <source_location>
 
 namespace KuplungApp::Utilities::GL {
 
@@ -29,8 +30,8 @@ public:
   void printProgramLog(GLuint program);
   void printShaderLog(GLuint shader);
   bool logOpenGLError(const char *file, int line);
-  GLint glGetAttribute(GLuint program, const char* var_name);
-  GLint glGetUniform(GLuint program, const char* var_name);
+  GLint glGetAttribute(GLuint program, const char* var_name, const std::source_location& location = std::source_location::current()) const;
+  GLint glGetUniform(GLuint program, const char* var_name, const std::source_location& location = std::source_location::current()) const;
   GLint glGetAttributeNoWarning(GLuint program, const char* var_name);
   GLint glGetUniformNoWarning(GLuint program, const char* var_name);
   GLsizei getGLTypeSize(GLenum type);

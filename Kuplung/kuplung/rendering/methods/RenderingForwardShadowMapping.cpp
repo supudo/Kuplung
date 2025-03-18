@@ -273,7 +273,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
     this->glFS_MMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_ModelMatrix");
     this->glVS_WorldMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_WorldMatrix");
     this->glFS_MVMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_MVMatrix");
-    this->glVS_NormalMatrix = glGetUniformLocation(this->shaderProgram, "vs_normalMatrix");
+    this->glVS_NormalMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_normalMatrix");
 
     this->glFS_ScreenResX = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_screenResX");
     this->glFS_ScreenResY = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
