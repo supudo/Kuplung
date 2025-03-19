@@ -181,14 +181,10 @@ bool RenderingForwardShadowMapping::init() {
   this->GLSL_LightSourceNumber_Point = 4;
   this->GLSL_LightSourceNumber_Spot = 4;
 
-  bool success = true;
-  success &= this->initShaderProgram();
-  return success;
+  return this->initShaderProgram();
 }
 
 bool RenderingForwardShadowMapping::initShaderProgram() {
-  bool success = true;
-
   // vertex shader
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.vert";
   std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
@@ -240,7 +236,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
   if (programSuccess != GL_TRUE) {
     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[RenderingForwardShadowMapping - initShaders] Error linking program ", this->shaderProgram, "!"));
     Settings::Instance()->glUtils->printProgramLog(this->shaderProgram);
-    return success = false;
+    return false;
   }
   else {
     glPatchParameteri(GL_PATCH_VERTICES, 3);
@@ -288,7 +284,6 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
     this->gl_ModelViewSkin = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_modelViewSkin");
     this->glFS_solidSkin_materialColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_materialColor");
 
-    this->solidLight->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
     this->solidLight->gl_Direction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
     this->solidLight->gl_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");
     this->solidLight->gl_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.diffuse");
@@ -403,57 +398,9 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
     // effects - tone mapping
     this->glEffect_ToneMapping_ACESFilmRec2020 = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_ACESFilmRec2020");
   }
-
-  success &= this->initShadows();
-  success &= this->initShadowsDepth();
-
   Settings::Instance()->glUtils->CheckForGLErrors();
 
-  return success;
-}
-
-bool RenderingForwardShadowMapping::initShadowsDepth() {
-  bool success = true;
-  success &= this->initShadowsDepthShader();
-  return success;
-}
-
-bool RenderingForwardShadowMapping::initShadowsDepthShader() {
-  std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/shadows_debug_quad.vert";
-  std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
-  const char* shader_vertex = shaderSourceVertex.c_str();
-
-  shaderPath = Settings::Instance()->appFolder() + "/shaders/shadows_debug_quad_depth.frag";
-  std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
-  const char* shader_fragment = shaderSourceFragment.c_str();
-
-  this->shaderProgramDepth = glCreateProgram();
-
-  bool shaderCompilation = true;
-  shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramDepth, this->shaderDepthVertex, GL_VERTEX_SHADER, shader_vertex);
-  shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramDepth, this->shaderDepthFragment, GL_FRAGMENT_SHADER, shader_fragment);
-
-  if (!shaderCompilation)
-    return false;
-
-  glLinkProgram(this->shaderProgramDepth);
-
-  GLint programSuccess = GL_TRUE;
-  glGetProgramiv(this->shaderProgramDepth, GL_LINK_STATUS, &programSuccess);
-  if (programSuccess != GL_TRUE) {
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Error linking program ", this->shaderProgramDepth, "!\n"));
-    Settings::Instance()->glUtils->printProgramLog(this->shaderProgramDepth);
-    return false;
-  }
-  else {
-    this->glDepth_Plane_Close = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "near_plane");
-    this->glDepth_Plane_Far = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "far_plane");
-    this->glDepth_SamplerTexture = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "depthMap");
-  }
-
-  Settings::Instance()->glUtils->CheckForGLErrors();
-
-  return true;
+  return this->initShadows() && this->initShadowsDepth();
 }
 
 bool RenderingForwardShadowMapping::initShadows() {
@@ -495,6 +442,48 @@ bool RenderingForwardShadowMapping::initShadowsShader() {
   else {
     this->glShadow_ModelMatrix = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_model");
     this->glShadow_LightSpaceMatrix = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_lightSpaceMatrix");
+  }
+
+  Settings::Instance()->glUtils->CheckForGLErrors();
+
+  return true;
+}
+
+bool RenderingForwardShadowMapping::initShadowsDepth() {
+  return this->initShadowsDepthShader();
+}
+
+bool RenderingForwardShadowMapping::initShadowsDepthShader() {
+  std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/shadows_debug_quad.vert";
+  std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
+  const char* shader_vertex = shaderSourceVertex.c_str();
+
+  shaderPath = Settings::Instance()->appFolder() + "/shaders/shadows_debug_quad_depth.frag";
+  std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
+  const char* shader_fragment = shaderSourceFragment.c_str();
+
+  this->shaderProgramDepth = glCreateProgram();
+
+  bool shaderCompilation = true;
+  shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramDepth, this->shaderDepthVertex, GL_VERTEX_SHADER, shader_vertex);
+  shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramDepth, this->shaderDepthFragment, GL_FRAGMENT_SHADER, shader_fragment);
+
+  if (!shaderCompilation)
+    return false;
+
+  glLinkProgram(this->shaderProgramDepth);
+
+  GLint programSuccess = GL_TRUE;
+  glGetProgramiv(this->shaderProgramDepth, GL_LINK_STATUS, &programSuccess);
+  if (programSuccess != GL_TRUE) {
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Error linking program ", this->shaderProgramDepth, "!\n"));
+    Settings::Instance()->glUtils->printProgramLog(this->shaderProgramDepth);
+    return false;
+  }
+  else {
+    this->glDepth_Plane_Close = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "near_plane");
+    this->glDepth_Plane_Far = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "far_plane");
+    this->glDepth_SamplerTexture = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "depthMap");
   }
 
   Settings::Instance()->glUtils->CheckForGLErrors();
@@ -748,7 +737,6 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
     glUniform1i(this->gl_ModelViewSkin, mfd->Setting_ModelViewSkin);
     glUniform3f(this->glFS_solidSkin_materialColor, mfd->solidLightSkin_MaterialColor.r, mfd->solidLightSkin_MaterialColor.g, mfd->solidLightSkin_MaterialColor.b);
 
-    glUniform1i(this->solidLight->gl_InUse, 1);
     glUniform3f(this->solidLight->gl_Direction, this->managerObjects.SolidLight_Direction.x, this->managerObjects.SolidLight_Direction.y, this->managerObjects.SolidLight_Direction.z);
     glUniform3f(this->solidLight->gl_Ambient, this->managerObjects.SolidLight_Ambient.r, this->managerObjects.SolidLight_Ambient.g, this->managerObjects.SolidLight_Ambient.b);
     glUniform3f(this->solidLight->gl_Diffuse, this->managerObjects.SolidLight_Diffuse.r, this->managerObjects.SolidLight_Diffuse.g, this->managerObjects.SolidLight_Diffuse.b);

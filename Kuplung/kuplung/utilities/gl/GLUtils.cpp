@@ -73,14 +73,14 @@ void GLUtils::CheckForGLErrors(const std::source_location& location) {
 GLint GLUtils::glGetAttribute(GLuint program, const char* var_name, const std::source_location& location) const {
   const GLint var = glGetAttribLocation(program, var_name);
   if (var == -1)
-    this->funcLog(Settings::Instance()->string_format("[GLUtils] Cannot fetch shader attribute ", var_name, " [", KuplungApp::Helpers::getFilename(location.file_name()), ": ", location.line(), "]"));
+    this->funcLog(Settings::Instance()->string_format("[GLUtils] Cannot fetch shader attribute ", var_name, " [", KuplungApp::Helpers::getFilename(location.file_name()), ":", location.line(), "]"));
   return var;
 }
 
 GLint GLUtils::glGetUniform(GLuint program, const char* var_name, const std::source_location& location) const {
   const GLint var = glGetUniformLocation(program, var_name);
   if (var == -1)
-    this->funcLog(Settings::Instance()->string_format("[GLUtils] Cannot fetch shader uniform - ", var_name, " [", KuplungApp::Helpers::getFilename(location.file_name()), ": ", location.line(), "]"));
+    this->funcLog(Settings::Instance()->string_format("[GLUtils] Cannot fetch shader uniform - ", var_name, " [", KuplungApp::Helpers::getFilename(location.file_name()), ":", location.line(), "]"));
   return var;
 }
 
