@@ -93,7 +93,7 @@ void ExportGLTF::draw(const char* title, bool* p_opened) {
 
 	ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.70f);
 	ImGui::Text("File Name: ");
-	ImGui::InputText("", this->fileName, sizeof(this->fileName));
+	ImGui::InputText("##exportGltfNewFileName", this->fileName, sizeof(this->fileName));
 	ImGui::SameLine(0, 10);
 	if (ImGui::Button("Save")) {
 		FBEntity file;
@@ -149,7 +149,7 @@ void ExportGLTF::modalNewFolder() {
 
 	if (this->newFolderName[0] == '\0')
 		strcpy(this->newFolderName, "untitled");
-	ImGui::InputText("", this->newFolderName, sizeof(this->newFolderName));
+	ImGui::InputText("##exportGltfNewFolderName", this->newFolderName, sizeof(this->newFolderName));
 
 	if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvail().x * 0.5f, 0))) {
 		std::string newDir = this->currentFolder + "/" + this->newFolderName;

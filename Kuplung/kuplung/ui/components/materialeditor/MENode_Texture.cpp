@@ -72,14 +72,14 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool
       this->loadTexture = true;
     }
     ImGui::SameLine();
-    ImGui::InputText("", this->filePath, sizeof(this->filePath), ImGuiInputTextFlags_ReadOnly);
+    ImGui::InputText("##meNodeFilePath", this->filePath, sizeof(this->filePath), ImGuiInputTextFlags_ReadOnly);
     ImGui::SameLine();
     float bw = ImGui::CalcTextSize("...").x + 10;
     ImGui::PushItemWidth(bw);
     if (ImGui::Button("..."))
       this->showFileBrowser = true;
 
-    if (showPreview && ImGui::ImageButton("", (ImTextureID)(intptr_t)this->vboBuffer, ImVec2(100 * scale, 100 * scale)))
+    if (showPreview && ImGui::ImageButton("##meNodePreviewTexture", (ImTextureID)(intptr_t)this->vboBuffer, ImVec2(100 * scale, 100 * scale)))
       this->showTextureWindow = !this->showTextureWindow;
 
     ImGui::PopItemWidth();

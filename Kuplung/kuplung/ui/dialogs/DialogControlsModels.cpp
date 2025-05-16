@@ -360,7 +360,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
   ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 100));
   ImGui::PushStyleColor(ImGuiCol_FrameBg, static_cast<ImVec4>(ImColor(1, 0, 0, 1)));
   // TODO: ListBox doesn't work with BeginPopupContextItem
-  ImGui::ListBox("", &this->selectedObject, &scene_items[0], static_cast<int>(this->meshModelFaces->size()));
+  ImGui::ListBox("##sceneModelFace", &this->selectedObject, &scene_items[0], static_cast<int>(this->meshModelFaces->size()), 4);
   ImGui::PopStyleColor(1);
   ImGui::PopStyleVar(2);
   if (this->selectedObject > -1 && ImGui::BeginPopupContextItem("Actions")) {
@@ -502,17 +502,17 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
         }
         ImGui::Checkbox("Scale all", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scale0);
         if ((*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scale0) {
-          ImGui::Checkbox("", &K_DCM_ReadOnly);
+          ImGui::Checkbox("##dcmReadOnly1", &K_DCM_ReadOnly);
           ImGui::SameLine();
           ImGui::SliderFloat("##001", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleX->point, 0.05f, this->managerObjects.Setting_GridSize / 2);
           ImGui::SameLine();
           ImGui::Text("X");
-          ImGui::Checkbox("", &K_DCM_ReadOnly);
+          ImGui::Checkbox("##dcmReadOnly2", &K_DCM_ReadOnly);
           ImGui::SameLine();
           ImGui::SliderFloat("##001", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleY->point, 0.05f, this->managerObjects.Setting_GridSize / 2);
           ImGui::SameLine();
           ImGui::Text("Y");
-          ImGui::Checkbox("", &K_DCM_ReadOnly);
+          ImGui::Checkbox("##dcmReadOnly3", &K_DCM_ReadOnly);
           ImGui::SameLine();
           ImGui::SliderFloat("##001", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleZ->point, 0.05f, this->managerObjects.Setting_GridSize / 2);
           ImGui::SameLine();
@@ -727,7 +727,7 @@ void DialogControlsModels::contextModelRename(std::vector<ModelFaceBase*>* meshM
 
   if (this->guiModelRenameText[0] == '\0')
     strcpy(this->guiModelRenameText, (*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelTitle.c_str());
-  ImGui::InputText("", this->guiModelRenameText, sizeof(this->guiModelRenameText));
+  ImGui::InputText("##guiModelRename", this->guiModelRenameText, sizeof(this->guiModelRenameText));
 
   if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvail().x * 0.5f, 0))) {
     (*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelTitle = std::string(this->guiModelRenameText);
