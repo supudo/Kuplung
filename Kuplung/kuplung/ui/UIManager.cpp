@@ -659,7 +659,7 @@ void UIManager::dialogFileSave(FileSaverOperation operation) {
       break;
     case FileSaverOperation_Renderer:
       title = "Render Scene";
-      wType = &this->showRenderer;
+      wType = &this->showImageSave;
       break;
   }
   this->componentFileSaver->draw(title.c_str(), operation, wType);
