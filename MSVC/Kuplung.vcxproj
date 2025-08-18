@@ -107,7 +107,7 @@
     <Link>
       <AdditionalOptions>
       </AdditionalOptions>
-      <AdditionalDependencies>glew32.lib;SDL3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;OpenGL32.Lib;SDL3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>D:\vcpkg\installed\x64-windows-static\lib;D:\vcpkg\installed\x64-windows\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>
@@ -431,6 +431,7 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\saveopen\SaveOpenGProtocolBufs.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\Kuplung.cpp" />
     <ClCompile Include="..\Kuplung\main.cpp" />
+    <ClInclude Include="imgui_impl_opengl3_loader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Kuplung\resources\kuplung.rc" />

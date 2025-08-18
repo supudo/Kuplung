@@ -652,7 +652,7 @@ void TextEditor::Render()
 
 	if (!mLines.empty())
 	{
-		auto fontScale = ImGui::GetFontSize() / ImGui::GetFont()->FontSize;
+		auto fontScale = ImGui::GetFontSize();
 		float spaceSize = ImGui::GetFont()->CalcTextSizeA(ImGui::GetFontSize(), FLT_MAX, -1.0f, " ", nullptr, nullptr).x;
 
 		while (lineNo <= lineMax)
@@ -835,14 +835,14 @@ void TextEditor::Render(const char* aTitle, const ImVec2& aSize, bool aBorder)
 	ImGui::PushStyleColor(ImGuiCol_WindowBg, ImGui::ColorConvertU32ToFloat4(mPalette[(int)PaletteIndex::Background]));
 	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
 	ImGui::BeginChild(aTitle, aSize, aBorder, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_AlwaysHorizontalScrollbar | ImGuiWindowFlags_NoMove);
-	ImGui::PushAllowKeyboardFocus(true);
+  ImGui::PushItemFlag(ImGuiItemFlags_NoTabStop, true);
 
 	HandleKeyboardInputs();
 	HandleMouseInputs();
 	ColorizeInternal();
 	Render();
 
-	ImGui::PopAllowKeyboardFocus();
+	ImGui::PopItemFlag();
 	ImGui::EndChild();
 	ImGui::PopStyleVar();
 	ImGui::PopStyleColor();
@@ -1974,7 +1974,7 @@ float TextEditor::TextDistanceToLineStart(const Coordinates& aFrom) const
 {
 	auto& line = mLines[aFrom.mLine];
 	float distance = 0.0f;
-	auto fontScale = ImGui::GetFontSize() / ImGui::GetFont()->FontSize;
+	auto fontScale = ImGui::GetFontSize();
 	float spaceSize = ImGui::GetFont()->CalcTextSizeA(ImGui::GetFontSize(), FLT_MAX, -1.0f, " ", nullptr, nullptr).x;
 	for (size_t it = 0u; it < line.size() && it < (unsigned)aFrom.mColumn; ++it)
 	{

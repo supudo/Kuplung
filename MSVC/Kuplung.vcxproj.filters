@@ -751,6 +751,9 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_textedit.h">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="imgui_impl_opengl3_loader.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="kuplung">

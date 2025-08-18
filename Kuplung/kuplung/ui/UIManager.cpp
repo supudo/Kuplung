@@ -147,6 +147,7 @@ void UIManager::init(SDL_Window* window, SDL_GLContext glContext, const std::fun
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO();
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
   (void)io;
   ImGui_ImplSDL3_InitForOpenGL(this->sdlWindow, glContext);
   ImGui_ImplOpenGL3_Init("#version 410 core");
@@ -566,11 +567,8 @@ void UIManager::popupRecentFileImportedDoesntExists() {
 }
 
 void UIManager::renderEnd() {
-  if (this->needsFontChange) {
+  if (this->needsFontChange)
     this->windowOptions->loadFonts(&this->needsFontChange);
-    ImGui_ImplOpenGL3_CreateFontsTexture();
-  }
-
   ImGui::Render();
 }
 
