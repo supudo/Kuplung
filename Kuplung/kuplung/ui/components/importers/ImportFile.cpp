@@ -10,9 +10,9 @@
 #include "kuplung/utilities/imgui/imgui_internal.h"
 #include "kuplung/utilities/helpers/Helpers.h"
 #include <ctime>
-#include <iostream>
 #include <sstream>
 #include <format>
+#include <cstring>
 
 namespace fs = std::filesystem;
 

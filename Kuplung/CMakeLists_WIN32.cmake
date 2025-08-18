@@ -1,58 +1,28 @@
 # Win32 CMake file
 
+# Compile options
+ADD_COMPILE_OPTIONS(/W3)
+ADD_COMPILE_OPTIONS(/wd4244 /wd4100 /wd4068 /wd4267 /wd4305 /wd4838 /wd4477 /wd4305 /wd4996 /wd4309 /wd4251)
+
+# Defines
+ADD_DEFINITIONS(-DCMAKE_CXX_CPPCHECK)
 ADD_DEFINITIONS(-DKuplung_Debug_Timings)
-ADD_DEFINITIONS(-DIMGUI_IMPL_OPENGL_LOADER_CUSTOM="${CMAKE_SOURCE_DIR}/kuplung/utilities/gl/GLIncludes.h")
+ADD_DEFINITIONS(-DIMGUI_DEFINE_MATH_OPERATORS)
+ADD_DEFINITIONS(-DUNICODE -D_UNICODE)
 
-# Warnings
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -wd4244 -wd4100 -wd4068 -wd4267 -wd4305 -wd4838 -wd4477 -wd4305 -wd4996 -wd4309")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DIMGUI_IMPL_OPENGL_LOADER_CUSTOM")
+SET(CMAKE_CXX_STANDARD 20)
+SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DKuplung_Debug_Timings")
-
-# GLM
-INCLUDE_DIRECTORIES("D:/Libs/glm-0.9.8.4")
-
-# Include OpenGL
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lopengl32")
-
-# SDL2
-LINK_DIRECTORIES("D:/Libs/SDL2-2.0.5/lib/x64")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lSDL2main -lSDL2")
-INCLUDE_DIRECTORIES("D:/Libs/SDL2-2.0.5/include")
-
-# GLFW3
-LINK_DIRECTORIES("D:/Libs/GLFW3/lib-vc2015")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lGLFW3")
-INCLUDE_DIRECTORIES("D:/Libs/GLFW3/include")
-
-# GLEW
-LINK_DIRECTORIES("D:/Libs/glew-2.0.0-win32/lib/Release/x64")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lGLEW32")
-INCLUDE_DIRECTORIES("D:/Libs/glew-2.0.0-win32/include")
-
-# Assimp
-LINK_DIRECTORIES("D:/Libs/assimp/lib")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lassimp-vc140-mt")
-INCLUDE_DIRECTORIES("D:/Libs/assimp/include")
-
-# Protobuf
-LINK_DIRECTORIES("D:/Libs/protobuf/lib")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -llibprotobufd")
-INCLUDE_DIRECTORIES("D:/Libs/protobuf/include")
-
-# Lua
-LINK_DIRECTORIES("D:/Libs/lua-5.3.4_Win64_vc14_lib/lib")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -llua53")
-INCLUDE_DIRECTORIES("D:/Libs/lua-5.3.4_Win64_vc14_lib/include")
-
-# libnoise
-INCLUDE_DIRECTORIES(../external/libnoise/windows/include)
-LINK_DIRECTORIES(../external/libnoise/windows/lib)
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lnoise")
-
-INCLUDE_DIRECTORIES(.)
-
 ADD_DEFINITIONS(-DDef_Kuplung_OpenGL_4x)
 ADD_DEFINITIONS(-DGLM_ENABLE_EXPERIMENTAL)
+
+# Includes & Libs
+INCLUDE_DIRECTORIES("D:/vcpkg/installed/x64-windows-static/include")
+INCLUDE_DIRECTORIES("D:/vcpkg/installed/x64-windows/include")
+LINK_DIRECTORIES("D:/vcpkg/installed/x64-windows-static/lib")
+LINK_DIRECTORIES("D:/vcpkg/installed/x64-windows/lib")
+
+INCLUDE_DIRECTORIES(.)
 
 SET(SOURCE_FILES
     kuplung/meshes/artefacts/Shadertoy.cpp
@@ -215,15 +185,16 @@ SET(SOURCE_FILES
     kuplung/utilities/imgui/imgui.h
     kuplung/utilities/imgui/imgui_demo.cpp
     kuplung/utilities/imgui/imgui_draw.cpp
+	kuplung/utilities/imgui/imgui_impl_opengl3.cpp
+	kuplung/utilities/imgui/imgui_impl_opengl3.h
+	kuplung/utilities/imgui/imgui_impl_sdl3.cpp
+	kuplung/utilities/imgui/imgui_impl_sdl3.h
     kuplung/utilities/imgui/imgui_internal.h
+	kuplung/utilities/imgui/imgui_tables.cpp
   	kuplung/utilities/imgui/imgui_widgets.cpp
   	kuplung/utilities/imgui/imstb_rectpack.h
   	kuplung/utilities/imgui/imstb_textedit.h
   	kuplung/utilities/imgui/imstb_truetype.h
-  	kuplung/utilities/imgui/imgui_impl_opengl3.cpp
-  	kuplung/utilities/imgui/imgui_impl_opengl3.h
-  	kuplung/utilities/imgui/imgui_impl_sdl.cpp
-  	kuplung/utilities/imgui/imgui_impl_sdl.h
     kuplung/utilities/nanovg/fontstash.h
     kuplung/utilities/nanovg/nanovg.c
     kuplung/utilities/nanovg/nanovg.h
@@ -293,7 +264,6 @@ SET(SOURCE_FILES
     kuplung/utilities/stb/stb_textedit.h
     kuplung/utilities/stb/stb_truetype.h
     kuplung/utilities/catch/catch.hpp
-    kuplung/utilities/json/json.hpp
     kuplung/utilities/cpp-base64/base64.cpp
     kuplung/utilities/cpp-base64/base64.h
     # kuplung/cuda/CudaTest.cpp
@@ -562,3 +532,16 @@ ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES} ${PROTOBUF_MODELS} kuplung/utilit
 SET(KuplungResources_PWD_WIN "/resources")
 SET(KuplungResources_DESTDIR_WIN "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/resources")
 EXECUTE_PROCESS(COMMAND "cmd /c xcopy /S /I /Y ${KuplungResources_PWD_WIN} ${KuplungResources_DESTDIR_WIN}")
+
+TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PRIVATE
+		${GLFW_INCLUDE_DIRS}
+)
+
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} assimp-vc143-mt)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} noise)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} noiseutils)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} glew32)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} SDL3)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} OpenGL32)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} abseil_dll)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} libprotobuf)

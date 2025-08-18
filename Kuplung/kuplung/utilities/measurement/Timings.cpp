@@ -7,6 +7,7 @@
 //
 
 #include "Timings.hpp"
+#include <cmath>
 
 namespace KuplungApp::Utilities::Measurement {
 

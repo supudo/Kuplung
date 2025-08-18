@@ -70,7 +70,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>Default</CompileAs>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <DisableSpecificWarnings>4244;4100;4068;4267;4305;4838;4477;4305;4996;4309</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4244;4100;4068;4267;4305;4838;4477;4996;4309</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <Optimization>Disabled</Optimization>
