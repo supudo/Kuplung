@@ -106,9 +106,8 @@ void RayPicking::pickVertex(const glm::mat4& matrixProjection, const glm::mat4& 
     rayStartPosition,
     rayDirection
   );
-  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[RAY] - [ORIGIN: %g, %g, %g] ||||||| [DIR: %g, %g, %g]",
-                                                                      rayStartPosition.x, rayStartPosition.y, rayStartPosition.z,
-                                                                      rayDirection.x, rayDirection.y, rayDirection.z));
+  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[RAY] - [ORIGIN: ", rayStartPosition.x, ", ", rayStartPosition.y, ", ", rayStartPosition.z,
+                                                                      "] ||||||| [DIR: ", rayDirection.x, ", ", rayDirection.y, ", ", rayDirection.z ,"]"));
 
   glm::vec2 normalizedCoordinates = this->getNormalizeDeviceCordinates(mouse_x, mouse_y);
   glm::vec4 clipCoordinates = glm::vec4(normalizedCoordinates, -1.0f, 1.0f);
@@ -156,17 +155,11 @@ const bool RayPicking::testRaySphereIntersection(int const vID, glm::vec3 const&
 
   const bool intersected = glm::intersectRaySphere(ray_origin, ray_direction, v0, radius * radius, distance);
   if (intersected)
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT - %i] ||||||||| [CENTER: %g, %g, %g] ||||||||| [VERTEX: %g, %g, %g] ===== %g",
-                                                                        vID,
-                                                                        v0.x, v0.y, v0.z,
-                                                                        vertex.x, vertex.y, vertex.z,
-                                                                        distance));
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT - ", vID, "] ||||||||| [CENTER: ", v0.x, ", ", v0.y, ", ", v0.z,
+                                                                        "] ||||||||| [VERTEX: ", vertex.x, ", ", vertex.y, ", ", vertex.z,"] ===== ", distance));
   else
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[NOK - %i] ||||||||| [CENTER: %g, %g, %g] ||||||||| [VERTEX: %g, %g, %g] ===== %g",
-                                                                        vID,
-                                                                        v0.x, v0.y, v0.z,
-                                                                        vertex.x, vertex.y, vertex.z,
-                                                                        distance));
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[NOK - ", vID, "] ||||||||| [CENTER: ", v0.x, ", ", v0.y, ", ", v0.z,
+                                                                        "] ||||||||| [VERTEX: ", vertex.x, ", ", vertex.y, ", ", vertex.z, "] ===== ", distance));
 
   return intersected;
 }

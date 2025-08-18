@@ -9,15 +9,14 @@
 #ifndef Controls_hpp
 #define Controls_hpp
 
-#include <SDL2/SDL.h>
+#define SDL_MAIN_HANDLED
+#include <SDL3/SDL.h>
 #ifdef _WIN32
 #  undef main
 #endif
 #include "kuplung/settings/Settings.h"
 
-namespace KuplungApp {
-namespace Utilities {
-namespace Input {
+namespace KuplungApp::Utilities::Input {
 
 struct ControlPoint {
   int x, y;
@@ -53,8 +52,6 @@ private:
   void handleMouseMotion(const SDL_Event* ev);
 };
 
-} // namespace Input
-} // namespace Utilities
-} // namespace KuplungApp
+}
 
 #endif /* Controls_hpp */

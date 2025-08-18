@@ -12,7 +12,7 @@
 #include "kuplung/settings/Settings.h"
 #include "miniz.h"
 
-namespace KuplungApp { namespace Utilities { namespace Miniz {
+namespace KuplungApp::Utilities::Miniz {
 
 class KuplungMiniz {
 public:
@@ -27,6 +27,6 @@ private:
   mz_zip_archive zipFile;
 };
 
-}}}
+}
 
 #endif /* KuplungMiniz_hpp */

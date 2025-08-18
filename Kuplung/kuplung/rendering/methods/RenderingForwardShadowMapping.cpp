@@ -13,13 +13,114 @@
 #include <glm/gtc/matrix_inverse.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/matrix_decompose.hpp>
+#include <source_location>
 
-RenderingForwardShadowMapping::RenderingForwardShadowMapping(ObjectsManager& managerObjects)
-    : managerObjects(managerObjects)  {
-  this->solidLight = std::make_unique<ModelFace_LightSource_Directional>();
+RenderingForwardShadowMapping::RenderingForwardShadowMapping(ObjectsManager& managerObjects) : managerObjects(managerObjects)  {
+  this->matrixProjection = glm::mat4(1.0);
+  this->matrixCamera = glm::mat4(1.0);
+  this->vecCameraPosition = glm::vec3(1.0);
+  this->uiAmbientLight = glm::vec3(1.0);
+  this->matrixLightSpace = glm::mat4(1.0);
+  
+  this->shaderProgramShadows = 0;
+  this->shaderShadowsVertex = 0;
+  this->shaderShadowsFragment = 0;
+  this->fboDepthMap = 0;
+  this->vboDepthMap = 0;
+  this->glShadow_ModelMatrix = 0;
+  this->glShadow_LightSpaceMatrix = 0;
+  this->glFS_ShadowPass = 0;
+  this->glFS_DebugShadowTexture = 0;
+
+  this->shaderProgramDepth = 0;
+  this->shaderDepthVertex = 0;
+  this->shaderDepthFragment = 0;
+  this->glDepth_Plane_Close = 0;
+  this->glDepth_Plane_Far = 0;
+  this->glDepth_SamplerTexture = 0;
+  this->depthQuadVAO = 0;
+  this->depthQuadVBO = 0;
+
   this->GLSL_LightSourceNumber_Directional = 0;
   this->GLSL_LightSourceNumber_Point = 0;
   this->GLSL_LightSourceNumber_Spot = 0;
+  this->mfLights_Directional = std::vector<std::unique_ptr<ModelFace_LightSource_Directional>>();
+  this->mfLights_Point = std::vector<std::unique_ptr<ModelFace_LightSource_Point>>();
+  this->mfLights_Spot = std::vector<std::unique_ptr<ModelFace_LightSource_Spot>>();
+
+  this->shaderProgram = 0;
+
+  this->glVS_MVPMatrix = 0;
+  this->glFS_MMatrix = 0;
+  this->glVS_WorldMatrix = 0;
+  this->glVS_NormalMatrix = 0;
+  this->glFS_MVMatrix = 0;
+
+  this->glVS_shadowModelMatrix = 0;
+  this->glVS_LightSpaceMatrix = 0;
+  this->glFS_showShadows = 0;
+  this->glFS_SamplerShadowMap = 0;
+
+  // general
+  this->glGS_GeomDisplacementLocation = 0;
+  this->glFS_AlphaBlending = 0;
+  this->glFS_CameraPosition = 0;
+  this->glFS_CelShading = 0;
+  this->glFS_OutlineColor = 0;
+  this->glVS_IsBorder = 0;
+  this->glFS_ScreenResX = 0;
+  this->glFS_ScreenResY = 0;
+  this->glFS_UIAmbient = 0;
+  this->glTCS_UseCullFace = 0;
+  this->glTCS_UseTessellation = 0;
+  this->glTCS_TessellationSubdivision = 0;
+  this->gl_ModelViewSkin = 0;
+  this->glFS_GammaCoeficient = 0;
+
+  // depth color
+  this->glFS_planeClose = 0;
+  this->glFS_planeFar = 0;
+  this->glFS_showDepthColor = 0;
+
+  // material
+  this->glMaterial_Ambient = 0;
+  this->glMaterial_Diffuse = 0;
+  this->glMaterial_Specular = 0;
+  this->glMaterial_SpecularExp = 0;
+  this->glMaterial_Emission = 0;
+  this->glMaterial_Refraction = 0;
+  this->glMaterial_IlluminationModel = 0;
+  this->glMaterial_HeightScale = 0;
+  this->glMaterial_SamplerAmbient = 0;
+  this->glMaterial_SamplerDiffuse = 0;
+  this->glMaterial_SamplerSpecular = 0;
+  this->glMaterial_SamplerSpecularExp = 0;
+  this->glMaterial_SamplerDissolve = 0;
+  this->glMaterial_SamplerBump = 0;
+  this->glMaterial_SamplerDisplacement = 0;
+  this->glMaterial_HasTextureAmbient = 0;
+  this->glMaterial_HasTextureDiffuse = 0;
+  this->glMaterial_HasTextureSpecular = 0;
+  this->glMaterial_HasTextureSpecularExp = 0;
+  this->glMaterial_HasTextureDissolve = 0;
+  this->glMaterial_HasTextureBump = 0;
+  this->glMaterial_HasTextureDisplacement = 0;
+  this->glMaterial_ParallaxMapping = 0;
+
+  this->glEffect_GB_W = 0;
+  this->glEffect_GB_Radius = 0;
+  this->glEffect_GB_Mode = 0;
+  this->glEffect_Bloom_doBloom = 0;
+  this->glEffect_Bloom_WeightA = 0;
+  this->glEffect_Bloom_WeightB = 0;
+  this->glEffect_Bloom_WeightC = 0;
+  this->glEffect_Bloom_WeightD = 0;
+  this->glEffect_Bloom_Vignette = 0;
+  this->glEffect_Bloom_VignetteAtt = 0;
+  this->glEffect_ToneMapping_ACESFilmRec2020 = 0;
+
+  this->solidLight = std::make_unique<ModelFace_LightSource_Directional>();
+  this->glFS_solidSkin_materialColor = 0;
 }
 
 RenderingForwardShadowMapping::~RenderingForwardShadowMapping() {
@@ -72,7 +173,7 @@ RenderingForwardShadowMapping::~RenderingForwardShadowMapping() {
     this->mfLights_Spot[i].reset();
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 bool RenderingForwardShadowMapping::init() {
@@ -80,14 +181,10 @@ bool RenderingForwardShadowMapping::init() {
   this->GLSL_LightSourceNumber_Point = 4;
   this->GLSL_LightSourceNumber_Spot = 4;
 
-  bool success = true;
-  success &= this->initShaderProgram();
-  return success;
+  return this->initShaderProgram();
 }
 
 bool RenderingForwardShadowMapping::initShaderProgram() {
-  bool success = true;
-
   // vertex shader
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.vert";
   std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
@@ -137,14 +234,12 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
   GLint programSuccess = GL_TRUE;
   glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
   if (programSuccess != GL_TRUE) {
-    Settings::Instance()->funcDoLog("[RenderingForwardShadowMapping - initShaders] Error linking program " + std::to_string(this->shaderProgram) + "!");
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[RenderingForwardShadowMapping - initShaders] Error linking program ", this->shaderProgram, "!"));
     Settings::Instance()->glUtils->printProgramLog(this->shaderProgram);
-    return success = false;
+    return false;
   }
   else {
-#ifdef Def_Kuplung_OpenGL_4x
     glPatchParameteri(GL_PATCH_VERTICES, 3);
-#endif
 
     glDetachShader(this->shaderProgramShadows, this->shaderShadowsVertex);
     glDetachShader(this->shaderProgramShadows, this->shaderShadowsFragment);
@@ -174,7 +269,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
     this->glFS_MMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_ModelMatrix");
     this->glVS_WorldMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_WorldMatrix");
     this->glFS_MVMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_MVMatrix");
-    this->glVS_NormalMatrix = glGetUniformLocation(this->shaderProgram, "vs_normalMatrix");
+    this->glVS_NormalMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_normalMatrix");
 
     this->glFS_ScreenResX = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_screenResX");
     this->glFS_ScreenResY = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
@@ -189,7 +284,6 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
     this->gl_ModelViewSkin = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_modelViewSkin");
     this->glFS_solidSkin_materialColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_materialColor");
 
-    this->solidLight->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
     this->solidLight->gl_Direction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
     this->solidLight->gl_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");
     this->solidLight->gl_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.diffuse");
@@ -200,7 +294,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
 
     // light - directional
     for (unsigned int i = 0; i < this->GLSL_LightSourceNumber_Directional; i++) {
-      std::unique_ptr<ModelFace_LightSource_Directional> f = std::make_unique<ModelFace_LightSource_Directional>();
+      auto f = std::make_unique<ModelFace_LightSource_Directional>();
       f->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
 
       f->gl_Direction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].direction").c_str());
@@ -217,7 +311,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
 
     // light - point
     for (unsigned int i = 0; i < this->GLSL_LightSourceNumber_Point; i++) {
-      std::unique_ptr<ModelFace_LightSource_Point> f = std::make_unique<ModelFace_LightSource_Point>();
+      auto f = std::make_unique<ModelFace_LightSource_Point>();
       f->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].inUse").c_str());
       f->gl_Position = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].position").c_str());
 
@@ -237,7 +331,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
 
     // light - spot
     for (unsigned int i = 0; i < this->GLSL_LightSourceNumber_Spot; i++) {
-      std::unique_ptr<ModelFace_LightSource_Spot> f = std::make_unique<ModelFace_LightSource_Spot>();
+      auto f = std::make_unique<ModelFace_LightSource_Spot>();
       f->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].inUse").c_str());
 
       f->gl_Position = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].position").c_str());
@@ -304,24 +398,62 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
     // effects - tone mapping
     this->glEffect_ToneMapping_ACESFilmRec2020 = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_ACESFilmRec2020");
   }
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
-  success &= this->initShadows();
-  success &= this->initShadowsDepth();
+  return this->initShadows() && this->initShadowsDepth();
+}
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+bool RenderingForwardShadowMapping::initShadows() {
+  return this->initShadowsShader() && this->initShadowsBuffers();
+}
 
-  return success;
+bool RenderingForwardShadowMapping::initShadowsShader() {
+  std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/shadow_mapping_depth.vert";
+  std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
+  const char* shader_vertex = shaderSourceVertex.c_str();
+
+  shaderPath = Settings::Instance()->appFolder() + "/shaders/shadow_mapping_depth.frag";
+  std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
+  const char* shader_fragment = shaderSourceFragment.c_str();
+
+  this->shaderProgramShadows = glCreateProgram();
+  Settings::Instance()->glUtils->CheckForGLErrors();
+
+  bool shaderCompilation = true;
+  shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramShadows, this->shaderShadowsVertex, GL_VERTEX_SHADER, shader_vertex);
+  Settings::Instance()->glUtils->CheckForGLErrors();
+  shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramShadows, this->shaderShadowsFragment, GL_FRAGMENT_SHADER, shader_fragment);
+  Settings::Instance()->glUtils->CheckForGLErrors();
+
+  if (!shaderCompilation)
+    return false;
+
+  glLinkProgram(this->shaderProgramShadows);
+  Settings::Instance()->glUtils->CheckForGLErrors();
+
+  GLint programSuccess = GL_TRUE;
+  glGetProgramiv(this->shaderProgramShadows, GL_LINK_STATUS, &programSuccess);
+  Settings::Instance()->glUtils->CheckForGLErrors();
+  if (programSuccess != GL_TRUE) {
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Error linking program ", this->shaderProgramShadows, "!\n"));
+    Settings::Instance()->glUtils->printProgramLog(this->shaderProgramShadows);
+    return false;
+  }
+  else {
+    this->glShadow_ModelMatrix = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_model");
+    this->glShadow_LightSpaceMatrix = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_lightSpaceMatrix");
+  }
+
+  Settings::Instance()->glUtils->CheckForGLErrors();
+
+  return true;
 }
 
 bool RenderingForwardShadowMapping::initShadowsDepth() {
-  bool success = true;
-  success &= this->initShadowsDepthShader();
-  return success;
+  return this->initShadowsDepthShader();
 }
 
 bool RenderingForwardShadowMapping::initShadowsDepthShader() {
-  bool result = true;
-
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/shadows_debug_quad.vert";
   std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
   const char* shader_vertex = shaderSourceVertex.c_str();
@@ -344,7 +476,7 @@ bool RenderingForwardShadowMapping::initShadowsDepthShader() {
   GLint programSuccess = GL_TRUE;
   glGetProgramiv(this->shaderProgramDepth, GL_LINK_STATUS, &programSuccess);
   if (programSuccess != GL_TRUE) {
-    Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgramDepth) + "!\n");
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Error linking program ", this->shaderProgramDepth, "!\n"));
     Settings::Instance()->glUtils->printProgramLog(this->shaderProgramDepth);
     return false;
   }
@@ -354,55 +486,9 @@ bool RenderingForwardShadowMapping::initShadowsDepthShader() {
     this->glDepth_SamplerTexture = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "depthMap");
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
-  return result;
-}
-
-bool RenderingForwardShadowMapping::initShadows() {
-  bool success = true;
-  success &= this->initShadowsShader();
-  success &= this->initShadowsBuffers();
-  return success;
-}
-
-bool RenderingForwardShadowMapping::initShadowsShader() {
-  bool result = true;
-
-  std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/shadow_mapping_depth.vert";
-  std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
-  const char* shader_vertex = shaderSourceVertex.c_str();
-
-  shaderPath = Settings::Instance()->appFolder() + "/shaders/shadow_mapping_depth.frag";
-  std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
-  const char* shader_fragment = shaderSourceFragment.c_str();
-
-  this->shaderProgramShadows = glCreateProgram();
-
-  bool shaderCompilation = true;
-  shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramShadows, this->shaderShadowsVertex, GL_VERTEX_SHADER, shader_vertex);
-  shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramShadows, this->shaderShadowsFragment, GL_FRAGMENT_SHADER, shader_fragment);
-
-  if (!shaderCompilation)
-    return false;
-
-  glLinkProgram(this->shaderProgramShadows);
-
-  GLint programSuccess = GL_TRUE;
-  glGetProgramiv(this->shaderProgramShadows, GL_LINK_STATUS, &programSuccess);
-  if (programSuccess != GL_TRUE) {
-    Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgramShadows) + "!\n");
-    Settings::Instance()->glUtils->printProgramLog(this->shaderProgramShadows);
-    return false;
-  }
-  else {
-    this->glShadow_ModelMatrix = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_model");
-    this->glShadow_LightSpaceMatrix = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_lightSpaceMatrix");
-  }
-
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
-
-  return result;
+  return true;
 }
 
 bool RenderingForwardShadowMapping::initShadowsBuffers() {
@@ -411,16 +497,16 @@ bool RenderingForwardShadowMapping::initShadowsBuffers() {
   glGenTextures(1, &this->vboDepthMap);
   glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
 
-  const int smapWidth = 1024; //Settings::Instance()->SDL_Window_Width;
-  const int smapHeight = 1024; //Settings::Instance()->SDL_Window_Height;
+  constexpr int smapWidth = 1024; //Settings::Instance()->SDL_Window_Width;
+  constexpr int smapHeight = 1024; //Settings::Instance()->SDL_Window_Height;
 
   glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, smapWidth, smapHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-  GLfloat borderColor[] = {1.0, 1.0, 1.0, 1.0};
-  glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+  constexpr auto borderColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+  glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, &borderColor.x);
 
   glBindFramebuffer(GL_FRAMEBUFFER, this->fboDepthMap);
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, this->vboDepthMap, 0);
@@ -432,7 +518,7 @@ bool RenderingForwardShadowMapping::initShadowsBuffers() {
     return false;
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return true;
 }
@@ -452,10 +538,10 @@ void RenderingForwardShadowMapping::renderShadows(const std::vector<ModelFaceDat
   if (this->managerObjects.lightSources.size() > 0) {
     //glm::vec4 vecpos = this->managerObjects.lightSources[0]->matrixModel[3];
     //glm::vec3 lightPos = glm::vec3(vecpos.x, vecpos.y, vecpos.z);
-    glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, this->managerObjects.Setting_PlaneClose, this->managerObjects.Setting_PlaneFar);
+    const glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, this->managerObjects.Setting_PlaneClose, this->managerObjects.Setting_PlaneFar);
     // TODO: PVS SA
     //glm::mat4 matrixLightView = glm::lookAt(lightPos, this->managerObjects.camera->eyeSettings->View_Center, this->managerObjects.camera->eyeSettings->View_Up);
-    glm::mat4 matrixLightView = glm::translate(this->managerObjects.camera->matrixCamera, glm::vec3(-2, 2, 2));
+    const glm::mat4 matrixLightView = glm::translate(this->managerObjects.camera->matrixCamera, glm::vec3(-2, 2, 2));
     this->matrixLightSpace = lightProjection * matrixLightView;
 
     glUseProgram(this->shaderProgramShadows);
@@ -488,7 +574,7 @@ void RenderingForwardShadowMapping::renderShadows(const std::vector<ModelFaceDat
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void RenderingForwardShadowMapping::renderDepth() {
@@ -509,7 +595,7 @@ void RenderingForwardShadowMapping::renderDepth() {
     glGenBuffers(1, &this->depthQuadVBO);
     glBindVertexArray(this->depthQuadVAO);
     glBindBuffer(GL_ARRAY_BUFFER, this->depthQuadVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(1);
@@ -521,7 +607,7 @@ void RenderingForwardShadowMapping::renderDepth() {
 
   glUseProgram(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const GLuint& sProgram, const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
@@ -534,7 +620,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
     if (mfd->getOptionsSelected())
       selectedModelID = static_cast<int>(i);
 
-    glm::mat4 matrixModel = glm::mat4(1.0);
+    auto matrixModel = glm::mat4(1.0);
     matrixModel *= this->managerObjects.grid->matrixModel;
     // scale
     matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
@@ -632,7 +718,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
     glUniform1f(this->glFS_ScreenResY, Settings::Instance()->SDL_Window_Height);
 
     // Outline color
-    glm::vec4 outline_color = mfd->getOptionsOutlineColor();
+    const glm::vec4 outline_color = mfd->getOptionsOutlineColor();
     glUniform3f(this->glFS_OutlineColor, outline_color.r, outline_color.g, outline_color.b);
 
     // ambient color for editor
@@ -651,7 +737,6 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
     glUniform1i(this->gl_ModelViewSkin, mfd->Setting_ModelViewSkin);
     glUniform3f(this->glFS_solidSkin_materialColor, mfd->solidLightSkin_MaterialColor.r, mfd->solidLightSkin_MaterialColor.g, mfd->solidLightSkin_MaterialColor.b);
 
-    glUniform1i(this->solidLight->gl_InUse, 1);
     glUniform3f(this->solidLight->gl_Direction, this->managerObjects.SolidLight_Direction.x, this->managerObjects.SolidLight_Direction.y, this->managerObjects.SolidLight_Direction.z);
     glUniform3f(this->solidLight->gl_Ambient, this->managerObjects.SolidLight_Ambient.r, this->managerObjects.SolidLight_Ambient.g, this->managerObjects.SolidLight_Ambient.b);
     glUniform3f(this->solidLight->gl_Diffuse, this->managerObjects.SolidLight_Diffuse.r, this->managerObjects.SolidLight_Diffuse.g, this->managerObjects.SolidLight_Diffuse.b);
@@ -701,7 +786,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
           glUniform1i(f->gl_InUse, 1);
 
           // light
-          glm::vec3 vec_pos = glm::vec3(light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
+          const glm::vec3 vec_pos = glm::vec3(light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
           glUniform3f(f->gl_Position, vec_pos.x, vec_pos.y, vec_pos.z);
 
           // factors
@@ -940,12 +1025,12 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
 
     ModelFaceData* mfd = meshModelFaces[selectedModelID];
 
-    glm::vec4 v0 = glm::vec4(this->managerObjects.VertexEditorMode, 1.0);
+    auto v0 = glm::vec4(this->managerObjects.VertexEditorMode, 1.0);
     v0 = mfd->matrixModel * v0;
     glm::mat4 matrixVertex = mfd->matrixModel;
     matrixVertex[3] = v0;
 
-    glm::mat4 mtx = glm::mat4(1.0);
+    auto mtx = glm::mat4(1.0);
 
     ImGuiIO& io = ImGui::GetIO();
     ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
@@ -979,5 +1064,5 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
 
   glUseProgram(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }

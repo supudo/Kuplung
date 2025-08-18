@@ -11,7 +11,6 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 #include "kuplung/utilities/imgui/imgui.h"
-#define IMGUI_DEFINE_MATH_OPERATORS
 #include "kuplung/utilities/imgui/imgui_internal.h"
 
 #include <GLFW/glfw3.h>

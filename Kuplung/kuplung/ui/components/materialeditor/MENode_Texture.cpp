@@ -16,7 +16,7 @@
 
 // NB: You can use math functions/operators on ImVec2 if you #define IMGUI_DEFINE_MATH_OPERATORS and #include "imgui_internal.h"
 // Here we only declare simple +/- operators so others don't leak into the demo code.
-static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x+rhs.x, lhs.y+rhs.y); }
+//static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x+rhs.x, lhs.y+rhs.y); }
 //static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
 
 MENode_Texture::MENode_Texture(int id, MaterialTextureType texType, std::string const& name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string const& textureFilename, std::string const& textureImage) {
@@ -46,7 +46,7 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool
   ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
   ImGui::BeginGroup();
 
-  ImGui::SetNextTreeNodeOpen(this->IsExpanded, ImGuiCond_Always);
+  ImGui::SetNextItemOpen(this->IsExpanded, ImGuiCond_Always);
   if (ImGui::TreeNode(this, "%s", "")) {
     ImGui::TreePop();
     this->IsExpanded = true;
@@ -72,14 +72,14 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool
       this->loadTexture = true;
     }
     ImGui::SameLine();
-    ImGui::InputText("", this->filePath, sizeof(this->filePath), ImGuiInputTextFlags_ReadOnly);
+    ImGui::InputText("##meNodeFilePath", this->filePath, sizeof(this->filePath), ImGuiInputTextFlags_ReadOnly);
     ImGui::SameLine();
     float bw = ImGui::CalcTextSize("...").x + 10;
     ImGui::PushItemWidth(bw);
     if (ImGui::Button("..."))
       this->showFileBrowser = true;
 
-    if (showPreview && ImGui::ImageButton((ImTextureID)(intptr_t)this->vboBuffer, ImVec2(100 * scale, 100 * scale)))
+    if (showPreview && ImGui::ImageButton("##meNodePreviewTexture", (ImTextureID)(intptr_t)this->vboBuffer, ImVec2(100 * scale, 100 * scale)))
       this->showTextureWindow = !this->showTextureWindow;
 
     ImGui::PopItemWidth();
@@ -168,7 +168,7 @@ void MENode_Texture::createTextureBuffer(int* width, int* height) {
   int tChannels;
   unsigned char* tPixels = stbi_load(this->TextureImage.c_str(), width, height, &tChannels, 0);
   if (!tPixels)
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[MENode_Texture] Can't load texture image %s with error %s!\n", this->TextureImage.c_str(), stbi_failure_reason()));
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[MENode_Texture] Can't load texture image ", this->TextureImage.c_str(), " with error ", stbi_failure_reason(), "!\n"));
   else {
     glGenTextures(1, &this->vboBuffer);
     glBindTexture(GL_TEXTURE_2D, this->vboBuffer);

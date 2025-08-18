@@ -8,7 +8,8 @@
 
 #include "Settings.h"
 #include "kuplung/utilities/helpers/Strings.h"
-#include <SDL2/SDL.h>
+#define SDL_MAIN_HANDLED
+#include <SDL3/SDL.h>
 #include <iostream>
 #include <filesystem>
 #include <assimp/Exporter.hpp>
@@ -16,6 +17,9 @@
 #include <assimp/importerdesc.h>
 #include <memory>
 #include <stdarg.h>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 Settings* Settings::m_pInstance = NULL;
 
@@ -28,13 +32,8 @@ Settings* Settings::Instance() {
 }
 
 void Settings::initSettings(const std::string& iniFolder) {
-#ifdef Def_Kuplung_OpenGL_4x
   m_pInstance->OpenGL_MajorVersion = 4;
   m_pInstance->OpenGL_MinorVersion = 1;
-#else
-  m_pInstance->OpenGL_MajorVersion = 2;
-  m_pInstance->OpenGL_MinorVersion = 1;
-#endif
   m_pInstance->mRayDraw = false;
   m_pInstance->mRayAnimate = false;
   m_pInstance->mRayOriginX = 0.0f;
@@ -94,7 +93,7 @@ void Settings::initSettings(const std::string& iniFolder) {
   m_pInstance->Consumption_Interval_Memory = m_pInstance->cfgUtils->readInt("Consumption_Interval_Memory");
 
   m_pInstance->guiClearColor = {70.0f / 255.0f, 70.0f / 255.0f, 70.0f / 255.0f, 255.0f / 255.0f};
-  m_pInstance->SDL_Window_Flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
+  m_pInstance->SDL_Window_Flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
 
   m_pInstance->UIFontFileIndex = 0;
 
@@ -122,7 +121,7 @@ void Settings::initSettings(const std::string& iniFolder) {
 #ifdef _WIN32
   m_pInstance->Setting_CurrentDriveIndex = 0;
   m_pInstance->Setting_SelectedDriveIndex = 0;
-  m_pInstance->hddDriveList.empty();
+  static_cast<void>(m_pInstance->hddDriveList.empty());
   DWORD drives = ::GetLogicalDrives();
   if (drives) {
     char drive[] = "?";
@@ -143,14 +142,14 @@ void Settings::initSettings(const std::string& iniFolder) {
 
   m_pInstance->ApplicationConfigurationFolder = iniFolder;
 
-  m_pInstance->AssimpSupportedFormats_Import.empty();
+  static_cast<void>(m_pInstance->AssimpSupportedFormats_Import.empty());
   std::unique_ptr<Assimp::Importer> aImporter = std::make_unique<Assimp::Importer>();
   size_t aImporter_num = aImporter->GetImporterCount();
   for (size_t i = 0; i < aImporter_num; i++) {
     const aiImporterDesc* aiImporterDesc = aImporter->GetImporterInfo(i);
     std::string textensions(aiImporterDesc->mFileExtensions);
     std::transform(textensions.begin(), textensions.end(), textensions.begin(), ::toupper);
-    std::vector<std::string> elems = Kuplung::Helpers::splitString(textensions, ' ');
+    std::vector<std::string> elems = KuplungApp::Helpers::splitString(textensions, ' ');
     std::string extensions("." + elems[0]);
     for (size_t j = 1; j < elems.size(); j++) {
       extensions += ", ." + elems[j];
@@ -161,7 +160,7 @@ void Settings::initSettings(const std::string& iniFolder) {
   }
   aImporter.release();
 
-  m_pInstance->AssimpSupportedFormats_Export.empty();
+  static_cast<void>(m_pInstance->AssimpSupportedFormats_Export.empty());
   std::unique_ptr<Assimp::Exporter> aExporter = std::make_unique<Assimp::Exporter>();
   size_t aExporter_num = aExporter->GetExportFormatCount();
   for (size_t i = 0; i < aExporter_num; i++) {
@@ -297,11 +296,11 @@ std::vector<FBEntity> Settings::loadRecentFilesImported() {
 }
 
 void Settings::timerStart(const std::string& msg) {
-  this->funcDoLog(this->string_format("[Timer START] %s - %s", msg.c_str(), this->getTimeNow().c_str()));
+  this->funcDoLog(this->string_format("[Timer START] ", msg.c_str(), " - ", this->getTimeNow().c_str()));
 }
 
 void Settings::timerEnd(const std::string& msg) {
-  this->funcDoLog(this->string_format("[Timer END] %s - %s", msg.c_str(), this->getTimeNow().c_str()));
+  this->funcDoLog(this->string_format("[Timer END] ", msg.c_str(), " - ", this->getTimeNow().c_str()));
 }
 
 const std::string Settings::getTimeNow() const {
@@ -330,7 +329,6 @@ const bool Settings::hasEnding(std::string const& fullString, std::string const&
 }
 
 void Settings::logTimings(const std::string& file, const std::string& method) {
-#ifdef Kuplung_Debug_Timings
-  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] [%s - %s] : %f seconds.", file.c_str(), method.c_str(), (1.0 * std::clock() / CLOCKS_PER_SEC)));
-#endif
+  if (this->showFrameRenderTime)
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] [", file.c_str(), " - ", method.c_str(), "] : ", (1.0 * std::clock() / CLOCKS_PER_SEC), " seconds."));
 }

@@ -12,9 +12,7 @@
 #include <fstream>
 #include <sstream>
 
-namespace KuplungApp {
-namespace Utilities {
-namespace FontParser {
+namespace KuplungApp::Utilities::FontParser {
 
 FNTParser::~FNTParser() {}
 
@@ -211,6 +209,4 @@ const std::vector<std::string> FNTParser::splitString(const std::string& s, std:
   return elements;
 }
 
-} // namespace FontParser
-} // namespace Utilities
-} // namespace KuplungApp
+}

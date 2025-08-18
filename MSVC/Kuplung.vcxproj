@@ -9,14 +9,6 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="MinSizeRel|x64">
-      <Configuration>MinSizeRel</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="RelWithDebInfo|x64">
-      <Configuration>RelWithDebInfo</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGUID>{C32FB03E-A9FE-3AAC-A339-D619916CA374}</ProjectGUID>
@@ -32,24 +24,13 @@
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -70,46 +51,46 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Kuplung.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Kuplung</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    </LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">..\MSVC\Release\MinSizeRel\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Kuplung.dir\MinSizeRel\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Kuplung</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
-    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">..\MSVC\Release\RelWithDebInfo\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Kuplung.dir\RelWithDebInfo\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Kuplung</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
-    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <EnableCppCoreCheck>true</EnableCppCoreCheck>
     <CodeAnalysisRuleSet>D:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgConfiguration>Debug</VcpkgConfiguration>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\vcpkg\installed\x64-windows-static\include;D:\vcpkg\installed\x64-windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <CompileAs>CompileAsCpp</CompileAs>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <DisableSpecificWarnings>4244;4100;4068;4267;4305;4838;4477;4305;4996;4309</DisableSpecificWarnings>
+      <CompileAs>Default</CompileAs>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4244;4100;4068;4267;4305;4838;4477;4996;4309</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <RuntimeTypeInfo>
+      </RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";Def_Kuplung_DEBUG_BUILD;Def_Kuplung_OpenGL_4x;GLM_ENABLE_EXPERIMENTAL;Kuplung_Debug_Timings;IMGUI_IMPL_OPENGL_LOADER_CUSTOM;_CRT_NO_VA_START_VALIDATION;GLEW_STATIC;IMGUI_IMPL_OPENGL_LOADER_CUSTOM="kuplung\utilities\gl\GLIncludes.h";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WIN32;_WINDOWS;_DEBUG;_CONSOLE;GLEW_STATIC;GLM_ENABLE_EXPERIMENTAL;IMGUI_DEFINE_MATH_OPERATORS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <EnablePREfast>false</EnablePREfast>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <SDLCheck>true</SDLCheck>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <ConformanceMode>true</ConformanceMode>
+      <SupportJustMyCode>true</SupportJustMyCode>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -124,19 +105,23 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
-      <AdditionalDependencies>glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <AdditionalDependencies>glew32.lib;OpenGL32.Lib;SDL3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>D:\vcpkg\installed\x64-windows-static\lib;D:\vcpkg\installed\x64-windows\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <GenerateDebugInformation>Debug</GenerateDebugInformation>
-      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/Software/C++/Kuplung/MSVC/Release/Debug/Kuplung.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Software/C++/Kuplung/MSVC/Release/Debug/Kuplung.pdb</ProgramDataBaseFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>
+      </ImportLibrary>
+      <ProgramDataBaseFile>$(OutDir)$(TargetName).pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version>
       </Version>
+      <LinkTimeCodeGeneration />
     </Link>
     <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <PostBuildEvent>
       <Command>cmd /c xcopy /S /I /Y "$(ProjectDir)..\Kuplung\resources" "$(TargetDir)..\..\resources"</Command>
@@ -147,7 +132,7 @@
       <AdditionalIncludeDirectories>..\Kuplung\..\external\libnoise\windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
-      <DisableSpecificWarnings>4244;4100;4068;4267;4305;4838;4477;4305;4996;4309</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4244;4100;4068;4267;4305;4838;4477;4996;4309</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <Optimization>MaxSpeed</Optimization>
@@ -155,14 +140,14 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release";Def_Kuplung_RELEASE_BUILD;Def_Kuplung_OpenGL_4x;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Kuplung\..\external\libnoise\windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -181,97 +166,6 @@
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>D:/Software/C++/Kuplung/MSVC/Release/Release/Kuplung.lib</ImportLibrary>
       <ProgramDataBaseFile>D:/Software/C++/Kuplung/MSVC/Release/Release/Kuplung.pdb</ProgramDataBaseFile>
-      <SubSystem>Console</SubSystem>
-      <Version>
-      </Version>
-    </Link>
-    <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-    </ProjectReference>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>..\Kuplung\..\external\libnoise\windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
-      <CompileAs>CompileAsCpp</CompileAs>
-      <DisableSpecificWarnings>4244;4100;4068;4267;4305;4838;4477;4305;4996;4309</DisableSpecificWarnings>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <Optimization>MinSpace</Optimization>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
-      <DebugInformationFormat>
-      </DebugInformationFormat>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Kuplung\..\external\libnoise\windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Midl>
-      <AdditionalIncludeDirectories>..\Kuplung\..\external\libnoise\windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
-    <Link>
-      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib;D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <GenerateDebugInformation>No</GenerateDebugInformation>
-      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/Software/C++/Kuplung/MSVC/Release/MinSizeRel/Kuplung.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Software/C++/Kuplung/MSVC/Release/MinSizeRel/Kuplung.pdb</ProgramDataBaseFile>
-      <SubSystem>Console</SubSystem>
-      <Version>
-      </Version>
-    </Link>
-    <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-    </ProjectReference>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>..\Kuplung\..\external\libnoise\windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
-      <CompileAs>CompileAsCpp</CompileAs>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <DisableSpecificWarnings>4244;4100;4068;4267;4305;4838;4477;4305;4996;4309</DisableSpecificWarnings>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <Optimization>MaxSpeed</Optimization>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Kuplung\..\external\libnoise\windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Midl>
-      <AdditionalIncludeDirectories>..\Kuplung\..\external\libnoise\windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
-    <Link>
-      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib;D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <GenerateDebugInformation>Debug</GenerateDebugInformation>
-      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/Software/C++/Kuplung/MSVC/Release/RelWithDebInfo/Kuplung.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Software/C++/Kuplung/MSVC/Release/RelWithDebInfo/Kuplung.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version>
       </Version>
@@ -351,6 +245,8 @@
     <ClInclude Include="..\Kuplung\kuplung\ui\iconfonts\IconsMaterialDesign.h" />
     <ClInclude Include="..\Kuplung\kuplung\ui\UIManager.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\UIHelpers.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\Consumption.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\cuda\CudaHelpers.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.hpp" />
@@ -359,24 +255,22 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Files.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Helpers.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Strings.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imconfig.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_internal.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_rectpack.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_textedit.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_truetype.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\measurement\Timings.hpp" />
-    <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\Consumption.hpp" />
-    <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\Exporter.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterOBJ.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\font-parser\FNTParser.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\gl\GLIncludes.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\gl\GLUtils.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imguizmo\ImGuizmo.h" />
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imconfig.h" />
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui.h" />
-    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_internal.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\nanovg\fontstash.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\nanovg\nanovg.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\nanovg\nanovg_gl.h" />
@@ -481,30 +375,29 @@
     <ClCompile Include="..\Kuplung\kuplung\ui\dialogs\DialogSVS.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\UIManager.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\UIHelpers.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\Consumption.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\cuda\CudaHelpers.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_widgets.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\measurement\Timings.cpp" />
-    <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\Consumption.cpp" />
-    <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\Exporter.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterOBJ.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\font-parser\FNTParser.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\gl\GLUtils.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imguizmo\ImGuizmo.cpp" />
-    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_demo.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_draw.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\nanovg\nanovg.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
     </ClCompile>
     <ClCompile Include="..\Kuplung\kuplung\utilities\input\Controls.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\libnoise\noiseutils.cpp" />
@@ -514,8 +407,6 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\miniz\miniz.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
     </ClCompile>
     <ClCompile Include="..\Kuplung\kuplung\utilities\miniz\KuplungMiniz.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\assimp-parser\AssimpParser.cpp" />
@@ -540,11 +431,13 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\saveopen\SaveOpenGProtocolBufs.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\Kuplung.cpp" />
     <ClCompile Include="..\Kuplung\main.cpp" />
+    <ClInclude Include="imgui_impl_opengl3_loader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Kuplung\resources\kuplung.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Kuplung\kuplung\utilities\imgui\debuggers\imgui.natstepfilter" />
     <None Include="..\Kuplung\resources\Kuplung_RecentFiles.ini" />
     <None Include="..\Kuplung\resources\Kuplung_RecentFilesImported.ini" />
     <None Include="..\Kuplung\resources\Kuplung_Settings.ini" />
@@ -624,6 +517,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Kuplung\resources\noise16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\Kuplung\kuplung\utilities\imgui\debuggers\imgui.natvis" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

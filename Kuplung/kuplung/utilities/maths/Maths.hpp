@@ -12,7 +12,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 
-namespace KuplungApp { namespace Utilities { namespace Math {
+namespace KuplungApp::Utilities::Math {
 
 class Maths {
 public:
@@ -27,6 +27,6 @@ public:
   ) const;
 };
 
-}}}
+}
 
 #endif /* Maths_hpp */

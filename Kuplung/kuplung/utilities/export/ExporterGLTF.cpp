@@ -16,7 +16,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-namespace KuplungApp { namespace Utilities { namespace Export {
+namespace KuplungApp::Utilities::Export {
 
 ExporterGLTF::~ExporterGLTF() {
 }
@@ -403,7 +403,7 @@ void ExporterGLTF::prepFolderLocation() {
   if (!std::filesystem::exists(newFolder)) {
     std::filesystem::path dir(newFolder);
     if (!std::filesystem::create_directory(dir))
-      Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[ExportGLTF] Cannot create destination folder : %s!", newFolder.c_str()));
+      Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[ExportGLTF] Cannot create destination folder : ", newFolder.c_str(), "!"));
   }
   this->exportFileFolder = newFolder;
 }
@@ -478,4 +478,4 @@ const bool ExporterGLTF::saveBufferFile(std::string buffer) const {
 	return true;
 }
 
-}}}
+}

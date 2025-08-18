@@ -34,7 +34,7 @@ Spaceship::~Spaceship() {
 
   glDeleteVertexArrays(1, &this->glVAO);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 Spaceship::Spaceship() {
@@ -103,7 +103,7 @@ bool Spaceship::initShaderProgram() {
   glDisable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return success;
 }
@@ -153,7 +153,7 @@ void Spaceship::initBuffers(const int gridSize) {
 
   glBindVertexArray(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void Spaceship::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel, const glm::vec3& vecCameraPosition) {
@@ -195,5 +195,5 @@ void Spaceship::render(const glm::mat4& matrixProjection, const glm::mat4& matri
     glUseProgram(0);
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }

@@ -9,28 +9,28 @@
 #ifndef Exporter_hpp
 #define Exporter_hpp
 
-#include "kuplung/settings/Settings.h"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
-#include "kuplung/utilities/export/ExporterAssimp.hpp"
-#include "kuplung/utilities/export/ExporterOBJ.hpp"
-#include "kuplung/utilities/export/ExporterGLTF.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
+#include "kuplung/settings/Settings.h"
+#include "kuplung/utilities/export/ExporterAssimp.hpp"
+#include "kuplung/utilities/export/ExporterGLTF.hpp"
+#include "kuplung/utilities/export/ExporterOBJ.hpp"
 
-namespace KuplungApp { namespace Utilities { namespace Export {
+namespace KuplungApp::Utilities::Export {
 
 class Exporter {
-public:
+  public:
   ~Exporter();
   Exporter();
   void init(const std::function<void(float)>& doProgress);
-  void exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects, ImportExportFormats exportFormat, int exportFormatAssimp);
+  void exportScene(const ::FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager>& managerObjects, ImportExportFormats exportFormat, int exportFormatAssimp);
 
-private:
-	std::unique_ptr<ExporterAssimp> exporterAssimp;
+  private:
+  std::unique_ptr<ExporterAssimp> exporterAssimp;
   std::unique_ptr<ExporterOBJ> exporterOBJ;
-	std::unique_ptr<ExporterGLTF> exporterGLTF;
+  std::unique_ptr<ExporterGLTF> exporterGLTF;
 };
 
-}}}
+}
 
 #endif /* Exporter_hpp */

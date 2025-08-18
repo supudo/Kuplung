@@ -7,10 +7,9 @@
 //
 
 #include "Timings.hpp"
+#include <cmath>
 
-namespace KuplungApp {
-namespace Utilities {
-namespace Measurement {
+namespace KuplungApp::Utilities::Measurement {
 
 std::chrono::high_resolution_clock::time_point tStart;
 std::chrono::high_resolution_clock::time_point tEnd;
@@ -26,15 +25,13 @@ void timingEnd() {
 void timingPrint() {
   auto durationMS = std::chrono::duration_cast<std::chrono::microseconds>(tEnd - tStart).count();
   auto duration_seconds = durationMS * pow(10, -6);
-  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] %f seconds", duration_seconds));
+  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] ", duration_seconds, " seconds"));
 }
 
 void timingPrintPretty(const char* fileName, const char* functionName, const int lineNumber) {
   auto durationMS = std::chrono::duration_cast<std::chrono::microseconds>(tEnd - tStart).count();
   auto durationS = durationMS * pow(10, -6);
-  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] %f s: [%s] @ [%s] on line [%i]", durationS, fileName, functionName, lineNumber));
+  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] ", durationS, " s: [", fileName, "] @ [", functionName, "] on line [", lineNumber, "]"));
 }
 
-} // namespace Measurement
-} // namespace Utilities
-} // namespace KuplungApp
+}

@@ -13,7 +13,7 @@
 
 #include "kuplung/settings/Settings.h"
 
-namespace KuplungApp { namespace Utilities { namespace Minizip {
+namespace KuplungApp::Utilities::Minizip {
 
 class KuplungMinizip {
 public:
@@ -28,7 +28,7 @@ public:
     bool UnzipFile(std::string const& unzipFolder);
 };
 
-}}}
+}
 
 #else
 
@@ -37,7 +37,7 @@ public:
 #include <minizip/zip.h>
 #include <minizip/unzip.h>
 
-namespace KuplungApp { namespace Utilities { namespace Minizip {
+namespace KuplungApp::Utilities::Minizip {
 
 #define ZipFlag_Overwrite 0x01 /* -o */
 #define ZipFlag_Append 0x02 /* -a */
@@ -67,7 +67,7 @@ private:
     int getFileCrc(const char* filenameinzip, void* buf, unsigned long size_buf, unsigned long* result_crc);
 };
 
-}}}
+}
 
 #endif
 

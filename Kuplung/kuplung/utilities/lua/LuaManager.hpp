@@ -19,7 +19,7 @@
 #include <lauxlib.h>
 #endif
 
-namespace KuplungApp { namespace Utilities { namespace Lua {
+namespace KuplungApp::Utilities::Lua {
 
 class LuaManager {
 public:
@@ -35,6 +35,6 @@ private:
   lua_State *luaState;
 };
 
-}}}
+}
 
 #endif /* LuaManager_hpp */

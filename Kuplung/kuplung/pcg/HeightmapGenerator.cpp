@@ -107,7 +107,8 @@ void HeightmapGenerator::generateTerrain(const std::string& assetFolder, const i
     filename = "terrain_heightmap.bmp";
   this->heightmapImage = assetsFolder + "/" + filename;
 
-  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Generating terrain [O = %i, F = %f, P = %f] = %s", this->Setting_Octaves, double(this->Setting_Frequency), double(this->Setting_Persistence), this->heightmapImage.c_str()));
+  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Generating terrain [O = ", this->Setting_Octaves,
+    ", F = ", double(this->Setting_Frequency), ", P = ", double(this->Setting_Persistence), "] = ", this->heightmapImage.c_str()));
 
   std::string afPrefix("Kuplung.app/Contents/Resources");
   if (this->assetsFolder.find("Kuplung.app/Contents/Resources") != std::string::npos)
@@ -231,7 +232,7 @@ void HeightmapGenerator::generateSphereGeometry() {
       position += glm::normalize(position) * hmValue;
 
       if (Settings::Instance()->logDebugInfo)
-        grapher += Settings::Instance()->string_format("%g,%g,%g\n", position.x, position.y, position.z);
+        grapher += Settings::Instance()->string_format(position.x, ",", position.y, ",", position.z, '\n');
 
       uv = glm::vec2(x * 1.0f / heightmapWidth, y * 1.0f / heightmapHeight);
       c = this->image.GetValue(static_cast<int>(x), static_cast<int>(y));
@@ -370,7 +371,7 @@ void HeightmapGenerator::generatePlaneGeometryCubic() {
       this->colors.push_back(color);
 
       if (Settings::Instance()->logDebugInfo)
-        grapher += Settings::Instance()->string_format(" %g,%g,%g;%g,%g,%g;%g,%g,%g \n", v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z);
+        grapher += Settings::Instance()->string_format(" ", v0.x, ",", v0.y, ",", v0.z, ",", v1.x, ",", v1.y, ",", v1.z, ",", v2.x, ",", v2.y, ",", v2.z, ",", '\n');
 
       // triangle 2
       this->vertices.push_back(v0 / this->Setting_ScaleCoeficient);

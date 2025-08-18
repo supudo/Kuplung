@@ -15,7 +15,7 @@
 #include <nlohmann/json.hpp>
 #include "kuplung/objects/ObjectsManager.hpp"
 
-namespace KuplungApp { namespace Utilities { namespace Export {
+namespace KuplungApp::Utilities::Export {
 
 class ExporterGLTF {
 public:
@@ -45,6 +45,6 @@ private:
 	std::string gltfGenerator, gltfVersion;
 };
 
-}}}
+}
 
 #endif /* ExporterGLTF_hpp */

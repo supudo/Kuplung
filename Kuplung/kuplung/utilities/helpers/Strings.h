@@ -13,7 +13,7 @@
 #include <iostream>
 #include <sstream>
 
-namespace Kuplung::Helpers {
+namespace KuplungApp::Helpers {
   static inline std::string trim(const std::string& line) {
     const char* WhiteSpace = " \t\v\r\n";
     std::size_t start = line.find_first_not_of(WhiteSpace);
@@ -48,6 +48,6 @@ namespace Kuplung::Helpers {
     }
     return s.str();
   }
-} // namespace Kuplung::helpers
+} // namespace KuplungApp::helpers
 
 #endif /* Strings_h */

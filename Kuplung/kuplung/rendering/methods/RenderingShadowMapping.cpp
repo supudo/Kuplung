@@ -71,7 +71,7 @@ RenderingShadowMapping::~RenderingShadowMapping() {
     this->mfLights_Spot[i].reset();
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 bool RenderingShadowMapping::init() {
@@ -143,9 +143,7 @@ bool RenderingShadowMapping::initShaderProgram() {
     return success = false;
   }
   else {
-#ifdef Def_Kuplung_OpenGL_4x
     glPatchParameteri(GL_PATCH_VERTICES, 3);
-#endif
 
     glDetachShader(this->shaderProgramShadows, this->shaderShadowsVertex);
     glDetachShader(this->shaderProgramShadows, this->shaderShadowsFragment);
@@ -309,7 +307,7 @@ bool RenderingShadowMapping::initShaderProgram() {
   success &= this->initShadows();
   success &= this->initShadowsDepth();
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return success;
 }
@@ -355,7 +353,7 @@ bool RenderingShadowMapping::initShadowsDepthShader() {
     this->glDepth_SamplerTexture = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "depthMap");
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return result;
 }
@@ -401,7 +399,7 @@ bool RenderingShadowMapping::initShadowsShader() {
     this->glShadow_LightSpaceMatrix = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_lightSpaceMatrix");
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return result;
 }
@@ -433,7 +431,7 @@ bool RenderingShadowMapping::initShadowsBuffers() {
     return false;
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return true;
 }
@@ -489,7 +487,7 @@ void RenderingShadowMapping::renderShadows(const std::vector<ModelFaceData*>& me
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void RenderingShadowMapping::renderDepth() {
@@ -522,7 +520,7 @@ void RenderingShadowMapping::renderDepth() {
 
   glUseProgram(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void RenderingShadowMapping::renderModels(const bool& isShadowPass, const GLuint& sProgram, const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
@@ -982,5 +980,5 @@ void RenderingShadowMapping::renderModels(const bool& isShadowPass, const GLuint
 
   glUseProgram(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }

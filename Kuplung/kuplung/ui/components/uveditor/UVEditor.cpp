@@ -11,12 +11,8 @@
 #include "kuplung/utilities/imgui/imgui_internal.h"
 #include "kuplung/utilities/stb/stb_image.h"
 
-static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) {
-  return ImVec2(lhs.x + rhs.x, lhs.y + rhs.y);
-}
-static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) {
-  return ImVec2(lhs.x - rhs.x, lhs.y - rhs.y);
-}
+//static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x+rhs.x, lhs.y+rhs.y); }
+//static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
 
 void UVEditor::init(int positionX, int positionY, int width, int height) {
   this->positionX = positionX;
@@ -432,7 +428,7 @@ void UVEditor::initTextureBuffer() {
     int tChannels;
     unsigned char* tPixels = stbi_load(this->textureImage.c_str(), &this->textureWidth, &this->textureHeight, &tChannels, 0);
     if (!tPixels)
-      Settings::Instance()->funcDoLog("[UVEditor] Can't load texture image - " + this->textureImage + " with error - " + std::string(stbi_failure_reason()));
+      Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[UVEditor] Can't load texture image - ", this->textureImage, " with error - ", stbi_failure_reason()));
     else {
       glGenTextures(1, &this->vboTexture);
       glBindTexture(GL_TEXTURE_2D, this->vboTexture);

@@ -13,8 +13,9 @@
 #include <functional>
 #include <vector>
 #include "kuplung/utilities/gl/GLIncludes.h"
+#include <source_location>
 
-namespace KuplungApp { namespace Utilities { namespace GL {
+namespace KuplungApp::Utilities::GL {
 
 class GLUtils {
 public:
@@ -22,15 +23,15 @@ public:
   explicit GLUtils(const std::function<void(std::string)>& logFunction);
   GLUtils();
   bool compileAndAttachShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source);
-  bool compileShader(GLuint &shader, GLenum shaderType, const char *shader_source);
+  bool compileShader(const GLuint &shader, GLenum shaderType, const char *shader_source);
   std::string readFile(const char *filePath);
-  void CheckForGLErrors(const std::string& message);
+  void CheckForGLErrors(const std::source_location& location = std::source_location::current());
 
   void printProgramLog(GLuint program);
   void printShaderLog(GLuint shader);
   bool logOpenGLError(const char *file, int line);
-  GLint glGetAttribute(GLuint program, const char* var_name);
-  GLint glGetUniform(GLuint program, const char* var_name);
+  GLint glGetAttribute(GLuint program, const char* var_name, const std::source_location& location = std::source_location::current()) const;
+  GLint glGetUniform(GLuint program, const char* var_name, const std::source_location& location = std::source_location::current()) const;
   GLint glGetAttributeNoWarning(GLuint program, const char* var_name);
   GLint glGetUniformNoWarning(GLuint program, const char* var_name);
   GLsizei getGLTypeSize(GLenum type);
@@ -40,6 +41,6 @@ private:
   std::vector<std::string> reportedErrors;
 };
 
-}}}
+}
 
 #endif /* GLUtils_hpp */

@@ -6,12 +6,15 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
 #include "UIManager.hpp"
 #include "kuplung/ui/components/Tabs.hpp"
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 #include "kuplung/utilities/imgui/imgui_impl_opengl3.h"
-#include "kuplung/utilities/imgui/imgui_impl_sdl.h"
+#include "kuplung/utilities/imgui/imgui_impl_sdl3.h"
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 
 UIManager::UIManager(ObjectsManager& managerObjects) : managerObjects(managerObjects) {
@@ -144,8 +147,9 @@ void UIManager::init(SDL_Window* window, SDL_GLContext glContext, const std::fun
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO();
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
   (void)io;
-  ImGui_ImplSDL2_InitForOpenGL(this->sdlWindow, glContext);
+  ImGui_ImplSDL3_InitForOpenGL(this->sdlWindow, glContext);
   ImGui_ImplOpenGL3_Init("#version 410 core");
   ImGui::StyleColorsDark();
 
@@ -217,14 +221,14 @@ void UIManager::setSceneSelectedModelObject(int sceneSelectedModelObject) {
 }
 
 bool UIManager::processEvent(SDL_Event* event) {
-  return ImGui_ImplSDL2_ProcessEvent(event);
+  return ImGui_ImplSDL3_ProcessEvent(event);
 }
 
 void UIManager::renderStart(bool isFrame, int* sceneSelectedModelObject) {
   this->isFrame = isFrame;
 
   ImGui_ImplOpenGL3_NewFrame();
-  ImGui_ImplSDL2_NewFrame(this->sdlWindow);
+  ImGui_ImplSDL3_NewFrame();
   ImGui::NewFrame();
   ImGuizmo::BeginFrame();
 
@@ -530,7 +534,7 @@ void UIManager::popupRecentFileDoesntExists() {
   ImGui::OpenPopup("Warning");
   ImGui::BeginPopupModal("Warning", NULL, ImGuiWindowFlags_AlwaysAutoResize);
   ImGui::Text("This file no longer exists!");
-  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth(), 0))) {
+  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
     std::vector<FBEntity> recents;
     for (size_t i = 0; i < this->recentFiles.size(); i++) {
       if (std::filesystem::exists(this->recentFiles[i].path))
@@ -548,7 +552,7 @@ void UIManager::popupRecentFileImportedDoesntExists() {
   ImGui::OpenPopup("Warning");
   ImGui::BeginPopupModal("Warning", NULL, ImGuiWindowFlags_AlwaysAutoResize);
   ImGui::Text("This file no longer exists!");
-  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth(), 0))) {
+  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
     std::vector<FBEntity> recents;
     for (size_t i = 0; i < this->recentFilesImported.size(); i++) {
       if (std::filesystem::exists(this->recentFilesImported[i].path))
@@ -563,11 +567,8 @@ void UIManager::popupRecentFileImportedDoesntExists() {
 }
 
 void UIManager::renderEnd() {
-  if (this->needsFontChange) {
+  if (this->needsFontChange)
     this->windowOptions->loadFonts(&this->needsFontChange);
-    ImGui_ImplOpenGL3_CreateFontsTexture();
-  }
-
   ImGui::Render();
 }
 
@@ -614,7 +615,7 @@ void UIManager::recentFilesClearImported() {
 }
 
 bool UIManager::isMouseOnGUI() const {
-  return ImGui::IsAnyWindowHovered();
+  return ImGui::IsWindowHovered(ImGuiHoveredFlags_AnyWindow);
 }
 
 void UIManager::showParsing() {
@@ -656,7 +657,7 @@ void UIManager::dialogFileSave(FileSaverOperation operation) {
       break;
     case FileSaverOperation_Renderer:
       title = "Render Scene";
-      wType = &this->showRenderer;
+      wType = &this->showImageSave;
       break;
   }
   this->componentFileSaver->draw(title.c_str(), operation, wType);
@@ -774,7 +775,7 @@ void UIManager::dialogShadertoyMessageWindow() {
   ImGui::OpenPopup("Paste Error");
   ImGui::BeginPopupModal("Paste Error", NULL, ImGuiWindowFlags_AlwaysAutoResize);
   ImGui::Text("Clipboard size is too big.\nPlease, reduce the shader source and paste it again.");
-  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth(), 0))) {
+  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
     this->showShadertoyMessage = false;
     ImGui::CloseCurrentPopup();
   }

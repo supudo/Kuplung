@@ -70,7 +70,7 @@ void Log::draw(const char* title, bool* p_opened) {
     ImGui::TextUnformatted(this->Buf.begin());
 
   if (this->ScrollToBottom)
-    ImGui::SetScrollHere(1.0f);
+    ImGui::SetScrollHereY(1.0f);
   this->ScrollToBottom = false;
   ImGui::PopStyleVar();
   ImGui::EndChild();

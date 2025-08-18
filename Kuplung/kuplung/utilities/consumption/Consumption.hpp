@@ -10,11 +10,30 @@
 #define Consumption_hpp
 
 #include "kuplung/settings/Settings.h"
-#ifdef WIN32
+#ifdef _WIN32
 #include "WindowsCPUUsage.hpp"
 #endif
 
-namespace KuplungApp { namespace Utilities { namespace Consumption {
+#ifdef _WIN32
+//#define WIN32_LEAN_AND_MEAN
+//#define PSAPI_VERSION 2
+//#include <Windows.h>
+//#include <Psapi.h>
+#elif __APPLE__
+#include <mach/mach.h>
+#include <sys/resource.h>
+#include <sys/sysctl.h>
+#include <sys/types.h>
+#include <unistd.h>
+#endif
+
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include "kuplung/utilities/helpers/Strings.h"
+#include "kuplung/utilities/gl/GLIncludes.h"
+
+namespace KuplungApp::Utilities::Consumption {
 
 class Consumption {
 public:
@@ -50,6 +69,6 @@ private:
 #endif
 };
 
-}}}
+}
 
 #endif /* Consumption_hpp */

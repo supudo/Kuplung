@@ -29,7 +29,7 @@ StructuredVolumetricSampling::~StructuredVolumetricSampling() {
 
   glDeleteVertexArrays(1, &this->glVAO);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 StructuredVolumetricSampling::StructuredVolumetricSampling() {}
@@ -79,7 +79,7 @@ bool StructuredVolumetricSampling::initShaderProgram() {
   glDisable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return success;
 }
@@ -100,7 +100,7 @@ void StructuredVolumetricSampling::initBuffers() {
 
   glBindVertexArray(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void StructuredVolumetricSampling::initNoiseTexture() {
@@ -138,7 +138,7 @@ void StructuredVolumetricSampling::initNoiseTexture() {
     stbi_image_free(tPixels);
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void StructuredVolumetricSampling::render(const int mouseX, const int mouseY, const float seconds) {
@@ -164,7 +164,7 @@ void StructuredVolumetricSampling::render(const int mouseX, const int mouseY, co
     glUseProgram(0);
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void StructuredVolumetricSampling::initFBO(const int windowWidth, const int windowHeight, GLuint* vboTexture) {
@@ -195,14 +195,14 @@ void StructuredVolumetricSampling::initFBO(const int windowWidth, const int wind
 
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void StructuredVolumetricSampling::bindFBO() {
   glBindFramebuffer(GL_FRAMEBUFFER, this->tFBO);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void StructuredVolumetricSampling::unbindFBO(GLuint* vboTexture) {
@@ -211,7 +211,7 @@ void StructuredVolumetricSampling::unbindFBO(GLuint* vboTexture) {
   glGenerateMipmap(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, 0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 void StructuredVolumetricSampling::renderToTexture(const int mouseX, const int mouseY, const float seconds, GLuint* vboTexture) {

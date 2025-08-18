@@ -15,8 +15,8 @@
 #include <sstream>
 #include <stdio.h>
 
-static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x + rhs.x, lhs.y + rhs.y); }
-static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x - rhs.x, lhs.y - rhs.y); }
+//static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x+rhs.x, lhs.y+rhs.y); }
+//static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
 
 void DialogShadertoy::render(bool* p_opened) {
   ImGui::SetNextWindowSize(ImVec2(400, 500), ImGuiCond_FirstUseEver);
@@ -168,7 +168,7 @@ ImGui::Begin("Shadertoy.com", p_opened);
 
   if (this->texImage0 > 0) {
     this->engineShadertoy->iChannel0_CubeImage.clear();
-    this->engineShadertoy->iChannel0_Image = Settings::Instance()->appFolder() + "tex" + std::string((this->texImage0 < 10) ? "0" : "") + std::to_string(this->texImage0) + ".jpg";
+    this->engineShadertoy->iChannel0_Image = Settings::Instance()->string_format(Settings::Instance()->appFolder(), "tex", ((this->texImage0 < 10) ? "0" : ""), this->texImage0, ".jpg");
     this->texImage0 = 0;
   }
   if (this->cubemapImage0 > 0) {

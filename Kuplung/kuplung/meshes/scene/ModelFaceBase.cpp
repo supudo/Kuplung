@@ -248,7 +248,7 @@ void ModelFaceBase::loadTexture(std::string const& texturesFolder, MeshMaterialT
           texName = "displacement";
           break;
       }
-      Settings::Instance()->funcDoLog("Can't load " + texName + " texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
+      Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Can't load ", texName, " texture image - ", matImageLocal, " with error - ", stbi_failure_reason()));
     }
     else {
       glGenTextures(1, vboObject);

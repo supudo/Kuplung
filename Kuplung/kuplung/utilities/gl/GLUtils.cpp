@@ -8,11 +8,10 @@
 
 #include "GLUtils.hpp"
 #include "kuplung/settings/Settings.h"
+#include "kuplung/utilities/helpers/Files.h"
 #include <fstream>
 
-namespace KuplungApp {
-namespace Utilities {
-namespace GL {
+namespace KuplungApp::Utilities::GL {
 
 GLUtils::~GLUtils() {}
 
@@ -39,15 +38,15 @@ bool GLUtils::compileAndAttachShader(GLuint& shaderProgram, GLuint& shader, GLen
   return true;
 }
 
-bool GLUtils::compileShader(GLuint& shaderProgram, GLenum shaderType, const char* shader_source) {
-  GLuint shader = glCreateShader(shaderType);
+bool GLUtils::compileShader(const GLuint& shaderProgram, GLenum shaderType, const char* shader_source) {
+  const GLuint shader = glCreateShader(shaderType);
   glShaderSource(shader, 1, &shader_source, nullptr);
   glCompileShader(shader);
 
   GLint isOK = GL_FALSE;
   glGetShaderiv(shader, GL_COMPILE_STATUS, &isOK);
   if (isOK != GL_TRUE) {
-    this->funcLog("Unable to compile shader " + std::to_string(shader) + "!");
+    this->funcLog(Settings::Instance()->string_format("Unable to compile shader ", shader, "!"));
     this->printShaderLog(shader);
     glDeleteShader(shader);
     return false;
@@ -58,11 +57,11 @@ bool GLUtils::compileShader(GLuint& shaderProgram, GLenum shaderType, const char
   return true;
 }
 
-void GLUtils::CheckForGLErrors(const std::string& message) {
+void GLUtils::CheckForGLErrors(const std::source_location& location) {
   if (Settings::Instance()->showGLErrors) {
-    GLenum error = glGetError();
+    const GLenum error = glGetError();
     if (error != GL_NO_ERROR) {
-      std::string errMessage = "[GLError] [" + message + "] glError = " + std::to_string(error);
+      std::string errMessage = Settings::Instance()->string_format("[GLError] glError = ", error, " [", KuplungApp::Helpers::getFilename(location.file_name()), ":", location.line(), "]");
       if (std::find(this->reportedErrors.begin(), this->reportedErrors.end(), errMessage) == this->reportedErrors.end()) {
         Settings::Instance()->funcDoLog(errMessage);
         this->reportedErrors.push_back(errMessage);
@@ -71,17 +70,17 @@ void GLUtils::CheckForGLErrors(const std::string& message) {
   }
 }
 
-GLint GLUtils::glGetAttribute(GLuint program, const char* var_name) {
-  GLint var = glGetAttribLocation(program, var_name);
+GLint GLUtils::glGetAttribute(GLuint program, const char* var_name, const std::source_location& location) const {
+  const GLint var = glGetAttribLocation(program, var_name);
   if (var == -1)
-    this->funcLog("[GLUtils] Cannot fetch shader attribute " + std::string(var_name) + "!");
+    this->funcLog(Settings::Instance()->string_format("[GLUtils] Cannot fetch shader attribute ", var_name, " [", KuplungApp::Helpers::getFilename(location.file_name()), ":", location.line(), "]"));
   return var;
 }
 
-GLint GLUtils::glGetUniform(GLuint program, const char* var_name) {
-  GLint var = glGetUniformLocation(program, var_name);
+GLint GLUtils::glGetUniform(GLuint program, const char* var_name, const std::source_location& location) const {
+  const GLint var = glGetUniformLocation(program, var_name);
   if (var == -1)
-    this->funcLog("[GLUtils] Cannot fetch shader uniform - " + std::string(var_name));
+    this->funcLog(Settings::Instance()->string_format("[GLUtils] Cannot fetch shader uniform - ", var_name, " [", KuplungApp::Helpers::getFilename(location.file_name()), ":", location.line(), "]"));
   return var;
 }
 
@@ -164,7 +163,7 @@ bool GLUtils::logOpenGLError(const char* file, int line) {
         break;
     }
     success = false;
-    this->funcLog("Error occured at " + std::string(file) + " on line " + std::to_string(line) + " : " + error);
+    this->funcLog(Settings::Instance()->string_format("Error occured at ", file, " on line ", line, " : ", error));
     err = glGetError();
   }
 
@@ -195,7 +194,7 @@ std::string GLUtils::readFile(const char* filePath) {
   std::string content;
   std::ifstream fileStream(filePath, std::ios::in);
   if (!fileStream.is_open()) {
-    this->funcLog("Could not read file " + std::string(filePath) + ". File does not exist.");
+    this->funcLog(Settings::Instance()->string_format("Could not read file ", filePath, ". File does not exist."));
     return "";
   }
   std::string line("");
@@ -207,6 +206,4 @@ std::string GLUtils::readFile(const char* filePath) {
   return content;
 }
 
-} // namespace GL
-} // namespace Utilities
-} // namespace KuplungApp
+}

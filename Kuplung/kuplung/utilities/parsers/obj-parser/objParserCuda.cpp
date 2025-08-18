@@ -79,8 +79,8 @@ void objParserCuda::doParse(std::string const& obj_file_contents, int length) {
     cuDeviceGetCount(&deviceCount);
     cuDeviceGet(&cudaDevice, 0);
     cuDeviceGetName(cudaDeviceName, 100, cudaDevice);
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Cuda OBJ Parser] Number of devices: %i\n", deviceCount));
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Cuda OBJ Parser] Device name: %s\n", cudaDeviceName));
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Cuda OBJ Parser] Number of devices: ", deviceCount, '\n'));
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Cuda OBJ Parser] Device name: ", cudaDeviceName, '\n'));
 
     float *vertices, *textureCoordinates, *normals, *indices;
 

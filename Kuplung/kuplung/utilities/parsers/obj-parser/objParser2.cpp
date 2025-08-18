@@ -119,7 +119,7 @@ std::vector<MeshModel> objParser2::parse(const FBEntity& fileToParse, const std:
       this->models[static_cast<size_t>(currentModelID)].MaterialTitle = this->models[static_cast<size_t>(currentModelID)].ModelMaterial.MaterialTitle;
     }
     else if (singleLine.starts_with(this->id_face)) {
-      std::vector<std::string> ft = Kuplung::Helpers::splitString(singleLine, ' ');
+      std::vector<std::string> ft = KuplungApp::Helpers::splitString(singleLine, ' ');
       if (ft.size() == 5) {
         unsigned int tri_vertexIndex[4], tri_uvIndex[4], tri_normalIndex[4];
         std::string face = this->id_face + "%d/%d/%d %d/%d/%d %d/%d/%d %d/%d/%d";
@@ -411,12 +411,12 @@ MeshMaterialTextureImage objParser2::parseTextureImage(const std::string& textur
   materialImage.UseTexture = true;
 
   if (textureLine.find('-') != std::string::npos) {
-    std::vector<std::string> lineElements = Kuplung::Helpers::splitString(textureLine, '-');
+    std::vector<std::string> lineElements = KuplungApp::Helpers::splitString(textureLine, '-');
 
     if (lineElements[0].empty())
       lineElements.erase(lineElements.begin());
 
-    std::vector<std::string> lastElements = Kuplung::Helpers::splitString(lineElements[lineElements.size() - 1], ' ');
+    std::vector<std::string> lastElements = KuplungApp::Helpers::splitString(lineElements[lineElements.size() - 1], ' ');
     materialImage.Image = lastElements[lastElements.size() - 1];
     lastElements.erase(lastElements.end() - 1);
 
@@ -431,7 +431,7 @@ MeshMaterialTextureImage objParser2::parseTextureImage(const std::string& textur
   }
   else
     materialImage.Image = textureLine;
-  materialImage.Image = Kuplung::Helpers::trim(materialImage.Image);
+  materialImage.Image = KuplungApp::Helpers::trim(materialImage.Image);
 
   std::string folderPath = this->file.path;
   if (folderPath.find(this->file.title) != std::string::npos)
@@ -439,7 +439,7 @@ MeshMaterialTextureImage objParser2::parseTextureImage(const std::string& textur
   if (!std::filesystem::exists(materialImage.Image) && !std::filesystem::path(materialImage.Image).is_absolute())
     materialImage.Image = folderPath + materialImage.Image;
 
-  std::vector<std::string> fileElements = Kuplung::Helpers::splitString(materialImage.Image, '/');
+  std::vector<std::string> fileElements = KuplungApp::Helpers::splitString(materialImage.Image, '/');
   materialImage.Filename = fileElements[fileElements.size() - 1];
   return materialImage;
 }

@@ -160,7 +160,7 @@ void ExportFile::draw(ImportExportFormats* dialogExportType, int* dialogExportTy
 
   ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.70f);
   ImGui::Text("File Name: ");
-  ImGui::InputText("", this->fileName, sizeof(this->fileName));
+  ImGui::InputText("##exportFileName", this->fileName, sizeof(this->fileName));
   ImGui::SameLine(0, 10);
   if (ImGui::Button("Save")) {
     FBEntity file;
@@ -219,9 +219,9 @@ void ExportFile::modalNewFolder() {
 
   if (this->newFolderName[0] == '\0')
     strcpy(this->newFolderName, "untitled");
-  ImGui::InputText("", this->newFolderName, sizeof(this->newFolderName));
+  ImGui::InputText("##newFolderName", this->newFolderName, sizeof(this->newFolderName));
 
-  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f, 0))) {
+  if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvail().x * 0.5f, 0))) {
     std::string newDir = this->currentFolder + "/" + this->newFolderName;
     if (!std::filesystem::exists(newDir)) {
       std::filesystem::path dir(newDir);
@@ -233,7 +233,7 @@ void ExportFile::modalNewFolder() {
     this->newFolderName[0] = '\0';
   }
   ImGui::SameLine();
-  if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvailWidth(), 0))) {
+  if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
     ImGui::CloseCurrentPopup();
     this->showNewFolderModel = false;
     this->newFolderName[0] = '\0';
@@ -296,7 +296,7 @@ std::map<std::string, FBEntity> ExportFile::getFolderContents(std::string const&
     for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
       try {
         fs::file_status fileStatus = iteratorFolder->status();
-        if (Kuplung::Helpers::isHidden(iteratorFolder->path().string())) {
+        if (KuplungApp::Helpers::isHidden(iteratorFolder->path().string())) {
           FBEntity entity;
           if (fs::is_directory(fileStatus))
             entity.isFile = false;
@@ -318,7 +318,7 @@ std::map<std::string, FBEntity> ExportFile::getFolderContents(std::string const&
           else
             entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
 
-          entity.modifiedDate = Kuplung::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
+          entity.modifiedDate = KuplungApp::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
 
           folderContents[entity.path] = entity;
         }

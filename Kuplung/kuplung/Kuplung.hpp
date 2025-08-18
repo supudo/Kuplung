@@ -9,6 +9,9 @@
 #ifndef Kuplung_hpp
 #define Kuplung_hpp
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
 #include <thread>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/settings/Settings.h"
@@ -28,7 +31,7 @@
 
 class Kuplung {
 public:
-	Kuplung();
+	Kuplung() noexcept;
   ~Kuplung();
   int run();
 
@@ -71,7 +74,10 @@ private:
   SDL_GLContext glContext;
 
   // Variables
-  bool gameIsRunning = false, objParserThreadFinished, objParserThreadProcessed, exporterThreadFinished;
+  bool gameIsRunning = false;
+  bool objParserThreadFinished;
+  bool objParserThreadProcessed;
+  bool exporterThreadFinished;
   int sceneSelectedModelObject;
   float objLoadingProgress;
 

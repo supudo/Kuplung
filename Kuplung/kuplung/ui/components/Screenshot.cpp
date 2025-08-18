@@ -59,7 +59,7 @@ void Screenshot::ShowScreenshotsWindow(bool* open) {
   //g.OverlayDrawList.AddText(ImGui::GetFont(), ImGui::GetFontSize(), ImVec2(1, 1), ImColor(255, 255, 255), buf);
   //g.OverlayDrawList.AddRect(bounds_rect.Min - ImVec2(1, 1), bounds_rect.Max + ImVec2(1, 1), 0xFFFFFFFF);
 
-  capture |= (ImGui::GetIO().KeyAlt && ImGui::IsKeyPressed(ImGui::GetKeyIndex(ImGuiKey_C)));
+  capture |= (ImGui::GetIO().KeyAlt && ImGui::IsKeyPressed(ImGuiKey_C));
   if (capture) {
     int w = int(bounds_rect.GetWidth()), h = int(bounds_rect.GetHeight());
     unsigned char* pixels = new unsigned char[3 * w * h];

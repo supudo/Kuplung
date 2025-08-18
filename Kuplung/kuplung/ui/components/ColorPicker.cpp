@@ -16,7 +16,6 @@
 // TODO: massage, cleanup
 
 #include "kuplung/utilities/imgui/imgui.h"
-#define IMGUI_DEFINE_MATH_OPERATORS
 #include "kuplung/utilities/imgui/imgui_internal.h" // ImSaturate
 
 // ImGui picker

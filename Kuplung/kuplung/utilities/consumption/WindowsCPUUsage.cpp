@@ -8,7 +8,7 @@
 
 #include "WindowsCPUUsage.hpp"
 
-namespace KuplungApp { namespace Utilities { namespace Consumption {
+namespace KuplungApp::Utilities::Consumption {
 
 WindowsCPUUsage::WindowsCPUUsage() : m_nCpuUsage(-1), m_dwLastRun(0), m_lRunCount(0) {
   ZeroMemory(&m_ftPrevSysKernel, sizeof(FILETIME));
@@ -88,4 +88,4 @@ bool WindowsCPUUsage::EnoughTimePassed() {
   return (dwCurrentTickCount - m_dwLastRun) > minElapsedMS;
 }
 
-}}}
+}

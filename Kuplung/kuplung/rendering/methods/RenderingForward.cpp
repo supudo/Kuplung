@@ -57,7 +57,7 @@ RenderingForward::~RenderingForward() {
     this->mfLights_Spot[i].reset();
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }
 
 bool RenderingForward::init() {
@@ -103,9 +103,7 @@ bool RenderingForward::initShaderProgram() {
     return success = false;
   }
   else {
-#ifdef Def_Kuplung_OpenGL_4x
     glPatchParameteri(GL_PATCH_VERTICES, 3);
-#endif
 
     this->glFS_showShadows = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_showShadows");
     this->glFS_ShadowPass = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_shadowPass");
@@ -263,7 +261,7 @@ bool RenderingForward::initShaderProgram() {
     this->glPBR_AO = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_PBR_AO");
   }
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 
   return success;
 }
@@ -331,9 +329,7 @@ bool RenderingForward::initShaderProgram() {
 //        return success = false;
 //    }
 //    else {
-//#ifdef Def_Kuplung_OpenGL_4x
 //        glPatchParameteri(GL_PATCH_VERTICES, 3);
-//#endif
 //
 //        this->glFS_showShadows = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_showShadows");
 //        this->glFS_ShadowPass = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_shadowPass");
@@ -963,5 +959,5 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
 
   glUseProgram(0);
 
-  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+  Settings::Instance()->glUtils->CheckForGLErrors();
 }

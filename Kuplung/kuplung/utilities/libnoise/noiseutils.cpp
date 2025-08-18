@@ -37,7 +37,7 @@
 #ifdef __linux__
 #include <libnoise/interp.h>
 #include <libnoise/mathconsts.h>
-#elif WIN32
+#elif _WIN32
 #include <noise/interp.h>
 #include <noise/mathconsts.h>
 #else

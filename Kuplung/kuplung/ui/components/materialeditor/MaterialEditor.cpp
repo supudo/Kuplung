@@ -21,8 +21,8 @@
 
 // NB: You can use math functions/operators on ImVec2 if you #define IMGUI_DEFINE_MATH_OPERATORS and #include "imgui_internal.h"
 // Here we only declare simple +/- operators so others don't leak into the demo code.
-static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x+rhs.x, lhs.y+rhs.y); }
-static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
+//static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x+rhs.x, lhs.y+rhs.y); }
+//static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
 
 // Really dumb data structure provided for the example.
 // Note that we storing links are INDICES (not ID) to make example code shorter, obviously a bad idea for any general purpose code.
@@ -144,7 +144,7 @@ void MaterialEditor::draw(const int selectedModelID, ModelFaceBase *face, bool* 
     MELink* link = this->links[i];
     ImVec2 p1 = offset + link->NodeOutput->GetOutputSlotPos(link->SlotOutput);
     ImVec2 p2 = offset + link->NodeInput->GetInputSlotPos(link->SlotInput);
-    draw_list->AddBezierCurve(p1, p1 + link_size, p2 - link_size, p2, this->style_LinkColor, this->style_LinkThickness);
+    draw_list->AddBezierCubic(p1, p1 + link_size, p2 - link_size, p2, this->style_LinkColor, this->style_LinkThickness);
   }
 
   // Display dragging links
@@ -152,12 +152,12 @@ void MaterialEditor::draw(const int selectedModelID, ModelFaceBase *face, bool* 
     if (this->dragNode.inputSlotIndex != -1) {
       ImVec2 p1 = offset + this->dragNode.node->GetOutputSlotPos(this->dragNode.inputSlotIndex, window->FontWindowScale);
       const ImVec2& p2 = mouseScreenPos;
-      draw_list->AddBezierCurve(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness, 0);
+      draw_list->AddBezierCubic(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness, 0);
     }
     else if (this->dragNode.outputSlotIndex != -1) {
       const ImVec2& p1 = mouseScreenPos;
       ImVec2 p2 = offset + this->dragNode.node->GetInputSlotPos(this->dragNode.outputSlotIndex, window->FontWindowScale);
-      draw_list->AddBezierCurve(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness, 0);
+      draw_list->AddBezierCubic(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness, 0);
     }
   }
 

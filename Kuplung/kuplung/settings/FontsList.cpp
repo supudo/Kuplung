@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <filesystem>
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <shlobj.h>
 #endif
 
@@ -33,7 +33,7 @@ const int FontsList::getSelectedFontSize() const {
 }
 
 void FontsList::getFonts() {
-#ifdef WIN32
+#ifdef _WIN32
   return this->loadFontsWindows();
 #elif __APPLE__
   return this->loadFontsOSX();
@@ -82,7 +82,7 @@ void FontsList::loadFontsOSX() {
 void FontsList::loadFontsWindows() {
   //| %WINDIR%\fonts
 
-#ifdef WIN32
+#ifdef _WIN32
   std::string fontsFolder = "%WINDIR%\fonts";
 
   TCHAR szPath[MAX_PATH];

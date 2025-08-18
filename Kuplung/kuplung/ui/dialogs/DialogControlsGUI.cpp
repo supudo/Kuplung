@@ -200,9 +200,9 @@ void DialogControlsGUI::drawPropertiesPane(bool* isFrame) {
             Settings::Instance()->mRayOriginY = managerObjects.camera->positionY->point;
             Settings::Instance()->mRayOriginZ = managerObjects.camera->positionZ->point;
           }
-          ImGui::InputFloat("X##9920", &Settings::Instance()->mRayOriginX, 0, 0, 8);
-          ImGui::InputFloat("Y##9921", &Settings::Instance()->mRayOriginY, 0, 0, 8);
-          ImGui::InputFloat("Z##9922", &Settings::Instance()->mRayOriginZ, 0, 0, 8);
+          ImGui::InputFloat("X##9920", &Settings::Instance()->mRayOriginX, 0, 0, "%.8f");
+          ImGui::InputFloat("Y##9921", &Settings::Instance()->mRayOriginY, 0, 0, "%.8f");
+          ImGui::InputFloat("Z##9922", &Settings::Instance()->mRayOriginZ, 0, 0, "%.8f");
           ImGui::Checkbox("Animate", &Settings::Instance()->mRayAnimate);
           if (Settings::Instance()->mRayAnimate) {
             ImGui::Text("Direction");
@@ -212,9 +212,9 @@ void DialogControlsGUI::drawPropertiesPane(bool* isFrame) {
           }
           else {
             ImGui::Text("Direction");
-            ImGui::InputFloat("X##9930", &Settings::Instance()->mRayDirectionX, 0, 0, 8);
-            ImGui::InputFloat("Y##9931", &Settings::Instance()->mRayDirectionY, 0, 0, 8);
-            ImGui::InputFloat("Z##9932", &Settings::Instance()->mRayDirectionZ, 0, 0, 8);
+            ImGui::InputFloat("X##9930", &Settings::Instance()->mRayDirectionX, 0, 0, "%.8f");
+            ImGui::InputFloat("Y##9931", &Settings::Instance()->mRayDirectionY, 0, 0, "%.8f");
+            ImGui::InputFloat("Z##9932", &Settings::Instance()->mRayDirectionZ, 0, 0, "%.8f");
             if (ImGui::Button("Draw", ImVec2(ImGui::GetWindowWidth() * 0.75f, 0)))
               Settings::Instance()->mRayDraw = true;
           }
@@ -243,7 +243,7 @@ void DialogControlsGUI::drawPropertiesPane(bool* isFrame) {
         ImGui::Indent();
         ImGui::TextColored(ImVec4(1, 0, 0, 1), "Manipulate mode:");
         ImGui::BeginGroup();
-        float width = ImGui::GetContentRegionAvailWidth() * 0.3f;
+        float width = ImGui::GetContentRegionAvail().x * 0.3f;
 
         if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Vertex) {
           ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(121 / 255.0f, 5 / 255.0f, 5 / 255.0f, 1.0f));
@@ -702,7 +702,7 @@ void DialogControlsGUI::drawPropertiesPane(bool* isFrame) {
               int tChannels;
               unsigned char* tPixels = stbi_load(this->heightmapImage.c_str(), &this->heightmapWidth, &this->heightmapHeight, &tChannels, 0);
               if (!tPixels)
-                Settings::Instance()->funcDoLog("Can't load heightmap preview image - " + this->heightmapImage + " with error - " + std::string(stbi_failure_reason()));
+                Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Can't load heightmap preview image - ", this->heightmapImage, " with error - ", stbi_failure_reason()));
               else {
                 glGenTextures(1, &this->vboTexHeightmap);
                 glBindTexture(GL_TEXTURE_2D, this->vboTexHeightmap);
