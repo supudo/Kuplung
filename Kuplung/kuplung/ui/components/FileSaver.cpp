@@ -210,7 +210,7 @@ void FileSaver::drawFiles(const std::string& fPath) {
 std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string const& filePath) {
   std::map<std::string, FBEntity> folderContents;
 
-  fs::path currentPath(filePath);
+  fs::path currentPath = filePath;
 
   if (fs::is_directory(currentPath)) {
     this->currentFolder = currentPath.string();
@@ -225,37 +225,37 @@ std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string const& 
     }
 
     fs::directory_iterator iteratorEnd;
-    for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
+    for (const auto& entry : fs::recursive_directory_iterator(currentPath)) {
       try {
-        fs::file_status fileStatus = iteratorFolder->status();
-        if (!KuplungApp::Helpers::isHidden(iteratorFolder->path().string())) {
-          FBEntity entity;
-          if (fs::is_directory(fileStatus))
-            entity.isFile = false;
-          else if (fs::is_regular_file(fileStatus))
-            entity.isFile = true;
-          else
-            entity.isFile = false;
+        fs::file_status fileStatus = entry.status();
+        FBEntity entity;
+        if (fs::is_directory(fileStatus))
+          entity.isFile = false;
+        else if (fs::is_regular_file(fileStatus))
+          entity.isFile = true;
+        else
+          entity.isFile = false;
 
-          entity.title = iteratorFolder->path().filename().string();
-          if (!entity.isFile)
-            entity.title = "<" + entity.title + ">";
+        entity.title = entry.path().filename().string();
+        if (!entity.isFile)
+          entity.title = "<" + entity.title + ">";
 
-          entity.extension = iteratorFolder->path().extension().string();
+        entity.extension = entry.path().extension().string();
 
-          entity.path = iteratorFolder->path().string();
+        entity.path = entry.path().string();
 
-          if (!entity.isFile)
-            entity.size.clear();
-          else
-            entity.size = this->convertSize(std::filesystem::file_size(iteratorFolder->path()));
+        if (!entity.isFile)
+          entity.size.clear();
+        else
+          entity.size = this->convertSize(std::filesystem::file_size(entry.path()));
 
-          entity.modifiedDate = KuplungApp::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
+        entity.modifiedDate = KuplungApp::Helpers::getDateToStringFormatted(fs::last_write_time(entry.path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
 
-          folderContents[entity.path] = entity;
-        }
+        folderContents[entity.path] = entity;
+      } catch (const fs::filesystem_error& e) {
+        Settings::Instance()->funcDoLog("[SceneExport] Filesystem error: " + entry.path().filename().string() + " " + e.what());
       } catch (const std::exception& ex) {
-        Settings::Instance()->funcDoLog("[SceneExport] " + iteratorFolder->path().filename().string() + " " + ex.what());
+        Settings::Instance()->funcDoLog("[SceneExport] Exception: " + entry.path().filename().string() + " 2- " + ex.what());
       }
     }
   }
