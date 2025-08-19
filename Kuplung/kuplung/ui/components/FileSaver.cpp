@@ -181,7 +181,7 @@ void FileSaver::drawFiles(const std::string& fPath) {
     this->currentFolder = cFolder;
   }
 #endif
-  std::map<std::string, FBEntity> folderContents = this->getFolderContents(cFolder);
+  std::map<std::string, FBEntity> folderContents = KuplungApp::Helpers::getFolderContents(cFolder);
   int i = 0;
   static int selected = -1;
   for (std::map<std::string, FBEntity>::iterator iter = folderContents.begin(); iter != folderContents.end(); ++iter) {
@@ -205,89 +205,4 @@ void FileSaver::drawFiles(const std::string& fPath) {
     ImGui::NextColumn();
     i += 1;
   }
-}
-
-std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string const& filePath) {
-  std::map<std::string, FBEntity> folderContents;
-
-  fs::path currentPath = filePath;
-
-  if (fs::is_directory(currentPath)) {
-    this->currentFolder = currentPath.string();
-
-    if (currentPath.has_parent_path()) {
-      FBEntity entity;
-      entity.isFile = false;
-      entity.title = "..";
-      entity.path = currentPath.parent_path().string();
-      entity.size.clear();
-      folderContents[".."] = entity;
-    }
-
-    fs::directory_iterator iteratorEnd;
-    for (const auto& entry : fs::recursive_directory_iterator(currentPath)) {
-      try {
-        fs::file_status fileStatus = entry.status();
-        FBEntity entity;
-        if (fs::is_directory(fileStatus))
-          entity.isFile = false;
-        else if (fs::is_regular_file(fileStatus))
-          entity.isFile = true;
-        else
-          entity.isFile = false;
-
-        entity.title = entry.path().filename().string();
-        if (!entity.isFile)
-          entity.title = "<" + entity.title + ">";
-
-        entity.extension = entry.path().extension().string();
-
-        entity.path = entry.path().string();
-
-        if (!entity.isFile)
-          entity.size.clear();
-        else
-          entity.size = this->convertSize(std::filesystem::file_size(entry.path()));
-
-        entity.modifiedDate = KuplungApp::Helpers::getDateToStringFormatted(fs::last_write_time(entry.path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
-
-        folderContents[entity.path] = entity;
-      } catch (const fs::filesystem_error& e) {
-        Settings::Instance()->funcDoLog("[SceneExport] Filesystem error: " + entry.path().filename().string() + " " + e.what());
-      } catch (const std::exception& ex) {
-        Settings::Instance()->funcDoLog("[SceneExport] Exception: " + entry.path().filename().string() + " 2- " + ex.what());
-      }
-    }
-  }
-
-  return folderContents;
-}
-
-const std::string FileSaver::convertToString(double num) const {
-  std::ostringstream convert;
-  convert << num;
-  return convert.str();
-}
-
-const std::string FileSaver::convertSize(size_t size) const {
-  static const char* SIZES[] = {"B", "KB", "MB", "GB"};
-  int div = 0;
-  size_t rem = 0;
-
-  while (size >= 1024 && div < static_cast<int>(sizeof SIZES / sizeof *SIZES)) {
-    rem = (size % 1024);
-    div++;
-    size /= 1024;
-  }
-
-  double size_d = static_cast<double>(size + rem / 1024.0f);
-  std::string result = this->convertToString(roundOff(size_d)) + " " + SIZES[div];
-  return result;
-}
-
-const double FileSaver::roundOff(double n) const {
-  double d = n * 100.0;
-  const int i = static_cast<int>(d + 0.5);
-  d = static_cast<double>(i / 100.0);
-  return d;
 }

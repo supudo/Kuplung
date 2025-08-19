@@ -243,7 +243,7 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string const
           if (!entity.isFile)
             entity.size.clear();
           else
-            entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
+            entity.size = KuplungApp::Helpers::convertSize(fs::file_size(iteratorFolder->path()));
 
           entity.modifiedDate = KuplungApp::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
 
@@ -259,35 +259,6 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string const
   this->logMessage("-- Folder contents end.");
 
   return folderContents;
-}
-
-std::string FileBrowser::convertToString(double num) {
-  std::ostringstream convert;
-  convert << num;
-  return convert.str();
-}
-
-std::string FileBrowser::convertSize(size_t size) {
-  static const char* SIZES[] = {"B", "KB", "MB", "GB"};
-  int div = 0;
-  size_t rem = 0;
-
-  while (size >= 1024 && div < int((sizeof SIZES / sizeof *SIZES))) {
-    rem = (size % 1024);
-    div++;
-    size /= 1024;
-  }
-
-  double size_d = static_cast<double>(size) + static_cast<double>(rem) / 1024.0;
-  std::string result = this->convertToString(roundOff(size_d)) + " " + SIZES[div];
-  return result;
-}
-
-double FileBrowser::roundOff(double n) {
-  double d = n * 100.0;
-  int i = static_cast<int>(d + 0.5);
-  d = static_cast<double>(i) / 100.0;
-  return d;
 }
 
 void FileBrowser::logMessage(std::string const& logMessage) {

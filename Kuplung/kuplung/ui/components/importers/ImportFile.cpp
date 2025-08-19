@@ -305,7 +305,7 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(ImportExportFormat
 					if (!entity.isFile)
 						entity.size.clear();
 					else
-            entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
+            entity.size = KuplungApp::Helpers::convertSize(fs::file_size(iteratorFolder->path()));
 
           entity.modifiedDate = KuplungApp::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
 
@@ -317,33 +317,4 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(ImportExportFormat
 	}
 
   return folderContents;
-}
-
-const std::string ImportFile::convertToString(double num) const {
-  std::ostringstream convert;
-  convert << num;
-  return convert.str();
-}
-
-const std::string ImportFile::convertSize(size_t size) const {
-  static const char *SIZES[] = { "B", "KB", "MB", "GB" };
-  int div = 0;
-  size_t rem = 0;
-
-  while (size >= 1024 && div < (int)(sizeof SIZES / sizeof *SIZES)) {
-    rem = (size % 1024);
-    div++;
-    size /= 1024;
-  }
-
-  double size_d = (float)size + (float)rem / 1024.0;
-  std::string result = this->convertToString(roundOff(size_d)) + " " + SIZES[div];
-  return result;
-}
-
-const double ImportFile::roundOff(double n) const {
-  double d = n * 100.0;
-  int i = d + 0.5;
-  d = (float)i / 100.0;
-  return d;
 }

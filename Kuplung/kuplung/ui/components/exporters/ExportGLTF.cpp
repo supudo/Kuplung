@@ -181,7 +181,7 @@ void ExportGLTF::drawFiles(const std::string& fPath) {
 		this->currentFolder = cFolder;
 	}
 #endif
-	std::map<std::string, FBEntity> folderContents = this->getFolderContents(cFolder);
+  std::map<std::string, FBEntity> folderContents = KuplungApp::Helpers::getFolderContents(cFolder);
 	int i = 0;
 	static int selected = -1;
 	for (std::map<std::string, FBEntity>::iterator iter = folderContents.begin(); iter != folderContents.end(); ++iter) {
@@ -203,87 +203,4 @@ void ExportGLTF::drawFiles(const std::string& fPath) {
 		ImGui::Text("%s", entity.modifiedDate.c_str()); ImGui::NextColumn();
 		i += 1;
 	}
-}
-
-std::map<std::string, FBEntity> ExportGLTF::getFolderContents(std::string const& filePath) {
-	std::map<std::string, FBEntity> folderContents;
-	fs::path currentPath(filePath);
-
-	if (fs::is_directory(currentPath)) {
-		if (currentPath.has_parent_path()) {
-			FBEntity entity;
-			entity.isFile = false;
-			entity.title = "..";
-			entity.path = currentPath.parent_path().string();
-			entity.size.clear();
-			folderContents[".."] = entity;
-		}
-
-		fs::directory_iterator iteratorEnd;
-		for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
-			try {
-				fs::file_status fileStatus = iteratorFolder->status();
-        if (!KuplungApp::Helpers::isHidden(iteratorFolder->path().string())) {
-					FBEntity entity;
-					if (fs::is_directory(fileStatus))
-						entity.isFile = false;
-					else if (fs::is_regular_file(fileStatus))
-						entity.isFile = true;
-					else
-						entity.isFile = false;
-
-					entity.title = iteratorFolder->path().filename().string();
-					if (!entity.isFile)
-						entity.title = "<" + entity.title + ">";
-
-					entity.extension = iteratorFolder->path().extension().string();
-
-					entity.path = iteratorFolder->path().string();
-
-					if (!entity.isFile)
-						entity.size.clear();
-					else
-						entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
-
-          entity.modifiedDate = KuplungApp::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
-
-					folderContents[entity.path] = entity;
-				}
-			}
-			catch (const std::exception & ex) {
-				Settings::Instance()->funcDoLog("[SceneExport] " + iteratorFolder->path().filename().string() + " " + ex.what());
-			}
-		}
-	}
-
-	return folderContents;
-}
-
-const std::string ExportGLTF::convertToString(double num) const {
-	std::ostringstream convert;
-	convert << num;
-	return convert.str();
-}
-
-const std::string ExportGLTF::convertSize(size_t size) const {
-	static const char *SIZES[] = { "B", "KB", "MB", "GB" };
-	int div = 0;
-	size_t rem = 0;
-
-	while (size >= 1024 && div < (int)(sizeof SIZES / sizeof *SIZES)) {
-		rem = (size % 1024);
-		div++;
-		size /= 1024;
-	}
-
-	double size_d = (float)size + (float)rem / 1024.0;
-	std::string result = this->convertToString(roundOff(size_d)) + " " + SIZES[div];
-	return result;
-}
-
-const double ExportGLTF::roundOff(double n) const {
-	double d = n * 100.0;
-	int i = d + 0.5;
-	d = (float)i / 100.0;
-	return d;
 }
