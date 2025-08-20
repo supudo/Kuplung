@@ -32,7 +32,6 @@ private:
   std::string convertToString(double num);
   std::string convertSize(size_t size);
   double roundOff(double n);
-  void logMessage(std::string const& logMessage);
 
   bool log, isStyleBrowser, isImageBrowser;
   int positionX, positionY, width, height;

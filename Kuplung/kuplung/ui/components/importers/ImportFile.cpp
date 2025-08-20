@@ -13,6 +13,7 @@
 #include <sstream>
 #include <format>
 #include <cstring>
+#include <ranges>
 
 namespace fs = std::filesystem;
 
@@ -72,15 +73,16 @@ void ImportFile::draw(ImportExportFormats* dialogImportType, int* dialogImportTy
 	ImGui::TextColored(ImVec4(1, 0, 0, 1), "Options");
 	ImGui::Separator();
 	ImGui::PushItemWidth(-1.0f);
-	ImGui::Text("Kuplung File Format");
+	ImGui::Text("Kuplung File Formats");
 	const char* file_format_items[] = {
+    "",
 		"Wavefront OBJ",
 		"glTF",
 		"STereoLithography STL",
 		"Stanford PLY"
 	};
 	ImGui::Combo("##982", (int*)dialogImportType, file_format_items, IM_ARRAYSIZE(file_format_items));
-	ImGui::Text("Assimp File Format");
+	ImGui::Text("Assimp File Formats");
 	ImGui::Combo("##983", (int*)dialogImportType_Assimp, &this->assimpImporters[0], int(this->assimpImporters.size()));
 	ImGui::PopItemWidth();
 	ImGui::Separator();
@@ -239,82 +241,29 @@ void ImportFile::drawFiles(ImportExportFormats* dialogImportType, int* dialogImp
 }
 
 std::map<std::string, FBEntity> ImportFile::getFolderContents(ImportExportFormats* dialogImportType, std::string const& filePath) {
+  std::map<std::string, FBEntity> folderContentsAll = KuplungApp::Helpers::getFolderContents(filePath);
   std::map<std::string, FBEntity> folderContents;
-  fs::path currentPath(filePath);
 
-	if (fs::is_directory(currentPath)) {
-		if (currentPath.has_parent_path()) {
-			FBEntity entity;
-			entity.isFile = false;
-			entity.title = "..";
-			entity.path = currentPath.parent_path().string();
-			entity.size.clear();
-			folderContents[".."] = entity;
-		}
+  const auto* settings = Settings::Instance();
+  const auto importType = *dialogImportType;
 
-		fs::directory_iterator iteratorEnd;
-		bool isAllowedFileExtension = false;
-		for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
-			try {
-				fs::file_status fileStatus = iteratorFolder->status();
-				if (*dialogImportType != ImportExportFormat_UNDEFINED) {
-					switch (*dialogImportType) {
-						case ImportExportFormat_OBJ: {
-							isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".obj" });
-							break;
-						}
-						case ImportExportFormat_GLTF: {
-							isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".gltf" });
-							break;
-						}
-						case ImportExportFormat_PLY: {
-							isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".ply" });
-							break;
-						}
-						case ImportExportFormat_STL: {
-							isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".stl" });
-							break;
-						}
-					}
-				}
-				else {
-					for (size_t i = 0; i < Settings::Instance()->AssimpSupportedFormats_Import.size(); i++) {
-						std::string fe = Settings::Instance()->AssimpSupportedFormats_Import[i].fileExtension;
-						std::string ce = iteratorFolder->path().extension().string();
-						if (fe.find(ce) != std::string::npos) {
-							isAllowedFileExtension = true;
-							break;
-						}
-					}
-				}
-        if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !KuplungApp::Helpers::isHidden(iteratorFolder->path().string()))) {
-					FBEntity entity;
-					if (fs::is_directory(fileStatus))
-						entity.isFile = false;
-					else if (fs::is_regular_file(fileStatus))
-						entity.isFile = true;
+  for (const auto& [key, file] : folderContentsAll) {
+    bool isAllowedFileExtension = false;
 
-					entity.title = iteratorFolder->path().filename().string();
-					if (!entity.isFile)
-						entity.title = "<" + entity.title + ">";
+    if (importType != ImportExportFormat_UNDEFINED) {
+      // Map each format to its allowed extension
+      static const std::map<ImportExportFormats, std::string> allowedExtensions = {{ImportExportFormat_OBJ, ".obj"}, {ImportExportFormat_GLTF, ".gltf"}, {ImportExportFormat_PLY, ".ply"}, {ImportExportFormat_STL, ".stl"}};
 
-					entity.extension = iteratorFolder->path().extension().string();
+      auto it = allowedExtensions.find(importType);
+      if (it != allowedExtensions.end())
+        isAllowedFileExtension = settings->isAllowedFileExtension(file.extension, {it->second});
+    }
+    else
+      isAllowedFileExtension = std::ranges::any_of(settings->AssimpSupportedFormats_Import, [&](const SupportedAssimpFormat& assimpFormat) { return assimpFormat.fileExtension.find(file.extension) != std::string::npos; });
 
-					entity.path = iteratorFolder->path().string();
-
-					if (!entity.isFile)
-						entity.size.clear();
-					else
-            entity.size = KuplungApp::Helpers::convertSize(fs::file_size(iteratorFolder->path()));
-
-          entity.modifiedDate = KuplungApp::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
-
-					folderContents[entity.path] = entity;
-				}
-			}
-			catch (const std::exception &) { }
-		}
-	}
+    if (isAllowedFileExtension || !file.isFile)
+      folderContents[file.path] = file;
+  }
 
   return folderContents;
 }

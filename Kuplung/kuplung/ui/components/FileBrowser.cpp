@@ -197,71 +197,23 @@ void FileBrowser::drawFiles(const std::string& fPath, MaterialTextureType Textur
 }
 
 std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string const& filePath) {
+  std::map<std::string, FBEntity> folderContentsAll = KuplungApp::Helpers::getFolderContents(filePath);
   std::map<std::string, FBEntity> folderContents;
 
-  if (this->log)
-    this->logMessage("-- Listing folder contents : " + filePath);
-  fs::path currentPath(filePath);
+  const auto* settings = Settings::Instance();
 
-  if (fs::is_directory(currentPath)) {
-    Settings::Instance()->currentFolder = currentPath.string();
-
-    if (currentPath.has_parent_path()) {
-      FBEntity entity;
-      entity.isFile = false;
-      entity.title = "..";
-      entity.path = currentPath.parent_path().string();
-      entity.size.clear();
-      folderContents[".."] = entity;
-    }
-
-    fs::directory_iterator iteratorEnd;
+  for (const auto& [key, file] : folderContentsAll) {
     bool isAllowedFileExtension = false;
-    for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
-      try {
-        fs::file_status fileStatus = iteratorFolder->status();
-        isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string());
-        if (this->isStyleBrowser)
-          isAllowedFileExtension = Settings::Instance()->isAllowedStyleExtension(iteratorFolder->path().extension().string());
-        else if (this->isImageBrowser)
-          isAllowedFileExtension = Settings::Instance()->isAllowedImageExtension(iteratorFolder->path().extension().string());
-        if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !KuplungApp::Helpers::isHidden(iteratorFolder->path().string()))) {
-          FBEntity entity;
-          if (fs::is_directory(fileStatus))
-            entity.isFile = false;
-          else if (fs::is_regular_file(fileStatus))
-            entity.isFile = true;
 
-          entity.title = iteratorFolder->path().filename().string();
-          if (!entity.isFile)
-            entity.title = "<" + entity.title + ">";
+    isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(file.extension);
+    if (this->isStyleBrowser)
+      isAllowedFileExtension = Settings::Instance()->isAllowedStyleExtension(file.extension);
+    else if (this->isImageBrowser)
+      isAllowedFileExtension = Settings::Instance()->isAllowedImageExtension(file.extension);
 
-          entity.extension = iteratorFolder->path().extension().string();
-
-          entity.path = iteratorFolder->path().string();
-
-          if (!entity.isFile)
-            entity.size.clear();
-          else
-            entity.size = KuplungApp::Helpers::convertSize(fs::file_size(iteratorFolder->path()));
-
-          entity.modifiedDate = KuplungApp::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
-
-          folderContents[entity.path] = entity;
-
-          this->logMessage(entity.title);
-        }
-      } catch (const std::exception& ex) {
-        this->logMessage(iteratorFolder->path().filename().string() + " " + ex.what());
-      }
-    }
+    if (isAllowedFileExtension || !file.isFile)
+      folderContents[file.path] = file;
   }
-  this->logMessage("-- Folder contents end.");
 
   return folderContents;
-}
-
-void FileBrowser::logMessage(std::string const& logMessage) {
-  if (this->log)
-    Settings::Instance()->funcDoLog("[FileBrowser] " + logMessage);
 }
