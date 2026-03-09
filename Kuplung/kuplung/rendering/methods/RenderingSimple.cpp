@@ -124,8 +124,8 @@ void RenderingSimple::render(const std::vector<ModelFaceData*>& meshModelFaces, 
     mfd->setOptionsOutlineColor(this->managerObjects.Setting_OutlineColor);
     mfd->setOptionsOutlineThickness(this->managerObjects.Setting_OutlineThickness);
 
-    glm::mat4 mvpMatrix = mvpMatrix * matrixModel;
-    glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+    glm::mat4 modelViewProjection = mvpMatrix * matrixModel;
+    glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(modelViewProjection));
 
     glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
