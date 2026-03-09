@@ -647,6 +647,14 @@ void DialogControlsGUI::drawPropertiesPane(bool* isFrame) {
             this->helperUI->addControlsSlider("Quadratic", 24, 0.01f, 0.0f, 1.0f, true, &this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->lQuadratic->animate, &this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->lQuadratic->point, true, isFrame);
           }
 
+          if (this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->type != LightSourceType_Point) {
+            ImGui::Separator();
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Light Direction");
+            this->helperUI->addControlsSliderSameLine("X", 27, 0.05f, -1.0f, 1.0f, true, &this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->directionX->animate, &this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->directionX->point, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("Y", 28, 0.05f, -1.0f, 1.0f, true, &this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->directionY->animate, &this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->directionY->point, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("Z", 29, 0.05f, -1.0f, 1.0f, true, &this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->directionZ->animate, &this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->directionZ->point, true, isFrame);
+          }
+
           int lType = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->type;
           assert(lType == LightSourceType_Directional || lType == LightSourceType_Point || lType == LightSourceType_Spot);
           switch (lType) {
@@ -945,3 +953,4 @@ void DialogControlsGUI::lockCamera() {
     this->managerObjects.camera->matrixCamera = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->matrixModel;
   }
 }
+

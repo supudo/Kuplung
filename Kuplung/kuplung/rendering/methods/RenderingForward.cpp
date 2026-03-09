@@ -655,7 +655,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
             glUniform1i(f->gl_InUse, 1);
 
             // light
-            glUniform3f(f->gl_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
+            glUniform3f(f->gl_Direction, light->directionX->point, light->directionY->point, light->directionZ->point);
 
             // color
             glUniform3f(f->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
@@ -706,7 +706,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
             glUniform1i(f->gl_InUse, 1);
 
             // light
-            glUniform3f(f->gl_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
+            glUniform3f(f->gl_Direction, light->directionX->point, light->directionY->point, light->directionZ->point);
             glUniform3f(f->gl_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
 
             // cutoff
