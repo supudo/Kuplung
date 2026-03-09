@@ -13,6 +13,7 @@ struct LightSource_Directional {
 uniform LightSource_Directional solidSkin_Light;
 uniform vec3 fs_UIAmbient;
 uniform vec3 fs_cameraPosition;
+uniform vec3 fs_color;
 
 in vec3 fs_vertexPosition;
 in vec2 fs_textureCoord;
@@ -26,7 +27,7 @@ in vec3 fs_bitangent;
 out vec4 fragColor;
 
 void main(void) {
-    vec4 processedColor = vec4(1, 1, 1, 1);
+    vec4 processedColor = vec4(fs_color, 1.0);
     if (has_texture)
         processedColor = texture(sampler_texture, fs_textureCoord);
 

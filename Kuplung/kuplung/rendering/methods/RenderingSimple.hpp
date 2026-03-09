@@ -29,7 +29,7 @@ private:
 
   GLuint shaderProgram;
   GLint glVS_MVPMatrix, glVS_WorldMatrix, glFS_SamplerTexture, glFS_HasSamplerTexture;
-  GLint glFS_CameraPosition, glFS_UIAmbient;
+  GLint glFS_CameraPosition, glFS_UIAmbient, glFS_Color;
   std::unique_ptr<ModelFace_LightSource_Directional> solidLight;
 };
 

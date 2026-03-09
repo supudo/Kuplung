@@ -76,6 +76,7 @@ bool RenderingSimple::init() {
 
     this->glFS_CameraPosition = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
     this->glFS_UIAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_UIAmbient");
+    this->glFS_Color = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_color");
 
     this->solidLight = std::make_unique<ModelFace_LightSource_Directional>();
     this->solidLight->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
@@ -131,6 +132,7 @@ void RenderingSimple::render(const std::vector<ModelFaceData*>& meshModelFaces, 
 
     glUniform3f(this->glFS_CameraPosition, this->vecCameraPosition.x, this->vecCameraPosition.y, this->vecCameraPosition.z);
     glUniform3f(this->glFS_UIAmbient, this->uiAmbientLight.r, this->uiAmbientLight.g, this->uiAmbientLight.b);
+    glUniform3f(this->glFS_Color, mfd->materialDiffuse->color.r, mfd->materialDiffuse->color.g, mfd->materialDiffuse->color.b);
 
     glUniform1i(this->solidLight->gl_InUse, 1);
     glUniform3f(this->solidLight->gl_Direction, this->managerObjects.SolidLight_Direction.x, this->managerObjects.SolidLight_Direction.y, this->managerObjects.SolidLight_Direction.z);
