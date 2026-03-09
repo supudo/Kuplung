@@ -76,11 +76,31 @@ void RenderingForward::precompileShaders() {
 bool RenderingForward::initShaderProgram() {
   bool success = true;
 
-  const char* shader_vertex = this->managerObjects->shaderSourceVertex.c_str();
-  const char* shader_tess_control = this->managerObjects->shaderSourceTCS.c_str();
-  const char* shader_tess_eval = this->managerObjects->shaderSourceTES.c_str();
-  const char* shader_geometry = this->managerObjects->shaderSourceGeometry.c_str();
-  const char* shader_fragment = this->managerObjects->shaderSourceFragment.c_str();
+  std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.vert";
+  std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
+  const char* shader_vertex = shaderSourceVertex.c_str();
+
+  shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
+  std::string shaderSourceTCS = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
+  const char* shader_tess_control = shaderSourceTCS.c_str();
+
+  shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tes";
+  std::string shaderSourceTES = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
+  const char* shader_tess_eval = shaderSourceTES.c_str();
+
+  shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.geom";
+  std::string shaderSourceGeometry = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
+  const char* shader_geometry = shaderSourceGeometry.c_str();
+
+  std::string shaderSourceFragment;
+  std::vector<std::string> fragFiles = {"vars", "effects", "lights", "mapping", "shadow_mapping", "misc", "pbr"};
+  for (size_t i = 0; i < fragFiles.size(); i++) {
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_" + fragFiles.at(i) + ".frag";
+    shaderSourceFragment += Settings::Instance()->glUtils->readFile(shaderPath.c_str());
+  }
+  shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.frag";
+  shaderSourceFragment += Settings::Instance()->glUtils->readFile(shaderPath.c_str());
+  const char* shader_fragment = shaderSourceFragment.c_str();
 
   this->shaderProgram = glCreateProgram();
 
@@ -534,6 +554,8 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
         glEndQuery(GL_ANY_SAMPLES_PASSED);
       }
       j = i;
+      glDepthMask(GL_TRUE);
+      glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
     }
     glEnable(GL_CULL_FACE);
 
@@ -655,7 +677,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
             glUniform1i(f->gl_InUse, 1);
 
             // light
-            glUniform3f(f->gl_Direction, light->directionX->point, light->directionY->point, light->directionZ->point);
+            glUniform3f(f->gl_Direction, light->matrixModel[2].x, light->matrixModel[2].y, light->matrixModel[2].z);
 
             // color
             glUniform3f(f->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
@@ -706,7 +728,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
             glUniform1i(f->gl_InUse, 1);
 
             // light
-            glUniform3f(f->gl_Direction, light->directionX->point, light->directionY->point, light->directionZ->point);
+            glUniform3f(f->gl_Direction, light->matrixModel[2].x, light->matrixModel[2].y, light->matrixModel[2].z);
             glUniform3f(f->gl_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
 
             // cutoff

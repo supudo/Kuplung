@@ -9,7 +9,7 @@ void main(void) {
         vec4 processedColor_Ambient = (material.has_texture_ambient ? texture(material.sampler_ambient, fs_textureCoord) : vec4(material.ambient, 1.0));
         vec4 processedColor_Diffuse = (material.has_texture_diffuse ? texture(material.sampler_diffuse, fs_textureCoord) : vec4(material.diffuse, 1.0));
         vec4 processedColor_Specular = (material.has_texture_specular ? texture(material.sampler_specular, fs_textureCoord) : vec4(material.specular, 1.0));
-        vec3 fragmentPosition = vec3(fs_ModelMatrix * vec4(fs_vertexPosition, 1.0f));
+        vec3 fragmentPosition = fs_vertexPosition;
         fragColor = (processedColor_Ambient + (1.0 - calculateShadowValue(fragmentPosition)) * (processedColor_Diffuse + processedColor_Specular));
     }
     else {
@@ -64,7 +64,7 @@ void main(void) {
                     vec4 processedColor_Specular = (material.has_texture_specular ? texture(material.sampler_specular, textureCoords) : vec4(material.specular, 1.0));
 
                     // fragment position
-                    vec3 fragmentPosition = vec3(fs_ModelMatrix * vec4(fs_vertexPosition, 1.0f));
+                    vec3 fragmentPosition = fs_vertexPosition;
 
                     // Parallax mapping coordinates
                     if (fs_userParallaxMapping) {
@@ -121,8 +121,6 @@ void main(void) {
                     // final color
                     if (fs_celShading) // cel-shading
                         fragColor = celShadingColor();
-                    else if (material.illumination_model == 0)
-                        fragColor = vec4((material.refraction > 1.0) ? processedColorRefraction : processedColor_Diffuse.rgb, fs_alpha);
                     else
                         fragColor = vec4(processedColorRefraction, fs_alpha);
 

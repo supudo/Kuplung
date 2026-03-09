@@ -97,7 +97,7 @@ vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 direct
     vec3 result = vec3(0.0);
     for (int i=0; i<NR_SPOT_LIGHTS; i++) {
         if (spotLights[i].inUse) {
-            vec3 directionLight = normalize((-1.0 * spotLights[i].position) - fragmentPosition);
+            vec3 directionLight = normalize(spotLights[i].position - fragmentPosition);
 
             // Diffuse shading - lambert factor
             float lambertFactor = max(dot(directionNormal, directionLight), 0.0);

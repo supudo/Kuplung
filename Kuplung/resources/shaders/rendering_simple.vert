@@ -19,7 +19,7 @@ out vec3 tcs_bitangent0;
 out vec3 tcs_bitangent;
 
 void main(void) {
-    tcs_vertexPosition = vs_vertexPosition;
+    tcs_vertexPosition = vec3(vs_WorldMatrix * vec4(vs_vertexPosition, 1.0));
     tcs_textureCoord = vs_textureCoord;
     tcs_vertexNormal0 = vs_vertexNormal;
     tcs_vertexNormal = (vs_WorldMatrix * vec4(vs_vertexNormal, 0.0)).xyz;

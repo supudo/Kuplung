@@ -87,6 +87,8 @@ void Camera::render() {
   this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateCenterY->point), glm::vec3(0, 1, 0));
   this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateCenterZ->point), glm::vec3(0, 0, 1));
 
+  //glm::mat4 inverseCamera = glm::inverse(this->matrixCamera);
+  //this->cameraPosition = glm::vec3(inverseCamera[3].x, inverseCamera[3].y, inverseCamera[3].z);
   this->cameraPosition = glm::vec3(this->matrixCamera[3].x, this->matrixCamera[3].y, this->matrixCamera[3].z);
 }
 

@@ -26,7 +26,7 @@ in vec3 fs_bitangent;
 out vec4 fragColor;
 
 void main(void) {
-    vec4 processedColor = vec4(0, 0, 0, 1);
+    vec4 processedColor = vec4(1, 1, 1, 1);
     if (has_texture)
         processedColor = texture(sampler_texture, fs_textureCoord);
 
@@ -35,9 +35,11 @@ void main(void) {
     float lambertFactor = max(dot(fs_vertexNormal, -directionLight), 0.0);
     vec3 directionReflection = normalize(reflect(-directionLight, fs_vertexNormal));
     float specularFactor = pow(max(dot(directionView, directionReflection), 0.0), 1.0);
-    vec3 solidLightColor = solidSkin_Light.strengthDiffuse * solidSkin_Light.diffuse * lambertFactor * processedColor.rgb;
-
-    solidLightColor += fs_UIAmbient;
+    vec3 ambient = solidSkin_Light.strengthAmbient * solidSkin_Light.ambient * processedColor.rgb;
+    vec3 diffuse = solidSkin_Light.strengthDiffuse * solidSkin_Light.diffuse * lambertFactor * processedColor.rgb;
+    vec3 specular = solidSkin_Light.strengthSpecular * solidSkin_Light.specular * specularFactor * processedColor.rgb;
+    vec3 solidLightColor = ambient + diffuse + specular + fs_UIAmbient;
 
     fragColor = vec4(solidLightColor, 1.0);
 }
+

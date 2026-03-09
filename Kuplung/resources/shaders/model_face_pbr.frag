@@ -82,15 +82,38 @@ vec3 calculatePBR() {
 
     // reflectance equation
     vec3 Lo = vec3(0.0);
+    for (int i=0; i<NR_DIRECTIONAL_LIGHTS; i++) {
+        if (directionalLights[i].inUse) {
+            vec3 L = normalize(-directionalLights[i].direction);
+            vec3 H = normalize(V + L);
+            vec3 radiance = directionalLights[i].diffuse * directionalLights[i].strengthDiffuse;
+
+            float NDF = DistributionGGX(N, H, roughness);
+            float G = GeometrySmith(N, V, L, roughness);
+            vec3 F = fresnelSchlick(max(dot(H, V), 0.0), F0);
+
+            vec3 nominator = NDF * G * F;
+            float denominator = 4 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0) + 0.001;
+            vec3 brdf = nominator / denominator;
+
+            vec3 kS = F;
+            vec3 kD = vec3(1.0) - kS;
+            kD *= 1.0 - metallic;
+
+            float NdotL = max(dot(N, L), 0.0);
+            Lo += (kD * albedo / PI + brdf) * radiance * NdotL;
+        }
+    }
+
     for (int i=0; i<NR_POINT_LIGHTS; i++) {
         if (pointLights[i].inUse) {
             // calculate per-light radiance
             vec3 L = normalize(pointLights[i].position - WorldPos);
             vec3 H = normalize(V + L);
             float distance = length(pointLights[i].position - WorldPos);
-            float attenuation = 1.0 / (distance * distance);
+            float attenuation = 1.0 / max(pointLights[i].constant + pointLights[i].linear * distance + pointLights[i].quadratic * (distance * distance), 0.001);
             vec3 radiance = pointLights[i].diffuse * attenuation * pointLights[i].strengthDiffuse;
-
+            
             // Cook-Torrance BRDF
             float NDF = DistributionGGX(N, H, roughness);
             float G = GeometrySmith(N, V, L, roughness);
@@ -99,7 +122,7 @@ vec3 calculatePBR() {
             vec3 nominator = NDF * G * F;
             float denominator = 4 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0) + 0.001; // 0.001 to prevent divide by zero.
             vec3 brdf = nominator / denominator;
-
+            
             // kS is equal to Fresnel
             vec3 kS = F;
             // for energy conservation, the diffuse and specular light can't
@@ -110,10 +133,37 @@ vec3 calculatePBR() {
             // have diffuse lighting, or a linear blend if partly metal (pure metals
             // have no diffuse light).
             kD *= 1.0 - metallic;
-
+            
             // scale light by NdotL
             float NdotL = max(dot(N, L), 0.0);
+            Lo += (kD * albedo / PI + brdf) * radiance * NdotL;
+        }
+    }
 
+    for (int i=0; i<NR_SPOT_LIGHTS; i++) {
+        if (spotLights[i].inUse) {
+            vec3 L = normalize(spotLights[i].position - WorldPos);
+            vec3 H = normalize(V + L);
+            float distance = length(spotLights[i].position - WorldPos);
+            float attenuation = 1.0 / max(spotLights[i].constant + spotLights[i].linear * distance + spotLights[i].quadratic * (distance * distance), 0.001);
+            float theta = dot(L, normalize(-spotLights[i].direction));
+            float epsilon = spotLights[i].cutOff - spotLights[i].outerCutOff;
+            float intensity = clamp((theta - spotLights[i].outerCutOff) / max(epsilon, 0.001), 0.0, 1.0);
+            vec3 radiance = spotLights[i].diffuse * attenuation * intensity * spotLights[i].strengthDiffuse;
+
+            float NDF = DistributionGGX(N, H, roughness);
+            float G = GeometrySmith(N, V, L, roughness);
+            vec3 F = fresnelSchlick(max(dot(H, V), 0.0), F0);
+
+            vec3 nominator = NDF * G * F;
+            float denominator = 4 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0) + 0.001;
+            vec3 brdf = nominator / denominator;
+
+            vec3 kS = F;
+            vec3 kD = vec3(1.0) - kS;
+            kD *= 1.0 - metallic;
+
+            float NdotL = max(dot(N, L), 0.0);
             // add to outgoing radiance Lo
             // note that we already multiplied the BRDF by the Fresnel (kS) so we won't multiply by kS again
             Lo += (kD * albedo / PI + brdf) * radiance * NdotL;
