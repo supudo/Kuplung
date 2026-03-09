@@ -18,14 +18,20 @@ namespace KuplungApp::Helpers {
     const char* WhiteSpace = " \t\v\r\n";
     std::size_t start = line.find_first_not_of(WhiteSpace);
     std::size_t end = line.find_last_not_of(WhiteSpace);
-    return start == end ? std::string() : line.substr(start, end - start + 1);
+    if (start == std::string::npos || end == std::string::npos) {
+      return std::string();
+    }
+    return line.substr(start, end - start + 1);
   }
 
   static inline std::string trimRight(const std::string& line) {
     const char* WhiteSpace = " \t\v\r\n";
     std::size_t start = 0;
     std::size_t end = line.find_last_not_of(WhiteSpace);
-    return start == end ? std::string() : line.substr(0, end + 1);
+    if (end == std::string::npos) {
+      return std::string();
+    }
+    return line.substr(0, end + 1);
   }
 
   static inline std::vector<std::string> splitString(const std::string& s, char delimiter) {
