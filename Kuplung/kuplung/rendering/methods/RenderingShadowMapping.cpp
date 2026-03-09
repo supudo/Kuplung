@@ -549,12 +549,22 @@ void RenderingShadowMapping::render(const std::vector<ModelFaceData*>& meshModel
 
 void RenderingShadowMapping::renderShadows(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
   if (this->managerObjects.lightSources.size() > 0) {
-    //glm::vec4 vecpos = this->managerObjects.lightSources[0]->matrixModel[3];
-    //glm::vec3 lightPos = glm::vec3(vecpos.x, vecpos.y, vecpos.z);
-    glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, this->managerObjects.Setting_PlaneClose, this->managerObjects.Setting_PlaneFar);
-    // TODO: PVS SA
-    //glm::mat4 matrixLightView = glm::lookAt(lightPos, this->managerObjects.camera->eyeSettings->View_Center, this->managerObjects.camera->eyeSettings->View_Up);
-    glm::mat4 matrixLightView = glm::translate(this->managerObjects.camera->matrixCamera, glm::vec3(-2, 2, 2));
+    const glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, this->managerObjects.Setting_PlaneClose, this->managerObjects.Setting_PlaneFar);
+    glm::vec3 lightDirection(0.0f, -1.0f, 0.0f);
+    glm::vec3 lightTarget(this->managerObjects.camera->eyeSettings->View_Center);
+    glm::vec3 lightPos = lightTarget - (lightDirection * 10.0f);
+    for (Light* light : this->managerObjects.lightSources) {
+      if (light->type != LightSourceType_Directional)
+        continue;
+
+      lightDirection = glm::normalize(glm::vec3(light->matrixModel[2]));
+      lightPos = lightTarget - (lightDirection * 10.0f);
+      break;
+    }
+    glm::vec3 lightUp(0.0f, 1.0f, 0.0f);
+    if (glm::abs(glm::dot(lightDirection, lightUp)) > 0.99f)
+      lightUp = glm::vec3(0.0f, 0.0f, 1.0f);
+    const glm::mat4 matrixLightView = glm::lookAt(lightPos, lightTarget, lightUp);
     this->matrixLightSpace = lightProjection * matrixLightView;
 
     glUseProgram(this->shaderProgramShadows);
@@ -655,17 +665,15 @@ void RenderingShadowMapping::renderModels(const bool& isShadowPass, const GLuint
     mfd->setOptionsOutlineColor(this->managerObjects.Setting_OutlineColor);
     mfd->setOptionsOutlineThickness(this->managerObjects.Setting_OutlineThickness);
     mfd->setOptionsSelected(static_cast<int>(i) == selectedModel);
-
-    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
-    if (isShadowPass)
-      mvpMatrix = this->matrixLightSpace;
-    glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-
     if (isShadowPass) {
-      glUniformMatrix4fv(this->glVS_shadowModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
       glUniformMatrix4fv(this->glShadow_ModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
       glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
+      mfd->renderModel(true);
+      continue;
     }
+
+    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
+    glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
     glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
     glm::mat4 matrixModelView = this->matrixCamera * matrixModel;
@@ -768,7 +776,7 @@ void RenderingShadowMapping::renderModels(const bool& isShadowPass, const GLuint
           glUniform1i(f->gl_InUse, 1);
 
           // light
-          glUniform3f(f->gl_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
+          glUniform3f(f->gl_Direction, light->matrixModel[2].x, light->matrixModel[2].y, light->matrixModel[2].z);
 
           // color
           const glm::vec3 c_ambient = light->ambient->color;
@@ -823,7 +831,7 @@ void RenderingShadowMapping::renderModels(const bool& isShadowPass, const GLuint
           glUniform1i(f->gl_InUse, 1);
 
           // light
-          glUniform3f(f->gl_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
+          glUniform3f(f->gl_Direction, light->matrixModel[2].x, light->matrixModel[2].y, light->matrixModel[2].z);
           glUniform3f(f->gl_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
 
           // cutoff
