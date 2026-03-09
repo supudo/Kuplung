@@ -9,6 +9,8 @@
 #include "RenderingSimple.hpp"
 #include <glm/gtc/matrix_inverse.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/euler_angles.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 RenderingSimple::RenderingSimple(ObjectsManager& managerObjects) : managerObjects(managerObjects) {}
 
@@ -100,21 +102,18 @@ void RenderingSimple::render(const std::vector<ModelFaceData*>& meshModelFaces, 
 
   glUseProgram(this->shaderProgram);
 
+  glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera;
   for (size_t i = 0; i < meshModelFaces.size(); i++) {
     ModelFaceData* mfd = meshModelFaces[i];
 
-    glm::mat4 matrixModel = glm::mat4(1.0);
-    matrixModel *= this->managerObjects.grid->matrixModel;
-    // scale
-    matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
-    // rotate
-    matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-    matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
-    matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
-    matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
-    matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-    // translate
-    matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
+    glm::vec3 position(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point);
+    glm::vec3 scale(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point);
+    glm::vec3 rotation(glm::radians(mfd->rotateX->point), glm::radians(mfd->rotateY->point), glm::radians(mfd->rotateZ->point));
+    glm::mat4 matrixModel =
+      managerObjects.grid->matrixModel *
+      glm::translate(glm::mat4(1.0f), position) *
+      glm::toMat4(glm::quat(rotation)) *
+      glm::scale(glm::mat4(1.0f), scale);
 
     mfd->matrixProjection = this->matrixProjection;
     mfd->matrixCamera = this->matrixCamera;
@@ -125,7 +124,7 @@ void RenderingSimple::render(const std::vector<ModelFaceData*>& meshModelFaces, 
     mfd->setOptionsOutlineColor(this->managerObjects.Setting_OutlineColor);
     mfd->setOptionsOutlineThickness(this->managerObjects.Setting_OutlineThickness);
 
-    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
+    glm::mat4 mvpMatrix = mvpMatrix * matrixModel;
     glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
     glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));

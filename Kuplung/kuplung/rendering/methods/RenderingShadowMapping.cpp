@@ -13,6 +13,7 @@
 #include <glm/gtc/matrix_inverse.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/matrix_decompose.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 RenderingShadowMapping::RenderingShadowMapping(ObjectsManager& managerObjects)
   : managerObjects(managerObjects) {
@@ -533,18 +534,10 @@ void RenderingShadowMapping::renderModels(const bool& isShadowPass, const GLuint
     if (mfd->getOptionsSelected())
       selectedModelID = static_cast<int>(i);
 
-    glm::mat4 matrixModel = glm::mat4(1.0);
-    matrixModel *= this->managerObjects.grid->matrixModel;
-    // scale
-    matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
-    // translate
-    matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
-    // rotate
-    matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-    matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
-    matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
-    matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
-    matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+    glm::vec3 position(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point);
+    glm::vec3 scale(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point);
+    glm::vec3 rotation(glm::radians(mfd->rotateX->point), glm::radians(mfd->rotateY->point), glm::radians(mfd->rotateZ->point));
+    glm::mat4 matrixModel = managerObjects.grid->matrixModel * glm::translate(glm::mat4(1.0f), position) * glm::toMat4(glm::quat(rotation)) * glm::scale(glm::mat4(1.0f), scale);
 
     //        if (this->managerObjects.lightSources.size() > 0) {
     //            this->managerObjects.matrixProjection = this->matrixLightSpace;

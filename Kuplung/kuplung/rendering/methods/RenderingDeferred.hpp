@@ -48,6 +48,8 @@ private:
 	std::vector<std::unique_ptr<ModelFace_LightSource_Point>> mfLights_Point;
 	std::vector<std::unique_ptr<ModelFace_LightSource_Spot>> mfLights_Spot;
 
+  std::vector<RenderingForward_LightSource> testLightsDeferred;
+
   GLuint gBuffer, gPosition, gNormal, gAlbedoSpec;
 
   const GLuint NR_LIGHTS = 32;

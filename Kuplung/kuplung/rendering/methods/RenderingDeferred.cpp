@@ -9,6 +9,7 @@
 #include "RenderingDeferred.hpp"
 #include <fstream>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 RenderingDeferred::RenderingDeferred(ObjectsManager& managerObjects) : managerObjects(managerObjects) {
   this->GLSL_LightSourceNumber_Directional = 0;
@@ -334,6 +335,17 @@ bool RenderingDeferred::initLights() {
     this->mfLights_Spot.push_back(std::move(f));
   }
 
+  // test lights
+  this->testLightsDeferred.resize(NR_LIGHTS);
+  for (int i = 0; i < NR_LIGHTS; i++) {
+    std::string idx = "lights[" + std::to_string(i) + "]";
+    this->testLightsDeferred[i].gl_Position = glGetUniformLocation(this->shaderProgram_LightingPass, (idx + ".Position").c_str());
+    this->testLightsDeferred[i].gl_Color = glGetUniformLocation(this->shaderProgram_LightingPass, (idx + ".Color").c_str());
+    this->testLightsDeferred[i].gl_Linear = glGetUniformLocation(this->shaderProgram_LightingPass, (idx + ".Linear").c_str());
+    this->testLightsDeferred[i].gl_Quadratic = glGetUniformLocation(this->shaderProgram_LightingPass, (idx + ".Quadratic").c_str());
+    this->testLightsDeferred[i].gl_Radius = glGetUniformLocation(this->shaderProgram_LightingPass, (idx + ".Radius").c_str());
+  }
+
   Settings::Instance()->glUtils->CheckForGLErrors();
 
   return result;
@@ -397,16 +409,10 @@ void RenderingDeferred::renderGBuffer(const std::vector<ModelFaceData*>& meshMod
     for (size_t j = 0; j < meshModelFaces.size(); j++) {
       ModelFaceData* mfd = meshModelFaces[j];
 
-      // scale
-      matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
-      // rotate
-      matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-      matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
-      matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
-      matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
-      matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-      // translate
-      matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
+      glm::vec3 position(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point);
+      glm::vec3 scale(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point);
+      glm::vec3 rotation(glm::radians(mfd->rotateX->point), glm::radians(mfd->rotateY->point), glm::radians(mfd->rotateZ->point));
+      glm::mat4 matrixModel = managerObjects.grid->matrixModel * glm::translate(glm::mat4(1.0f), position) * glm::toMat4(glm::quat(rotation)) * glm::scale(glm::mat4(1.0f), scale);
 
       glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(matrixModel));
 
@@ -564,38 +570,39 @@ void RenderingDeferred::renderLightingPass() {
   // Also send light relevant uniforms
   if (this->managerObjects.Setting_DeferredTestLights) {
     size_t i = 0;
-    for (; i < static_cast<size_t>(this->managerObjects.Setting_DeferredTestLightsNumber); i++) {
-      glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
-      glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
+    for (GLuint i = 0; i < this->managerObjects.Setting_DeferredTestLightsNumber; i++) {
+      glUniform3fv(this->testLightsDeferred[i].gl_Position, 1, &lightPositions[i][0]);
+      glUniform3fv(this->testLightsDeferred[i].gl_Color, 1, &lightColors[i][0]);
 
       // Update attenuation parameters and calculate radius
       const GLfloat constant = 1.0; // Note that we don't send this to the shader, we assume it is always 1.0 (in our case)
       const GLfloat linear = 0.7f;
       const GLfloat quadratic = 1.8f;
-      glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Linear").c_str()), linear);
-      glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Quadratic").c_str()), quadratic);
+      glUniform1f(this->testLightsDeferred[i].gl_Linear, linear);
+      glUniform1f(this->testLightsDeferred[i].gl_Quadratic, quadratic);
 
       // Then calculate radius of light volume/sphere
       const GLfloat lightThreshold = 5.0; // 5 / 256
       const GLfloat maxBrightness = std::fmaxf(std::fmaxf(this->lightColors[i].r, this->lightColors[i].g), this->lightColors[i].b);
       GLfloat radius = (-linear + static_cast<float>(std::sqrt(linear * linear - 4 * quadratic * (constant - (256 / lightThreshold)) * maxBrightness))) / (2 * quadratic);
-      glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), radius);
+      glUniform1f(this->testLightsDeferred[i].gl_Radius, radius);
     }
+
     for (; i < this->lightPositions.size(); i++) {
-      glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
-      glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
-      glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Linear").c_str()), 0.0f);
-      glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Quadratic").c_str()), 0.0f);
-      glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), 0.0f);
+      glUniform3fv(this->testLightsDeferred[i].gl_Position, 1, &lightPositions[i][0]);
+      glUniform3fv(this->testLightsDeferred[i].gl_Color, 1, &lightColors[i][0]);
+      glUniform1f(this->testLightsDeferred[i].gl_Linear, 0.0f);
+      glUniform1f(this->testLightsDeferred[i].gl_Quadratic, 0.0f);
+      glUniform1f(this->testLightsDeferred[i].gl_Radius, 0.0f);
     }
   }
   else {
     for (GLuint i = 0; i < this->lightPositions.size(); i++) {
-      glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
-      glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
-      glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Linear").c_str()), 0.0f);
-      glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Quadratic").c_str()), 0.0f);
-      glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), 0.0f);
+      glUniform3fv(this->testLightsDeferred[i].gl_Position, 1, &lightPositions[i][0]);
+      glUniform3fv(this->testLightsDeferred[i].gl_Color, 1, &lightColors[i][0]);
+      glUniform1f(this->testLightsDeferred[i].gl_Linear, 0.0f);
+      glUniform1f(this->testLightsDeferred[i].gl_Quadratic, 0.0f);
+      glUniform1f(this->testLightsDeferred[i].gl_Radius, 0.0f);
     }
   }
   glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, "viewPos"), 1, &this->managerObjects.camera->cameraPosition[0]);

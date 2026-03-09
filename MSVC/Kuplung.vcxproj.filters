@@ -338,6 +338,7 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl3.cpp">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="TestLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -754,6 +755,7 @@
     <ClInclude Include="imgui_impl_opengl3_loader.h">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="TestLight.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="kuplung">

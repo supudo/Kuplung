@@ -8,8 +8,7 @@
 
 #include "RenderingManager.hpp"
 
-RenderingManager::RenderingManager(ObjectsManager& managerObjects)
-    : managerObjects(managerObjects) {
+RenderingManager::RenderingManager(ObjectsManager& managerObjects) : managerObjects(managerObjects) {
   this->RenderingTotalVertices = 0;
   this->RenderingTotalIndices = 0;
   this->RenderingTotalTriangles = 0;
