@@ -532,7 +532,8 @@ void RenderingForwardShadowMapping::render(const std::vector<ModelFaceData*>& me
 
   this->renderShadows(meshModelFaces, selectedModel);
   this->renderModels(false, this->shaderProgram, meshModelFaces, selectedModel);
-  this->renderDepth();
+  if (this->managerObjects.Setting_DebugShadowTexture)
+    this->renderDepth();
 }
 
 void RenderingForwardShadowMapping::renderShadows(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {

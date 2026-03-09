@@ -17,11 +17,109 @@
 
 RenderingShadowMapping::RenderingShadowMapping(ObjectsManager& managerObjects)
   : managerObjects(managerObjects) {
+  this->matrixProjection = glm::mat4(1.0);
+  this->matrixCamera = glm::mat4(1.0);
+  this->vecCameraPosition = glm::vec3(1.0);
+  this->uiAmbientLight = glm::vec3(1.0);
+  this->matrixLightSpace = glm::mat4(1.0);
+
+  this->shaderProgramShadows = 0;
+  this->shaderShadowsVertex = 0;
+  this->shaderShadowsFragment = 0;
+  this->fboDepthMap = 0;
+  this->vboDepthMap = 0;
+  this->glShadow_ModelMatrix = 0;
+  this->glShadow_LightSpaceMatrix = 0;
+  this->glFS_ShadowPass = 0;
+  this->glFS_DebugShadowTexture = 0;
+
+  this->shaderProgramDepth = 0;
+  this->shaderDepthVertex = 0;
+  this->shaderDepthFragment = 0;
+  this->glDepth_Plane_Close = 0;
+  this->glDepth_Plane_Far = 0;
+  this->glDepth_SamplerTexture = 0;
+  this->depthQuadVAO = 0;
+  this->depthQuadVBO = 0;
+
   this->GLSL_LightSourceNumber_Directional = 0;
   this->GLSL_LightSourceNumber_Point = 0;
   this->GLSL_LightSourceNumber_Spot = 0;
-}
+  this->mfLights_Directional = std::vector<std::unique_ptr<ModelFace_LightSource_Directional>>();
+  this->mfLights_Point = std::vector<std::unique_ptr<ModelFace_LightSource_Point>>();
+  this->mfLights_Spot = std::vector<std::unique_ptr<ModelFace_LightSource_Spot>>();
 
+  this->shaderProgram = 0;
+
+  this->glVS_MVPMatrix = 0;
+  this->glFS_MMatrix = 0;
+  this->glVS_WorldMatrix = 0;
+  this->glVS_NormalMatrix = 0;
+  this->glFS_MVMatrix = 0;
+
+  this->glVS_shadowModelMatrix = 0;
+  this->glVS_LightSpaceMatrix = 0;
+  this->glFS_showShadows = 0;
+  this->glFS_SamplerShadowMap = 0;
+
+  this->glGS_GeomDisplacementLocation = 0;
+  this->glFS_AlphaBlending = 0;
+  this->glFS_CameraPosition = 0;
+  this->glFS_CelShading = 0;
+  this->glFS_OutlineColor = 0;
+  this->glVS_IsBorder = 0;
+  this->glFS_ScreenResX = 0;
+  this->glFS_ScreenResY = 0;
+  this->glFS_UIAmbient = 0;
+  this->glTCS_UseCullFace = 0;
+  this->glTCS_UseTessellation = 0;
+  this->glTCS_TessellationSubdivision = 0;
+  this->gl_ModelViewSkin = 0;
+  this->glFS_GammaCoeficient = 0;
+
+  this->glFS_planeClose = 0;
+  this->glFS_planeFar = 0;
+  this->glFS_showDepthColor = 0;
+
+  this->glMaterial_Ambient = 0;
+  this->glMaterial_Diffuse = 0;
+  this->glMaterial_Specular = 0;
+  this->glMaterial_SpecularExp = 0;
+  this->glMaterial_Emission = 0;
+  this->glMaterial_Refraction = 0;
+  this->glMaterial_IlluminationModel = 0;
+  this->glMaterial_HeightScale = 0;
+  this->glMaterial_SamplerAmbient = 0;
+  this->glMaterial_SamplerDiffuse = 0;
+  this->glMaterial_SamplerSpecular = 0;
+  this->glMaterial_SamplerSpecularExp = 0;
+  this->glMaterial_SamplerDissolve = 0;
+  this->glMaterial_SamplerBump = 0;
+  this->glMaterial_SamplerDisplacement = 0;
+  this->glMaterial_HasTextureAmbient = 0;
+  this->glMaterial_HasTextureDiffuse = 0;
+  this->glMaterial_HasTextureSpecular = 0;
+  this->glMaterial_HasTextureSpecularExp = 0;
+  this->glMaterial_HasTextureDissolve = 0;
+  this->glMaterial_HasTextureBump = 0;
+  this->glMaterial_HasTextureDisplacement = 0;
+  this->glMaterial_ParallaxMapping = 0;
+
+  this->glEffect_GB_W = 0;
+  this->glEffect_GB_Radius = 0;
+  this->glEffect_GB_Mode = 0;
+  this->glEffect_Bloom_doBloom = 0;
+  this->glEffect_Bloom_WeightA = 0;
+  this->glEffect_Bloom_WeightB = 0;
+  this->glEffect_Bloom_WeightC = 0;
+  this->glEffect_Bloom_WeightD = 0;
+  this->glEffect_Bloom_Vignette = 0;
+  this->glEffect_Bloom_VignetteAtt = 0;
+  this->glEffect_ToneMapping_ACESFilmRec2020 = 0;
+
+  this->solidLight = std::make_unique<ModelFace_LightSource_Directional>();
+  this->glFS_solidSkin_materialColor = 0;
+}
 RenderingShadowMapping::~RenderingShadowMapping() {
   //    if (this->vboTextureAmbient > 0)
   //        glDeleteBuffers(1, &this->vboTextureAmbient);
@@ -445,7 +543,8 @@ void RenderingShadowMapping::render(const std::vector<ModelFaceData*>& meshModel
 
   this->renderShadows(meshModelFaces, selectedModel);
   this->renderModels(false, this->shaderProgram, meshModelFaces, selectedModel);
-  this->renderDepth();
+  if (this->managerObjects.Setting_DebugShadowTexture)
+    this->renderDepth();
 }
 
 void RenderingShadowMapping::renderShadows(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
