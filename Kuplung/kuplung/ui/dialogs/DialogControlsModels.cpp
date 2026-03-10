@@ -332,6 +332,12 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 
 void DialogControlsModels::processTexture(ModelFaceBase* mmf) {
   this->showUVEditor = false;
+  if (this->meshModelFaces == nullptr)
+    return;
+  if (this->selectedObject < 0)
+    return;
+  if (static_cast<size_t>(this->selectedObject) >= this->meshModelFaces->size())
+    return;
   (*this->meshModelFaces)[this->selectedObject] = mmf;
 }
 
