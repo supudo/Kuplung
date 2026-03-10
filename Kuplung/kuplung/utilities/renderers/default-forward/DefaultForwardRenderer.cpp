@@ -339,7 +339,7 @@ std::string DefaultForwardRenderer::renderImage(const FBEntity& file, std::vecto
   glBindFramebuffer(GL_READ_FRAMEBUFFER, this->renderFBO);
   glBlitFramebuffer(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height, 0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
   glReadBuffer(GL_COLOR_ATTACHMENT0);
-  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+  glPixelStorei(GL_PACK_ALIGNMENT, 1);
   glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
