@@ -580,7 +580,7 @@ void RenderingForwardShadowMapping::renderShadows(const std::vector<ModelFaceDat
     //            glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
     //            glUniformMatrix4fv(this->glShadow_ModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
-    //            mfd->renderModel(true);
+    //            mfd->renderModel(false);
     //        }
     glUseProgram(0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -657,7 +657,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
     if (isShadowPass) {
       glUniformMatrix4fv(this->glShadow_ModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
       glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
-      mfd->renderModel(true);
+      mfd->renderModel(false);
       continue;
     }
 
@@ -965,7 +965,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
     //            mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
     //            glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
     //            glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
-    //            mfd->renderModel(true);
+    //            mfd->renderModel(false);
     //            glEnable(GL_DEPTH_TEST);
     //        }
 
@@ -1016,7 +1016,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
       //TODO: put in settings
       glUniform3f(this->glFS_solidSkin_materialColor, 1.0f, 0.522f, 0.0f);
 
-      mfd->renderModel(true);
+      mfd->renderModel(false);
       mfd->Setting_Wireframe = false;
     }
   }
