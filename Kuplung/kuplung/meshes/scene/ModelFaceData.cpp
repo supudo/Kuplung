@@ -173,14 +173,19 @@ void ModelFaceData::renderModel(const bool useTessellation) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
   auto matrixBB = glm::mat4(1.0f);
-  matrixBB *= this->matrixProjection;
-  matrixBB *= this->matrixCamera;
-  matrixBB *= this->matrixModel;
-
-  if (Settings::Instance()->ShowBoundingBox && this->so_selectedYn)
+  if (Settings::Instance()->ShowBoundingBox && this->so_selectedYn) {
+    matrixBB *= this->matrixProjection;
+    matrixBB *= this->matrixCamera;
+    matrixBB *= this->matrixModel;
     this->boundingBox->render(matrixBB, this->so_outlineColor);
+  }
 
   if (this->vertexSphereVisible) {
+    if (!Settings::Instance()->ShowBoundingBox || !this->so_selectedYn) {
+      matrixBB *= this->matrixProjection;
+      matrixBB *= this->matrixCamera;
+      matrixBB *= this->matrixModel;
+    }
     this->vertexSphere->isSphere = this->vertexSphereIsSphere;
     this->vertexSphere->showWireframes = this->vertexSphereShowWireframes;
     this->vertexSphere->initBuffers(this->meshModel, this->vertexSphereSegments, this->vertexSphereRadius);
