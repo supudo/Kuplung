@@ -754,7 +754,6 @@
     <ClInclude Include="imgui_impl_opengl3_loader.h">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="TestLight.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="kuplung">

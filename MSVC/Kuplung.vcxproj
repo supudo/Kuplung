@@ -432,7 +432,6 @@
     <ClCompile Include="..\Kuplung\kuplung\Kuplung.cpp" />
     <ClCompile Include="..\Kuplung\main.cpp" />
     <ClInclude Include="imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="TestLight.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Kuplung\resources\kuplung.rc" />
